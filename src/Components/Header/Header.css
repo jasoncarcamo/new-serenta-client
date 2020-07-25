@@ -1,0 +1,45 @@
+#header-container{
+    position: fixed;
+    top: 0;
+    left:0;
+    width: 100%;
+    height: 5em;
+    margin: 0;
+    padding: 0;
+    backdrop-filter: blur(.7em);
+}
+
+#nav-container{
+    width: 100%;
+    height: 5em;
+    margin: 0;
+    padding: 0;
+}
+
+#nav-list{
+    display: flex;
+    position: relative;
+    z-index: 2;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 5em;
+    justify-content: space-evenly;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link, .nav-link a{
+    display: block;
+    width: 5.5em;
+    text-align: center;
+    text-decoration: none;
+    list-style: none;
+    margin: 0;
+}
+
+.nav-link a{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
