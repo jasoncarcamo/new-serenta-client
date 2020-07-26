@@ -1,5 +1,5 @@
 #header-container{
-    position: fixed;
+    position: relative;
     top: 0;
     left:0;
     width: 100%;
@@ -7,6 +7,7 @@
     margin: 0;
     padding: 0;
     backdrop-filter: blur(.7em);
+    z-index: 2;
 }
 
 #nav-container{
@@ -19,27 +20,47 @@
 #nav-list{
     display: flex;
     position: relative;
+    justify-content: space-around;
     z-index: 2;
     top: 50%;
     transform: translateY(-50%);
     width: 100%;
     height: 5em;
-    justify-content: space-evenly;
     margin: 0;
     padding: 0;
 }
 
 .nav-link, .nav-link a{
     display: block;
-    width: 5.5em;
     text-align: center;
     text-decoration: none;
     list-style: none;
     margin: 0;
+    padding: 0;
+}
+
+.nav-link{
+    flex: 1 1 0;
+    overflow: hidden;
 }
 
 .nav-link a{
     position: relative;
     top: 50%;
     transform: translateY(-50%);
+    width: 100%;
+    height: auto;
+    padding: 2em 1em;
+    color: black;
+}
+
+.nav-link a:hover{
+    background-color: black;
+    color: white;
+}
+
+.nav-link a img{
+    height: 2.5em;
+    padding: 0 0 0 1em;
+    margin: 0;
 }

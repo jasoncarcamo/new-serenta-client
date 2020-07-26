@@ -3,6 +3,9 @@ const UserToken = {
 
         return window.localStorage.getItem("serenta-user");
     },
+    hasToken(){
+        return this.getToken();
+    },
     setToken(token){
 
         return window.localStorage.setItem("serenta-user", token);

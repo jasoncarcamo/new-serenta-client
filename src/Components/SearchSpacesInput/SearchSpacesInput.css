@@ -1,0 +1,71 @@
+#search-spaces-form{
+    position: absolute;
+    top: 10em;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0 auto;
+    padding: 0;
+    width: 35em;
+    border-right: .04em solid lightgrey;
+    border-bottom: .04em solid lightgrey;
+    border-left: .04em solid lightgrey;
+    box-shadow: 0 1em 1em lightgrey;
+    border-radius: .4em;
+    overflow: hidden;
+    z-index: 3;
+}
+
+#search-spaces-fieldset{
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+#search-spaces-input-container{
+    position: relative;
+    background-color: transparent;
+    overflow: hidden;
+}
+
+#input-container{
+    padding: 0;
+}
+
+#search-spaces-input{
+    display: inline-block;
+    width: 100%;
+    height: 2.5em;
+    font-size: 1em;
+    padding: 0 0 0 2em;
+    border: none;
+}
+
+#input-container button{
+    width: 4em;
+    height: 2.5em;
+    font-size: 1em;
+    position: absolute;
+    right: 0;
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-left: .1em solid lightgray;
+}
+
+.autocomplete-dropdown-container{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: white;
+}
+
+.autocomplete-dropdown-container li, .autocomplete-dropdown-container p{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.autocomplete-dropdown-container li{
+    border-bottom: .05em solid lightgrey;
+    padding: .7em 0 .7em 1em;
+}
