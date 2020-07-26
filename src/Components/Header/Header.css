@@ -3,16 +3,17 @@
     top: 0;
     left:0;
     width: 100%;
-    height: 5em;
+    height: 4em;
     margin: 0;
     padding: 0;
     backdrop-filter: blur(.7em);
+    -webkit-backdrop-filter: blur(.7em);
     z-index: 2;
 }
 
 #nav-container{
     width: 100%;
-    height: 5em;
+    height: 4em;
     margin: 0;
     padding: 0;
 }
@@ -25,7 +26,7 @@
     top: 50%;
     transform: translateY(-50%);
     width: 100%;
-    height: 5em;
+    height: 4em;
     margin: 0;
     padding: 0;
 }
@@ -42,6 +43,7 @@
 .nav-link{
     flex: 1 1 0;
     overflow: hidden;
+    border:  none;
 }
 
 .nav-link a{
