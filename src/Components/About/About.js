@@ -13,5 +13,5 @@ export default class About extends React.Component{
                 <h2>About</h2>
             </section>
         );
-    }
-}
+    };
+};
