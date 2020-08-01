@@ -10,8 +10,7 @@ export default class SignUp extends React.Component{
             mobile_number: "",
             email: "",
             password: "",
-            confirm_password: "",
-            email: ""
+            confirm_password: ""
         }
     }
 

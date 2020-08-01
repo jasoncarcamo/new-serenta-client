@@ -4,10 +4,15 @@ import './index.css';
 import App from './App/App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from "react-router-dom";
+import MapContext, {MapProvider} from "./Contexts/MapContext/MapContext";
 
 ReactDOM.render(
     <BrowserRouter>
-        <App/>
+        <MapProvider>
+            <MapContext.Consumer>
+                {(mapContext => <App mapContext={mapContext}/>)}
+            </MapContext.Consumer>
+        </MapProvider>
     </BrowserRouter>,
     document.getElementById('root')
 );

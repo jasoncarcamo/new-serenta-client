@@ -1,0 +1,110 @@
+#post-ad-form{
+    margin: 0;
+    padding: 0;
+
+}
+
+#post-ad-form input{
+    border: none;
+    background-color: transparent;
+}
+
+#post-ad-fieldset{
+    margin: 0;
+    padding: 0;
+}
+
+.post-ad-info{
+    border: 1px solid black;
+    padding: 0;
+    margin: 0 0 1em 0;
+}
+
+.post-ad-header{
+    font-size: .9em;
+    margin: 0 0 .25em 0;
+    padding: 0;
+}
+
+.post-ad-header span{
+    color: red;
+}
+
+.post-ad-input-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 25.5em;
+    height: 2.35em;
+    padding: 0;
+    border: 1px solid black;
+}
+
+.post-ad-dollar{
+    width: 2em;
+    height: 100%;
+    padding-top: .5em;
+    margin: 0;
+    text-align: center;
+}
+
+#post-ad-input-price{
+    height: 3em;
+    width: 25em;
+}
+
+.post-ad-price-info{
+    text-align: center;
+    width: 5em;
+    height: 100%;
+    padding-top: .5em;
+    align-items: center;
+}
+
+/* Security deposit */
+#post-ad-input-deposit{
+    width: 100%;
+    height: 3em;
+}
+
+/* Space info section */
+
+.post-ad-space-info{
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+}
+
+.post-ad-space-info-option{
+    border: 1px solid black;
+    padding: 0;
+    margin: 0 3em 0 0;
+}
+
+.post-ad-space-info-option-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    height: 2.25em;
+    border: .05em solid black;
+    border-radius: .25em;
+}
+
+.post-ad-select{
+    width: 18em;
+    height: 3em;
+}
+
+#post-ad-squareft{
+    width: 24em;
+    height: 3em;
+}
+
+.post-ad-squareft-label{
+    width: 4em;
+    height: 100%;
+    padding-top: .4em;
+    text-align: center;
+    border-left: .1em solid lightgrey;
+}

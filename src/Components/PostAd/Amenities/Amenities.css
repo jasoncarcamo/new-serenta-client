@@ -1,0 +1,99 @@
+#post-ad-amenities-form{
+    margin: 0;
+    padding: 0;
+
+}
+
+#post-ad-amenities-form input{
+    border: none;
+    background-color: transparent;
+}
+
+#post-ad-amenities-fieldset{
+    margin: 0;
+    padding: 0;
+}
+
+.post-ad-amenities-info{
+    border: 1px solid black;
+    padding: 0;
+    margin: 0 0 1em 0;
+}
+
+.post-ad-amenities-header{
+    font-size: .9em;
+    margin: 0 0 .25em 0;
+    padding: 0;
+}
+
+.post-ad-amenities-header span{
+    color: red;
+}
+
+.post-ad-amenities-input-container{
+    width: 25.5em;
+    height: auto;
+    padding: 0;
+    border: 1px solid black;
+}
+
+.post-ad-amenities-input-container label{
+    display: block;
+    margin: 0 0 .25em 0;
+}
+
+.post-ad-amenities-price-info{
+    text-align: center;
+    width: 5em;
+    height: 100%;
+    padding-top: .5em;
+    align-items: center;
+}
+
+/* Security deposit */
+#post-ad-amenities-input-deposit{
+    width: 100%;
+    height: 3em;
+}
+
+/* Space info section */
+
+.post-ad-amenities-space-info{
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+}
+
+.post-ad-amenities-space-info-option{
+    border: 1px solid black;
+    padding: 0;
+    margin: 0 3em 0 0;
+}
+
+.post-ad-amenities-space-info-option-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    height: 2.25em;
+    border: .05em solid black;
+    border-radius: .25em;
+}
+
+.post-ad-amenities-select{
+    width: 18em;
+    height: 3em;
+}
+
+#post-ad-amenities-squareft{
+    width: 24em;
+    height: 3em;
+}
+
+.post-ad-amenities-squareft-label{
+    width: 4em;
+    height: 100%;
+    padding-top: .4em;
+    text-align: center;
+    border-left: .1em solid lightgrey;
+}
