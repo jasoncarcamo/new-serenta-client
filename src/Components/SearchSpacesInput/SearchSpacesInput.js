@@ -2,7 +2,6 @@ import React from "react";
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete';
 import "./SearchSpacesInput.css";
 import MapContext from "../../Contexts/MapContext/MapContext";
-import { Polygon } from "@react-google-maps/api";
 
 export default class SearchSpacesInput extends React.Component{
     constructor(props){
@@ -110,7 +109,7 @@ export default class SearchSpacesInput extends React.Component{
                                         })}
                                         />
 
-                                        <button>Search</button>
+                                        <button type="submit">Search</button>
                                     </div>
                                     
                                     <ul className="autocomplete-dropdown-container">
@@ -124,11 +123,10 @@ export default class SearchSpacesInput extends React.Component{
                                         ? { backgroundColor: 'lightgrey', cursor: 'pointer' }
                                         : { backgroundColor: '#ffffff', cursor: 'pointer' };
                                         return (
-                                            <li
+                                            <li key={index}
                                                 {...getSuggestionItemProps(suggestion, {
                                                 className,
-                                                style,
-                                                key: index
+                                                style
                                                 })}
                                             >
                                                 <p key={index}>{suggestion.description}</p>

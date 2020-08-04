@@ -13,17 +13,21 @@ export default class Properties extends React.Component{
 
     static contextType = PostAdContext;
 
+    adListing = ()=>{
+        this.context.toggleAdListing();
+    }
+
     render(){
         console.log(this.props)
         return (
             <section id="properties-section">
-                <div>
+                <div id="properties-section-header-container">
                     <h2>Properties</h2>
 
-                    <button><span>+</span> Add a property</button>
+                    <button id="properties-section-container-button" onClick={this.adListing}><span>+</span> Add a property</button>
                 </div>
 
-                <AdListing history={this.props.history}/>
+                {this.context.adListing ? <AdListing history={this.props.history}/> : ""}
 
                 <section id="property-listings"> 
 

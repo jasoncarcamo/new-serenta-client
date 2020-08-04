@@ -2,6 +2,7 @@ import React from "react";
 import "./PostAd.css";
 import Details from "./Details/Details";
 import Amenities from "./Amenities/Amenities";
+import Description from "./Description/Description";
 import SubmitAd from "./SubmitAd/SubmitAd";
 
 export default class PostAd extends React.Component{
@@ -17,6 +18,7 @@ export default class PostAd extends React.Component{
             <section>
                 <Details/>
                 <Amenities/>
+                <Description/>
                 <SubmitAd/>
             </section>
         );
