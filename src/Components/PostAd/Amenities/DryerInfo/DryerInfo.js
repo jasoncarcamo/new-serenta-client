@@ -28,9 +28,9 @@ export default class DryerInfo extends React.Component{
 
                 <div className="post-ad-amenities-input-container">
 
-                    <label htmlFor="post-ad-amenity-dryer-notincluded"><input id="post-ad-amenity-dryer-notincluded" type="radio" name="dryer" value="Not included" onClick={this.handleRadioInput} defaultChecked></input>Not Included</label>
+                    <label htmlFor="post-ad-amenity-dryer-notincluded"><input id="post-ad-amenity-dryer-notincluded" type="radio" name="dryer" value="Not included" onChange={this.handleRadioInput} checked={this.context.ad.dryer && this.context.ad.dryer === "Not included" || !this.context.ad.dryer ? true : false}></input>Not Included</label>
 
-                    <label htmlFor="post-ad-amenity-dryer-included"><input id="post-ad-amenity-dryer-included" type="radio" name="dryer" value="Included" onClick={this.handleRadioInput}></input>Included</label>
+                    <label htmlFor="post-ad-amenity-dryer-included"><input id="post-ad-amenity-dryer-included" type="radio" name="dryer" value="Included" onChange={this.handleRadioInput} checked={this.context.ad.dryer && this.context.ad.dryer === "Included" ? true : false}></input>Included</label>
                 </div>
             </section>
         );

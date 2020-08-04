@@ -8,13 +8,19 @@ export default class Header extends React.Component{
 
     renderLoggedLinks = () => {
         if(UserToken.hasToken()){
-            return <li className="nav-link"><NavLink to="/" onClick={this.handleSignOut}>Sign Out</NavLink></li>;
+            return (
+                <>
+                    <li className="nav-link"><NavLink to="/properties">Properties</NavLink></li>
+                    <li className="nav-link"><NavLink to="/messages">Messages</NavLink></li>
+                    <li className="nav-link"><NavLink to="/" onClick={this.handleSignOut}>Sign Out</NavLink></li>
+                </>
+            )
         }
 
         return (
             <>
                 <li className="nav-link"><NavLink to="/login">Log In</NavLink></li>
-                <li className="nav-link"><NavLink to="/signup">Sign up</NavLink></li>
+                <li className="nav-link"><NavLink to="/register">Sign up</NavLink></li>
             </>
         )
     }

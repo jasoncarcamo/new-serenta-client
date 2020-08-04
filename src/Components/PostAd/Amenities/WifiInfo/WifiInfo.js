@@ -28,9 +28,9 @@ export default class WifiInfo extends React.Component{
 
                 <div className="post-ad-amenities-input-container">
                     
-                    <label htmlFor="post-ad-amenity-wifi-notincluded"><input id="post-ad-amenity-wifi-notincluded" type="radio" name="wifi" value="Not included" onClick={this.handleRadioInput} defaultChecked></input>Not Included</label>
+                    <label htmlFor="post-ad-amenity-wifi-notincluded"><input id="post-ad-amenity-wifi-notincluded" type="radio" name="wifi" value="Not included" onChange={this.handleRadioInput} checked={this.context.ad.wifi && this.context.ad.wifi === "Not included" || !this.context.ad.ac ? true : false}></input>Not Included</label>
 
-                    <label htmlFor="post-ad-amenity-wifi-included"><input id="post-ad-amenity-wifi-included" type="radio" name="wifi" value="Included" onClick={this.handleRadioInput}></input>Included</label>
+                    <label htmlFor="post-ad-amenity-wifi-included"><input id="post-ad-amenity-wifi-included" type="radio" name="wifi" value="Included" onChange={this.handleRadioInput} checked={this.context.ad.wifi && this.context.ad.wifi === "Included" ? true : false}></input>Included</label>
                 </div>
             </section>
         );

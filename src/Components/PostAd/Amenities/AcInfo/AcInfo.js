@@ -12,13 +12,12 @@ export default class AcInfo extends React.Component{
     static contextType = PostAdContext;
 
     handleRadioInput = (e)=>{
-        if(e.target.checked){
-            this.setState({
-                [e.target.name]: e.target.value
-            });
-    
-            this.context.handleRadioInput(e);
-        }
+
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+
+        this.context.handleRadioInput(e);
     };
 
     render(){
@@ -29,8 +28,8 @@ export default class AcInfo extends React.Component{
 
                 <div className="post-ad-amenities-input-container">
                     
-                    <label htmlFor="post-ad-amenity-ac-notincluded"><input id="post-ad-amenity-ac-notincluded" type="radio" name="ac" value="Not included" onClick={this.handleRadioInput} defaultChecked></input> Not Included</label>
-                    <label htmlFor="post-ad-amenity-ac-included"><input id="post-ad-amenity-ac-included" type="radio" name="ac" value="Included" onClick={this.handleRadioInput}></input> Included</label>
+                    <label htmlFor="post-ad-amenity-ac-notincluded"><input id="post-ad-amenity-ac-notincluded" type="radio" name="ac" value="Not included" onChange={this.handleRadioInput} checked={this.context.ad.ac && this.context.ad.ac === "Not included" || !this.context.ad.ac ? true : false}></input> Not Included</label>
+                    <label htmlFor="post-ad-amenity-ac-included"><input id="post-ad-amenity-ac-included" type="radio" name="ac" value="Included" onChange={this.handleRadioInput}checked={this.context.ad.ac && this.context.ad.ac === "Included" ? true : false}></input> Included</label>
 
                 </div>
             </section>
