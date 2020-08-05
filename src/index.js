@@ -4,6 +4,7 @@ import './index.css';
 import App from './App/App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from "react-router-dom";
+import {UserProvider} from "./Contexts/UserContext/UserContext";
 import {AdsProvider} from "./Contexts/AdsContext/AdsContext";
 import MapContext, {MapProvider} from "./Contexts/MapContext/MapContext";
 import PostAdContext, {PostAdProvider} from "./Contexts/PostAdContext/PostAdContext";
@@ -11,11 +12,13 @@ import PostAdContext, {PostAdProvider} from "./Contexts/PostAdContext/PostAdCont
 ReactDOM.render(
     <BrowserRouter>
         <AdsProvider>
-            <PostAdProvider>
-                <MapProvider>
-                    <App/>
-                </MapProvider>
-            </PostAdProvider>
+            <UserProvider>
+                <PostAdProvider>
+                    <MapProvider>
+                        <App/>
+                    </MapProvider>
+                </PostAdProvider>
+            </UserProvider>
         </AdsProvider>
     </BrowserRouter>,
     document.getElementById('root')

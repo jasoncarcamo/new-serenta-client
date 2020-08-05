@@ -17,7 +17,7 @@ export default PostAdContext;
 export class PostAdProvider extends React.Component{
     constructor(props){
         super(props);
-        this. state = {
+        this.state = {
             address: "",
             ad: {
                 street_address: "",

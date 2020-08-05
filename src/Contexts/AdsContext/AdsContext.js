@@ -2,7 +2,8 @@ import React from "react";
 import UserToken from "../../Services/UserToken/UserToken";
 
 const AdsContext = React.createContext({
-    ads: []
+    ads: [],
+    loading: Boolean
 });
 
 export default AdsContext;
@@ -12,19 +13,26 @@ export class AdsProvider extends React.Component{
         super(props);
         this.state = {
             ads: [],
+            loading: false,
             error: ""
         };
     };
 
     componentDidMount(){
+
+        // this.state.loading handler and gets all ads
         this.getAllAds();
     }
 
     getAllAds = ()=>{
+
+        this.setState({
+            loading: true
+        });
+
         fetch("http://localhost:8000/api/living-spaces", {
             headers: {
-                'content-type': 'application/json',
-                'authorization': `${UserToken.getToken()}`
+                'content-type': 'application/json'
             }
         })
             .then( res => {
@@ -37,19 +45,22 @@ export class AdsProvider extends React.Component{
             .then( resData => {
                 console.log(resData);
                 this.setState({
-                    ads: resData.ads
-                })
+                    ads: resData.ads,
+                    loading: false
+                });
             })
             .catch( err => {
                 this.setState({
-                    error: err.error
+                    error: err.error,
+                    loading: false
                 });
             });
     }
 
     render(){
         const value = {
-            ads: this.state.ads
+            ads: this.state.ads,
+            loading: this.state.loading
         };
         console.log(value);
         return (
