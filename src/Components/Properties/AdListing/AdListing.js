@@ -19,6 +19,10 @@ export default class AdListing extends React.Component{
         
     }
 
+    toggleAdListing = ()=>{
+        this.context.toggleAdListing();
+    }
+
     handleAddressInput = (address)=>{
 
         this.setState({
@@ -93,6 +97,7 @@ export default class AdListing extends React.Component{
                     </legend>
                     <fieldset>
 
+                        <label htmlFor="search-address-input">Property Address</label>
                         <PlacesAutocomplete
                         name="address"
                         value={this.context.address ? this.context.address : this.state.address}
@@ -104,9 +109,9 @@ export default class AdListing extends React.Component{
                                     <div id="input-container">
                                         <input
                                         {...getInputProps({
-                                            placeholder: 'Propety address...',
+                                            placeholder: 'Address...',
                                             className: 'location-search-input',
-                                            id: "search-spaces-input"
+                                            id: "search-address-input"
                                         })}
                                         />
                                     </div>
@@ -147,7 +152,7 @@ export default class AdListing extends React.Component{
                         </select>
 
                         <button type="button" onClick={this.toPostAd}>Create Listing</button>
-                        <button>Manage Lsitings</button>
+                        <button type="button" onClick={this.toggleAdListing}>Manage Lsitings</button>
                     </fieldset>
                 </form>
             </section>

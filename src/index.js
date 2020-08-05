@@ -4,16 +4,19 @@ import './index.css';
 import App from './App/App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from "react-router-dom";
+import {AdsProvider} from "./Contexts/AdsContext/AdsContext";
 import MapContext, {MapProvider} from "./Contexts/MapContext/MapContext";
 import PostAdContext, {PostAdProvider} from "./Contexts/PostAdContext/PostAdContext";
 
 ReactDOM.render(
     <BrowserRouter>
-        <PostAdProvider>
-            <MapProvider>
-                <App/>
-            </MapProvider>
-        </PostAdProvider>
+        <AdsProvider>
+            <PostAdProvider>
+                <MapProvider>
+                    <App/>
+                </MapProvider>
+            </PostAdProvider>
+        </AdsProvider>
     </BrowserRouter>,
     document.getElementById('root')
 );

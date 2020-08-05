@@ -50,7 +50,6 @@ export class PostAdProvider extends React.Component{
         let newAddress = address.split(", ");
         const ad = this.state.ad;
 
-        console.log(newAddress);
         if(newAddress.length > 2){
             ad.street_address = newAddress[0];
             ad.city = newAddress[1];
@@ -119,7 +118,7 @@ export class PostAdProvider extends React.Component{
     toggleAdListing = ()=>{
         this.setState({
             adListing: !this.state.adListing
-        })
+        });
     }
 
     render(){
