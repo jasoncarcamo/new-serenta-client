@@ -3,6 +3,7 @@ import UserToken from "../../Services/UserToken/UserToken";
 
 const PostAdContext = React.createContext({
     ad: {},
+    address: "",
     adListing: Boolean,
     managingListings: Boolean,
     handleAddressInput: ()=>{},
@@ -121,8 +122,26 @@ export class PostAdProvider extends React.Component{
 
     // sets current ad when editing and posting an ad
     setCurrentAd = (ad)=>{
+
+        // sets the state new address 
+        this.convertAdInfoAddress(ad);
+
         this.setState({
             ad
+        });
+    }
+
+    // converts ad info into address string then sets new state address
+    convertAdInfoAddress = (ad)=>{
+        const {
+            street_address,
+            city,
+            state,
+            zip_code
+        } = ad;
+
+        this.setState({
+            address: `${street_address}, ${city} ${zip_code}, ${state}`
         });
     }
 
@@ -211,6 +230,7 @@ export class PostAdProvider extends React.Component{
     render(){
         const value = {
             ad: this.state.ad,
+            address: "",
             adListing: this.state.adListing,
             managingListings: this.state.managingListings,
             address: this.state.address,

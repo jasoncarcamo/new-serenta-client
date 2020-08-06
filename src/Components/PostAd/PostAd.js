@@ -18,11 +18,9 @@ export default class PostAd extends React.Component{
     static contextType = PostAdContext;
 
     componentDidMount(){
-        if(!this.context.adListing){
+        if(!this.context.address){
 
-            if(this.context){
-                this.context.toggleAdListing();
-            };
+            this.context.toggleAdListing();
 
             return this.props.history.push("/properties");
         }

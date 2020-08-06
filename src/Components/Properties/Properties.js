@@ -19,7 +19,7 @@ export default class Properties extends React.Component{
     }
 
     render(){
-        console.log(this.props)
+        console.log(this.context)
         return (
             <section id="properties-section">
                 <div id="properties-section-header-container">
@@ -30,7 +30,7 @@ export default class Properties extends React.Component{
 
                 {this.context.adListing ? <AdListing history={this.props.history}/> : ""}
 
-                <StartedAds/>
+                <StartedAds history={this.props.history}/>
             </section>
         );
     };

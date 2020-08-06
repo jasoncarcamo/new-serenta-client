@@ -33,7 +33,7 @@ export default class SaveLaterButton extends React.Component{
                 this.setState({
                     saving: false,
                     error: err.error
-                })
+                });
             })
     };
 
@@ -42,11 +42,11 @@ export default class SaveLaterButton extends React.Component{
     };
 
     renderSaved = ()=>{
-        return <p>Saved!</p>
+        return <p>Saved!</p>;
     }
 
     renderLoading = ()=>{
-        return <p>Loading...</p>
+        return <p>Loading...</p>;
     };
 
     // this will revert saved message back to button after 2.5 seconds on successful save
