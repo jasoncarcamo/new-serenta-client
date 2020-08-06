@@ -18,7 +18,7 @@ export default class PetsInfo extends React.Component{
             });
     
             this.context.handleRadioInput(e);
-        }
+        };
     };
 
     render(){

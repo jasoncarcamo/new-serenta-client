@@ -2,6 +2,7 @@ import React from "react";
 import "./Properties.css";
 import PostAdContext from "../../Contexts/PostAdContext/PostAdContext";
 import AdListing from "./AdListing/AdListing";
+import StartedAds from "./StartedAds/StartedAds";
 
 export default class Properties extends React.Component{
     constructor(props){
@@ -29,9 +30,7 @@ export default class Properties extends React.Component{
 
                 {this.context.adListing ? <AdListing history={this.props.history}/> : ""}
 
-                <section id="property-listings"> 
-
-                </section>
+                <StartedAds/>
             </section>
         );
     };

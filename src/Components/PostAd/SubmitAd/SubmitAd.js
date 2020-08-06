@@ -14,27 +14,14 @@ export default class SUbmitAd extends React.Component{
 
     handleForm =  (e)=>{
         e.preventDefault();
-        console.log(this.context.ad)
-        fetch(`http://localhost:8000/api/living-space`, {
-            method: "POST",
-            headers: {
-                'content-type': "application/json",
-                'authorization': `bearer ${UserToken.getToken()}`
-            },
-            body: JSON.stringify(this.context.ad)
-        })
-            .then( res => {
-                if(!res.ok){
-                    return res.json().then(e=> Promise.reject(e));
-                };
 
-                return res.json();
-            })
+        this.context.handlePatchAd()
             .then( resData => {
-                console.log(resData);
+
+                //this.context.setAdDefault();
             })
             .catch(err => {
-                console.log(err)
+                console.log(err);
                 this.setState({
                     error: err.error
                 })
@@ -42,10 +29,6 @@ export default class SUbmitAd extends React.Component{
     }
 
     render(){
-        return (
-            <>
-                <button type="button" onClick={this.handleForm}>Post Ad</button>
-            </>
-        )
+        return <button type="button" onClick={this.handleForm}>Post Ad</button>;
     }
 }

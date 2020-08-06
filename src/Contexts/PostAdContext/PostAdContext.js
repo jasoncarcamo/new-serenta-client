@@ -1,4 +1,5 @@
 import React from "react";
+import UserToken from "../../Services/UserToken/UserToken";
 
 const PostAdContext = React.createContext({
     ad: {},
@@ -9,7 +10,11 @@ const PostAdContext = React.createContext({
     handleCheckboxInput: ()=>{},
     handleTextInput: ()=>{},
     handleSelectInput: ()=>{},
-    toggleAdListing: ()=>{}
+    toggleAdListing: ()=>{},
+    setAdDefault: ()=>{},
+    setCurrentAd:()=>{},
+    handlePostAd: ()=>{},
+    handlePatchAd: ()=>{}
 });
 
 export default PostAdContext;
@@ -46,6 +51,82 @@ export class PostAdProvider extends React.Component{
         };
     };
 
+
+    // handles saving the instance of the current ad
+    handlePatchAd = async ()=>{
+        return fetch(`http://localhost:8000/api/living-space/${this.state.ad.id}`, {
+            method: "PATCH",
+            headers: {
+                'content-type': "application/json",
+                'authorization': `bearer ${UserToken.getToken()}`
+            },
+            body: JSON.stringify(this.state.ad)
+        })
+            .then( res => {
+                if(!res.ok){
+                    return res.json().then(e=> Promise.reject(e));
+                };
+
+                return res.json();
+            })
+    }
+
+    // handles the instance of creating an ad
+    // POST request to create and save current ad
+    handlePostAd = async ()=>{
+        return fetch(`http://localhost:8000/api/living-space`, {
+            method: "POST",
+            headers: {
+                'content-type': "application/json",
+                'authorization': `bearer ${UserToken.getToken()}`
+            },
+            body: JSON.stringify(this.state.ad)
+        })
+            .then( res => {
+                if(!res.ok){
+                    return res.json().then(e=> Promise.reject(e));
+                };
+
+                return res.json();
+            })
+    }
+
+    // sets this.state.ad to default data
+    setAdDefault = ()=>{
+        this.setState({
+            ad: {
+                street_address: "",
+                apt_num: "",
+                city: "",
+                state: "",
+                country: "",
+                zip_code: "",
+                type: "Room",
+                price: "",
+                deposit: "",
+                bedrooms: 1,
+                bathrooms: 1,
+                squareft: "",
+                ac: "Not included",
+                wifi: "Not included",
+                cable: "Not included",
+                pets: "No pets",
+                parking: ["Not available"],
+                washer: "Not included",
+                dryer: "Not included",
+                comments: ""
+            }
+        })
+    }
+
+    // sets current ad when editing and posting an ad
+    setCurrentAd = (ad)=>{
+        this.setState({
+            ad
+        });
+    }
+
+    // handles address input form our start ad form in /properties
     handleAddressInput = (address)=>{
         let newAddress = address.split(", ");
         const ad = this.state.ad;
@@ -61,10 +142,11 @@ export class PostAdProvider extends React.Component{
         this.setState({
             address,
             ad
-        })
+        });
 
     }
 
+    // handles radio inputs from our post ad form
     handleRadioInput = (e)=>{
         const ad = this.state.ad;
 
@@ -73,8 +155,9 @@ export class PostAdProvider extends React.Component{
         this.setState({
             ad
         });
-    };
+    }
 
+    // handles checkbox inputs form our post ad form
     handleCheckboxInput = (e)=>{
         const ad = this.state.ad;
         let infoIndex = ad[e.target.name].indexOf(e.target.value);
@@ -95,6 +178,7 @@ export class PostAdProvider extends React.Component{
 
     }
 
+    // handles text inputs in our post form
     handleTextInput = (e)=>{
         const ad = this.state.ad;
 
@@ -105,6 +189,8 @@ export class PostAdProvider extends React.Component{
         });
     }
 
+
+    // handles select inputs in our post ad form
     handleSelectInput = (e)=>{
         const ad = this.state.ad;
 
@@ -115,6 +201,7 @@ export class PostAdProvider extends React.Component{
         });
     }
 
+    // toggles start ad post form in /properties
     toggleAdListing = ()=>{
         this.setState({
             adListing: !this.state.adListing
@@ -132,9 +219,14 @@ export class PostAdProvider extends React.Component{
             handleCheckboxInput: this.handleCheckboxInput,
             handleTextInput: this.handleTextInput,
             handleSelectInput: this.handleSelectInput,
-            toggleAdListing: this.toggleAdListing
+            toggleAdListing: this.toggleAdListing,
+            setAdDefault: this.setAdDefault,
+            setCurrentAd: this.setCurrentAd,
+            handlePostAd: this.handlePostAd,
+            handlePatchAd: this.handlePatchAd
         };
         console.log(value);
+
         return (
             <PostAdContext.Provider value={value}>
                 {this.props.children}

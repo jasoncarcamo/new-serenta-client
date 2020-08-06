@@ -2,6 +2,7 @@ import React from "react";
 import PostAdContext from "../../../Contexts/PostAdContext/PostAdContext";
 import PlacesAutocomplete from "react-places-autocomplete";
 import SearchSpacesInput from "../../SearchSpacesInput/SearchSpacesInput";
+import UserToken from "../../../Services/UserToken/UserToken";
 
 export default class AdListing extends React.Component{
     constructor(props){
@@ -19,8 +20,20 @@ export default class AdListing extends React.Component{
         
     }
 
+    renderLoading = ()=>{
+        return <p className="loading-icon">Loading...</p>
+    }
+
     toggleAdListing = ()=>{
         this.context.toggleAdListing();
+    }
+
+    handleTextInput = (e)=>{
+        this.setState({
+            [e.target.name]: e.target.value 
+        });
+
+        this.context.handleTextInput(e);
     }
 
     handleAddressInput = (address)=>{
@@ -38,7 +51,31 @@ export default class AdListing extends React.Component{
     }
 
     toPostAd = ()=>{
-        this.props.history.push("/post-ad")
+        this.props.history.push(`/post-ad`)
+    }
+
+    // This starts ad, so it will be used even the user returns and continues on the ad
+    startPostAd =  (e)=>{
+        e.preventDefault();
+        console.log(this.context.ad)
+
+        // check if the ad has already been created on the backend
+        if((this.context.ad.posted === false) && (this.context.ad.posted !== undefined)){
+            return this.toPostAd();
+        };
+
+        this.context.handlePostAd()
+            .then( resData => {
+                console.log(resData);
+                this.context.setCurrentAd(resData.createdAd);
+                this.toPostAd();
+            })
+            .catch(err => {
+                console.log(err)
+                this.setState({
+                    error: err.error
+                })
+            })
     }
 
     getAddressDetails = (newAddress)=>{
@@ -67,7 +104,7 @@ export default class AdListing extends React.Component{
         };
 
         address = address.join(" ").split(", ").join("+").split(" ").join("+");
-        console.log(address)
+        
         fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyAAPqYeOSuJKs63H8A4NwaKp8fjVZo_jao`)
             .then( res => {
                 if(!res.ok){
@@ -77,9 +114,6 @@ export default class AdListing extends React.Component{
                 return res.json();
             })
             .then( resData => {
-                console.log(resData.results[0].formatted_address)
-
-                
 
                 this.handleAddressInput(resData.results[0].formatted_address);
 
@@ -91,13 +125,13 @@ export default class AdListing extends React.Component{
         console.log(this.context)
         return (
             <section>
-                <form>
+                <form onSubmit={this.startPostAd}>
                     <legend>
                         <h3>Add Property</h3>
                     </legend>
                     <fieldset>
 
-                        <label htmlFor="search-address-input">Property Address</label>
+                        <label htmlFor="search-address-input">Property Address <span>*</span></label>
                         <PlacesAutocomplete
                         name="address"
                         value={this.context.address ? this.context.address : this.state.address}
@@ -143,7 +177,7 @@ export default class AdListing extends React.Component{
                         </PlacesAutocomplete>
 
                         <label htmlFor="ad-listing-property-apt-num">Suite / Apartment number</label>
-                        <input id="" type="text" name="apt_num" value={this.context.ad.apt_num ? this.context.ad.apt_num : this.state.apt_num} placeholder="If applicable"></input>
+                        <input id="" type="text" name="apt_num" onChange={this.handleTextInput} value={this.context.ad.apt_num ? this.context.ad.apt_num : this.state.apt_num} placeholder="If applicable"></input>
 
                         <label htmlFor="ad-listing-property-type">Space listing type</label>
                         <select id="ad-listing-property-type" name="type" value={this.context.ad.type ? this.context.ad.type : this.state.type} onChange={this.handleSelectInput}>
@@ -151,7 +185,7 @@ export default class AdListing extends React.Component{
                             <option value="Apartment">Apartment</option>
                         </select>
 
-                        <button type="button" onClick={this.toPostAd}>Create Listing</button>
+                        <button type="submit">Create Listing</button>
                         <button type="button" onClick={this.toggleAdListing}>Manage Lsitings</button>
                     </fieldset>
                 </form>

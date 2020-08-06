@@ -16,7 +16,7 @@ export default class Description extends React.Component{
 
     handleTextInput = (e)=>{
         this.setState({
-            [e.target.name]: e.target.name
+            [e.target.name]: e.target.value
         });
 
         this.context.handleTextInput(e);
