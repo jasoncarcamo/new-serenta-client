@@ -1,5 +1,6 @@
 import React from "react";
 import UserToken from "../../Services/UserToken/UserToken";
+import AppContext from "../../Contexts/AppContext/AppContext";
 
 export default class Login extends React.Component{
     constructor(props){
@@ -10,6 +11,8 @@ export default class Login extends React.Component{
             error: ""
         }
     }
+
+    static contextType = AppContext;
 
     handleTextInput = (e)=>{
         this.setState({
@@ -40,6 +43,9 @@ export default class Login extends React.Component{
             .then( resData => {
                 console.log(resData)
                 UserToken.setToken(resData.token);
+
+                this.context.userContext.handleLogIn();
+                
                 this.props.history.push("/user");
             })
             .catch( err => this.setState({

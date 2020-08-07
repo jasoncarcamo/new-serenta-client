@@ -7,7 +7,9 @@ const UserContext = React.createContext({
     loading: Boolean,
     refresh: ()=>{},
     addtoAds: ()=>{},
-    resetState: ()=>{}
+    resetState: ()=>{},
+    handleLogIn: ()=>{},
+    loading: Boolean
 });
 
 export default UserContext;
@@ -27,9 +29,7 @@ export class UserProvider extends React.Component{
         console.log("Hello");
         this.getUserInfo()
             .then(([userData, userAdsData])=>{
-                console.log(userData);
-                console.log(userAdsData);
-                console.log("Hello");
+
                 this.setState({
                     user: userData.user,
                     ads: userAdsData.userAds
@@ -44,6 +44,31 @@ export class UserProvider extends React.Component{
             });
     };
 
+    handleLogIn = ()=>{
+        this.setState({
+            loading: true
+        });
+
+        this.getUserInfo()
+            .then(([userData, userAdsData])=>{
+                console.log(userData);
+                console.log(userAdsData);
+                console.log("Hello");
+                this.setState({
+                    user: userData.user,
+                    ads: userAdsData.userAds,
+                    loading: false
+                });
+                
+            })
+            .catch( err => {
+                console.log(err)
+                this.setState({
+                    loading: false,
+                    error: err.error
+                })
+            });
+    }   
 
     // resets this state when user signs out
     resetState = ()=>{
@@ -124,9 +149,11 @@ export class UserProvider extends React.Component{
             loading: this.state.loading,
             refresh: this.refresh,
             addToAds: this.addToAds,
-            resetState: this.resetState
+            resetState: this.resetState,
+            loading: this.state.loading,
+            handleLogIn: this.handleLogIn
         };
-        
+        console.log(value)
         return (
             <UserContext.Provider value={value}>
                 {this.props.children}
