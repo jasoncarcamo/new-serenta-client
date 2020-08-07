@@ -15,8 +15,10 @@ export default class SUbmitAd extends React.Component{
     handleForm =  (e)=>{
         e.preventDefault();
 
-        this.context.handlePatchAd()
+        this.context.handleAdSubmit()
             .then( resData => {
+
+                this.context.addAd(this.context.ad);
 
                 //this.context.setAdDefault();
             })

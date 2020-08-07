@@ -3,7 +3,8 @@ import UserToken from "../../Services/UserToken/UserToken";
 
 const AdsContext = React.createContext({
     ads: [],
-    loading: Boolean
+    loading: Boolean,
+    addAdd: ()=>{}
 });
 
 export default AdsContext;
@@ -57,10 +58,21 @@ export class AdsProvider extends React.Component{
             });
     }
 
+    addAd = (ad)=>{
+        const ads = this.state.ads;
+
+        ads.push(ad);
+
+        this.setState({
+            ads
+        });
+    }
+
     render(){
         const value = {
             ads: this.state.ads,
-            loading: this.state.loading
+            loading: this.state.loading,
+            addAd: this.addAd
         };
         console.log(value);
         return (

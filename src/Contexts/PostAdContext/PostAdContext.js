@@ -1,11 +1,14 @@
 import React from "react";
 import UserToken from "../../Services/UserToken/UserToken";
+import AdsContext from "../../Contexts/AdsContext/AdsContext";
 
 const PostAdContext = React.createContext({
     ad: {},
     address: "",
     adListing: Boolean,
+    addToUserAds: ()=>{},
     managingListings: Boolean,
+    addAd:()=>{},
     handleAddressInput: ()=>{},
     handleRadioInput: ()=>{},
     handleCheckboxInput: ()=>{},
@@ -15,7 +18,11 @@ const PostAdContext = React.createContext({
     setAdDefault: ()=>{},
     setCurrentAd:()=>{},
     handlePostAd: ()=>{},
-    handlePatchAd: ()=>{}
+    handlePatchAd: ()=>{},
+    handleAdSubmit: ()=>{},
+    removeStartedAd: ()=>{},
+    handleAdSuccess: ()=>{},
+    setCoordinates: ()=>{}
 });
 
 export default PostAdContext;
@@ -45,13 +52,76 @@ export class PostAdProvider extends React.Component{
                 parking: ["Not available"],
                 washer: "Not included",
                 dryer: "Not included",
-                comments: ""
+                comments: "",
+                lat: "",
+                lng: ""
             },
             adListing: false,
             managingListings: false
         };
     };
 
+    static contextType = AdsContext;
+
+    setCoordinates = (coordinates)=>{
+        const ad = this.state.ad;
+
+        ad.lat = coordinates.lat;
+        ad.lng = coordinates.lng;
+
+        this.setState({
+            ad
+        });
+    }
+
+    handleAdSuccess = ()=>{
+        this.setAdDefault()
+    }
+
+    removeStartedAd = async (ad)=>{
+        console.log(ad);
+        return fetch(`http://localhost:8000/api/living-space/${ad.id}`, {
+            method: "DELETE",
+            headers: {
+                'content-type': "application/json",
+                'authorization': `bearer ${UserToken.getToken()}`
+            }
+        })
+            .then( res => {
+                console.log(res)
+                if(!res.ok){
+                    return res.json().then( e => Promise.reject(e));
+                };
+
+                return res.json();
+            });
+    }
+
+    // adds ad to user context
+    addToUserAds = (ad)=>{
+        this.props.userContext.addToAds(ad)
+    }
+
+
+    // hads ad to ad context
+    addAd = (ad)=>{
+        this.context.addAd(ad);
+    }
+
+    handleAdSubmit = async ()=>{
+        const ad = this.state.ad;
+        
+        if(ad.posted === false){
+            ad.posted = true;
+        };
+
+        this.setState({
+            ad
+        });
+
+        return await this.handlePatchAd();
+    
+    }
 
     // handles saving the instance of the current ad
     handlePatchAd = async ()=>{
@@ -95,6 +165,7 @@ export class PostAdProvider extends React.Component{
     // sets this.state.ad to default data
     setAdDefault = ()=>{
         this.setState({
+            address: "",
             ad: {
                 street_address: "",
                 apt_num: "",
@@ -234,6 +305,7 @@ export class PostAdProvider extends React.Component{
             adListing: this.state.adListing,
             managingListings: this.state.managingListings,
             address: this.state.address,
+            addAd: this.addAd,
             handleAddressInput: this.handleAddressInput,
             handleRadioInput: this.handleRadioInput,
             handleCheckboxInput: this.handleCheckboxInput,
@@ -243,14 +315,18 @@ export class PostAdProvider extends React.Component{
             setAdDefault: this.setAdDefault,
             setCurrentAd: this.setCurrentAd,
             handlePostAd: this.handlePostAd,
-            handlePatchAd: this.handlePatchAd
+            handlePatchAd: this.handlePatchAd,
+            handleAdSubmit: this.handleAdSubmit,
+            removeStartedAd: this.removeStartedAd,
+            handleAdSuccess: this.handleAdSuccess,
+            setCoordinates: this.setCoordinates,
+            addToUserAds: this.addToUserAds
         };
         console.log(value);
-
         return (
             <PostAdContext.Provider value={value}>
                 {this.props.children}
             </PostAdContext.Provider>
-        )
-    }
-} 
+        );
+    };
+};

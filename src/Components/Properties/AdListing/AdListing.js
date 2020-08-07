@@ -16,10 +16,6 @@ export default class AdListing extends React.Component{
 
     static contextType = PostAdContext;
 
-    componentDidMount(){
-        
-    }
-
     renderLoading = ()=>{
         return <p className="loading-icon">Loading...</p>
     }
@@ -36,13 +32,18 @@ export default class AdListing extends React.Component{
         this.context.handleTextInput(e);
     }
 
-    handleAddressInput = (address)=>{
+    // address and coordinates in post ad context
+    handleAddressInput = (address, location)=>{
 
         this.setState({
             address
         });
 
         this.context.handleAddressInput(address);
+
+        if(location){
+            this.context.setCoordinates(location);
+        };
     }
 
     handleSelectInput = (address)=>{
@@ -68,6 +69,7 @@ export default class AdListing extends React.Component{
             .then( resData => {
                 console.log(resData);
                 this.context.setCurrentAd(resData.createdAd);
+                this.context.addToUserAds(resData.createdAd);
                 this.toPostAd();
             })
             .catch(err => {
@@ -115,7 +117,7 @@ export default class AdListing extends React.Component{
             })
             .then( resData => {
 
-                this.handleAddressInput(resData.results[0].formatted_address);
+                this.handleAddressInput(resData.results[0].formatted_address, resData.results[0].geometry.location);
 
             })
             .catch( err => this.setState({ error: err}))

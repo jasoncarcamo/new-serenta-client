@@ -4,7 +4,9 @@ import UserToken from "../../Services/UserToken/UserToken";
 const UserContext = React.createContext({
     user: {},
     ads: [],
-    loading: Boolean
+    loading: Boolean,
+    refresh: ()=>{},
+    addtoAds: ()=>{}
 });
 
 export default UserContext;
@@ -21,12 +23,61 @@ export class UserProvider extends React.Component{
     };
 
     componentDidMount(){
-        this.getUserInfo();
+        console.log("Hello");
+        this.getUserInfo()
+            .then(([userData, userAdsData])=>{
+                console.log(userData);
+                console.log(userAdsData);
+                console.log("Hello");
+                this.setState({
+                    user: userData.user,
+                    ads: userAdsData.userAds
+                });
+                
+            })
+            .catch( err => {
+                console.log(err)
+                this.setState({
+                    error: err.error
+                })
+            });
     };
+
+    addToAds = (ad)=>{
+        const ads = this.state .ads;
+
+        ads.push(ad);
+
+        this.setState({
+            ads
+        });
+    }
+
+    refresh = async ()=>{
+        this.getUserInfo()
+            .then(([userData, userAdsData])=>{
+
+                this.setState({
+                    user: userData.user,
+                    ads: userAdsData.userAds
+                });
+
+                return true;
+                
+            })
+            .catch( err => {
+                console.log(err)
+                this.setState({
+                    error: err.error
+                });
+
+                return false;
+            });
+    }
     
-    getUserInfo = ()=>{
+    getUserInfo = async ()=>{
         if(UserToken.hasToken()){
-            Promise.all([
+            return Promise.all([
                 fetch("http://localhost:8000/api/user", {
                     headers: {
                         'content-type': "application/json",
@@ -50,29 +101,17 @@ export class UserProvider extends React.Component{
                     };
 
                     return Promise.all([ userRes.json(), userAdsRes.json()]);
-                })
-                .then(([userData, userAdsData])=>{
-                    console.log(userData);
-                    console.log(userAdsData);
-                    this.setState({
-                        user: userData.user,
-                        ads: userAdsData.userAds
-                    });
-                    
-                })
-                .catch( err => {
-                    console.log(err)
-                    this.setState({
-                        error: err.error
-                    })
-                })
+                });
         }
     }
 
     render(){
         const value = {
             user: this.state.user,
-            ads: this.state.ads
+            ads: this.state.ads,
+            loading: this.state.loading,
+            refresh: this.refresh,
+            addToAds: this.addToAds
         };
         console.log(value)
         return (

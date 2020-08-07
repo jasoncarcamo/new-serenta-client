@@ -20,7 +20,7 @@ export default class StartedAds extends React.Component{
 
         ads = ads.map((ad, index)=>{
             if((ad.posted === false) && (ad.posted !== undefined)){
-                return <StartedAd key={index} ad={ad} history={this.props.history}></StartedAd>;
+                return <StartedAd key={index} ad={ad} history={this.props.history} userContext={this.context}></StartedAd>;
             };
         });
 

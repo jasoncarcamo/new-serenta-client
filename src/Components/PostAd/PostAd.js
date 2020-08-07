@@ -33,6 +33,8 @@ export default class PostAd extends React.Component{
     render(){
         return (
             <section>
+                <h2>Posting an ad listing has never been this easy</h2>
+                
                 <Details/>
                 <Amenities/>
                 <Description/>
