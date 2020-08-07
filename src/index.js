@@ -8,24 +8,31 @@ import UserContext, {UserProvider} from "./Contexts/UserContext/UserContext";
 import {AdsProvider} from "./Contexts/AdsContext/AdsContext";
 import MapContext, {MapProvider} from "./Contexts/MapContext/MapContext";
 import PostAdContext, {PostAdProvider} from "./Contexts/PostAdContext/PostAdContext";
+import AppContext, {AppProvider} from "./Contexts/AppContext/AppContext";
 
 ReactDOM.render(
     <BrowserRouter>
         <AdsProvider>
             <UserProvider>
-                <UserContext>
+                <UserContext.Consumer>
                     { userContext => (
                         <MapProvider>
                             <MapContext.Consumer>
                                 { mapContext => (
                                     <PostAdProvider mapContext={mapContext} userContext={userContext}>
-                                        <App/>
+                                        <PostAdContext.Consumer>
+                                            {postAdContext => (
+                                                <AppProvider mapContext={mapContext} userContext={userContext} postAdContext={postAdContext}>
+                                                    <App/>
+                                                </AppProvider>
+                                            )}
+                                        </PostAdContext.Consumer>
                                     </PostAdProvider>
                                 )}
                             </MapContext.Consumer>
                         </MapProvider>
                     )}
-                </UserContext>
+                </UserContext.Consumer>
             </UserProvider>
         </AdsProvider>
     </BrowserRouter>,

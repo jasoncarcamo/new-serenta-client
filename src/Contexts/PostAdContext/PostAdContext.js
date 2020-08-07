@@ -22,7 +22,8 @@ const PostAdContext = React.createContext({
     handleAdSubmit: ()=>{},
     removeStartedAd: ()=>{},
     handleAdSuccess: ()=>{},
-    setCoordinates: ()=>{}
+    setCoordinates: ()=>{},
+    resetState: ()=>{}
 });
 
 export default PostAdContext;
@@ -62,6 +63,39 @@ export class PostAdProvider extends React.Component{
     };
 
     static contextType = AdsContext;
+
+    // resets this state to default when user signs out
+    resetState = ()=>{
+        this.setState({
+            address: "",
+            ad: {
+                street_address: "",
+                apt_num: "",
+                city: "",
+                state: "",
+                country: "",
+                zip_code: "",
+                type: "Room",
+                price: "",
+                deposit: "",
+                bedrooms: 1,
+                bathrooms: 1,
+                squareft: "",
+                ac: "Not included",
+                wifi: "Not included",
+                cable: "Not included",
+                pets: "No pets",
+                parking: ["Not available"],
+                washer: "Not included",
+                dryer: "Not included",
+                comments: "",
+                lat: "",
+                lng: ""
+            },
+            adListing: false,
+            managingListings: false
+        });
+    }
 
     setCoordinates = (coordinates)=>{
         const ad = this.state.ad;
@@ -320,7 +354,8 @@ export class PostAdProvider extends React.Component{
             removeStartedAd: this.removeStartedAd,
             handleAdSuccess: this.handleAdSuccess,
             setCoordinates: this.setCoordinates,
-            addToUserAds: this.addToUserAds
+            addToUserAds: this.addToUserAds,
+            resetState: this.resetState
         };
         console.log(value);
         return (

@@ -3,8 +3,11 @@ import "./Header.css";
 import UserToken from "../../Services/UserToken/UserToken";
 import {NavLink, } from "react-router-dom";
 import Logo from "../../Assets/SvgImages/logo.svg"
+import AppContext from "../../Contexts/AppContext/AppContext";
 
 export default class Header extends React.Component{
+
+    static contextType = AppContext;
 
     renderLoggedLinks = () => {
         if(UserToken.hasToken()){
@@ -26,6 +29,10 @@ export default class Header extends React.Component{
     }
 
     handleSignOut = ()=>{
+        
+        this.context.userContext.resetState();
+        this.context.postAdContext.resetState();
+        
         UserToken.removeToken();
     }
 

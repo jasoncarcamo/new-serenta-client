@@ -6,7 +6,8 @@ const UserContext = React.createContext({
     ads: [],
     loading: Boolean,
     refresh: ()=>{},
-    addtoAds: ()=>{}
+    addtoAds: ()=>{},
+    resetState: ()=>{}
 });
 
 export default UserContext;
@@ -42,6 +43,17 @@ export class UserProvider extends React.Component{
                 })
             });
     };
+
+
+    // resets this state when user signs out
+    resetState = ()=>{
+        this.setState({
+            user: {},
+            ads: [],
+            loading: false,
+            error: ""
+        })
+    }
 
     addToAds = (ad)=>{
         const ads = this.state .ads;
@@ -111,9 +123,10 @@ export class UserProvider extends React.Component{
             ads: this.state.ads,
             loading: this.state.loading,
             refresh: this.refresh,
-            addToAds: this.addToAds
+            addToAds: this.addToAds,
+            resetState: this.resetState
         };
-        console.log(value)
+        
         return (
             <UserContext.Provider value={value}>
                 {this.props.children}

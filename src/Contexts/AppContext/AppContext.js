@@ -1,12 +1,14 @@
 import React from "react";
 
 const AdContext = React.createContext({
-    history: {}
+    history: {},
+    userContext: {},
+    postAdContext: {}
 })
 
 export default AdContext;
 
-export default class AppContextProvider extends React.Component{
+export class AppProvider extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -16,8 +18,11 @@ export default class AppContextProvider extends React.Component{
 
     render(){
         const value = {
-            history: this.props.history
+            userContext: this.props.userContext,
+            postAdContext: this.props.postAdContext,
+            mapContext: this.props.mapContext
         };
+
         return (
             <AdContext.Provider value={value}>
                 {this.props.children}

@@ -65,6 +65,10 @@ export default class AdListing extends React.Component{
             return this.toPostAd();
         };
 
+        if(this.context.address === ""){
+            return;
+        }
+
         this.context.handlePostAd()
             .then( resData => {
                 console.log(resData);
