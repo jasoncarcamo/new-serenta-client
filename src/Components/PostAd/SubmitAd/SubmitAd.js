@@ -19,7 +19,7 @@ export default class SUbmitAd extends React.Component{
             .then( resData => {
 
                 this.context.addAd(this.context.ad);
-
+                console.log(resData);
                 //this.context.setAdDefault();
             })
             .catch(err => {
