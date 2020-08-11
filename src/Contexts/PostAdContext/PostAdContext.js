@@ -23,7 +23,8 @@ const PostAdContext = React.createContext({
     removeStartedAd: ()=>{},
     handleAdSuccess: ()=>{},
     setCoordinates: ()=>{},
-    resetState: ()=>{}
+    resetState: ()=>{},
+    toggleAdPosted: ()=>{}
 });
 
 export default PostAdContext;
@@ -143,18 +144,19 @@ export class PostAdProvider extends React.Component{
     }
 
     handleAdSubmit = async ()=>{
+
+        return await this.handlePatchAd();
+    
+    }
+
+    toggleAdPosted = (bool)=>{
         const ad = this.state.ad;
-        
-        if(ad.posted === false){
-            ad.posted = true;
-        };
+
+        ad.posted = bool;
 
         this.setState({
             ad
         });
-
-        return await this.handlePatchAd();
-    
     }
 
     // handles saving the instance of the current ad
@@ -220,8 +222,12 @@ export class PostAdProvider extends React.Component{
                 parking: ["Not available"],
                 washer: "Not included",
                 dryer: "Not included",
-                comments: ""
-            }
+                comments: "",
+                lat: "",
+                lng: ""
+            },
+            adListing: false,
+            managingListings: false
         })
     }
 
@@ -355,7 +361,8 @@ export class PostAdProvider extends React.Component{
             handleAdSuccess: this.handleAdSuccess,
             setCoordinates: this.setCoordinates,
             addToUserAds: this.addToUserAds,
-            resetState: this.resetState
+            resetState: this.resetState,
+            toggleAdPosted: this.toggleAdPosted
         };
         console.log(value);
         return (
