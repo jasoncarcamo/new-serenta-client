@@ -26,6 +26,8 @@ export default class StartedAd extends React.Component{
     };
 
     toPostAd = ()=>{
+
+        // sets current ad to this ad for editing
         this.context.setCurrentAd(this.props.ad);
         this.props.history.push("/post-ad");
     };
@@ -96,6 +98,10 @@ export default class StartedAd extends React.Component{
         );
     };
 
+    renderEditAdButton = ()=>{
+        return <button type="button" onClick={this.toPostAd}>Edit</button>
+    }
+
     renderListAdButton = ()=>{
         return <button onClick={this.toPostAd}>List ad</button>;
     }
@@ -109,7 +115,8 @@ export default class StartedAd extends React.Component{
             <section className="started-ad-listing">
                 <h4>{this.props.ad.street_address}</h4>
 
-                {!this.state.cancel && (!this.state.cancelSuccess) ? this.renderListAdButton() : ""}
+                {!this.state.cancel && (!this.state.cancelSuccess) && (!this.props.ad.posted) ? this.renderListAdButton() : ""}
+                {!this.state.cancel && (!this.state.cancelSuccess) && (this.props.ad.posted) ? this.renderEditAdButton() : ""}
                 {!this.state.cancel && (!this.state.cancelSuccess) ? this.renderRemoveAdButton() : "" }
                 {this.state.cancel && (!this.state.cancelSuccess) ? this.renderCancelOptions() : ""}
                 {this.state.cancelSuccess ? this.renderRemoveSuccess() : ""}

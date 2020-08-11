@@ -7,6 +7,7 @@ export default class SUbmitAd extends React.Component{
         super(props);
         this.state = {
             success: false,
+            message: "",
             error: ""
         };
     };
@@ -17,9 +18,16 @@ export default class SUbmitAd extends React.Component{
         e.preventDefault();
 
         this.setState({
+            message: "",
             success: false,
             error: ""
         });
+
+        if(this.context.ad.posted == true){
+            this.setPatchMessage();
+        } else if(this.context.ad.posted === false){
+            this.setPostMessage();
+        };
 
         // sets ad to posted 
         this.context.toggleAdPosted(true);
@@ -32,7 +40,9 @@ export default class SUbmitAd extends React.Component{
                 this.setState({
                     success: true
                 });
-                //this.context.setAdDefault();
+                
+                
+                this.context.setAdDefault();
             })
             .catch(err => {
                 console.log(err);
@@ -42,6 +52,7 @@ export default class SUbmitAd extends React.Component{
 
                 this.setState({
                     success: false,
+                    message: "",
                     error: err.error
                 });
             });
@@ -51,28 +62,47 @@ export default class SUbmitAd extends React.Component{
         this.props.history.push("/properties");
     };
 
-    handleConfirm = ()=>{
-        this.context.setAdDefault();  
+    handleConfirm = ()=>{ 
         this.goToProperties();
     };
 
     renderAdPostedSuccess = ()=>{
         return (
             <div>
-                <p>Your ad has been posted!</p>
+                <p>{this.state.message}</p>
                 <button type="button" onClick={this.handleConfirm}>Ok</button>
             </div>
         );
     };
 
+    setPatchMessage = ()=>{
+        this.setState({
+            message: "Your ad has been updated!"
+        });
+    }
+
+    setPostMessage = ()=>{
+        this.setState({
+            message: "Your ad has been posted!"
+        });
+    }
+
+    renderUpdateAdButton = ()=>{
+
+        return <button type="button" onClick={this.handleForm}>Update Ad</button>
+    }
+
     renderPostAdButton = ()=>{
+
         return <button type="button" onClick={this.handleForm}>Post Ad</button>;
     };
 
     render(){
         return (
             <>
-                {this.state.success === true ? this.renderAdPostedSuccess() : this.renderPostAdButton()}
+                {this.state.success === true ? this.renderAdPostedSuccess() : ""}
+                {this.context.ad.posted === true && this.state.success === false ? this.renderUpdateAdButton() : ""}
+                {this.context.ad.posted ===false &&  this.state.success === false ? this.renderPostAdButton() : ""}
             </>
         )
     };
