@@ -15,6 +15,7 @@ export default class Properties extends React.Component{
     static contextType = PostAdContext;
 
     adListing = ()=>{
+        this.context.setAdDefault();
         this.context.toggleAdListing();
     }
 

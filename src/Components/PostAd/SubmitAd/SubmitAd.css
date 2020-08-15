@@ -1,0 +1,34 @@
+#post-ad-success-container{
+    border: .05em solid black;
+    position: absolute;
+    left: 50%;
+    bottom: 12.5em;
+    transform: translateX(-50%);
+    width: 25em;
+    height: 12em;
+    background-color: white;
+}
+
+#post-ad-success-message{
+    text-align: center;
+    font-size: 1.25em;
+    margin: 2em 0 4em 0;
+}
+
+#post-ad-success-button{
+    display: block;
+    position: absolute;
+    bottom: 1.5em;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5em;
+    height: 2em;
+}
+
+@media screen and (max-width: 900px){
+
+    /* post ad success mobile and tablet view */
+    #post-ad-success-container{
+        width: 15em;
+    } 
+}

@@ -1,7 +1,6 @@
 #properties-section{
-    border: 1px solid black;
-    min-height: 70vh;
-    width: 75%;
+    border: 1px solid orange;
+    width: 80%;
     margin: 0 auto;
     padding: 0;
 }
@@ -21,7 +20,7 @@
     border: 1px solid black;
     position: absolute;
     top: 0;
-    left: 0;
+    left: 1em;
 }
 
 #properties-section-container-button{
@@ -29,4 +28,10 @@
     right: 0;
     height: 3em;
     border: 1px solid red;
+}
+ 
+@media screen and (max-width: 900px){
+    #properties-section{
+        width: 100%;
+    }
 }

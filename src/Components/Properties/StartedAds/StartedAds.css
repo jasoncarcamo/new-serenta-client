@@ -7,3 +7,21 @@
     min-height: 30em;
     border: 1px solid red;
 }
+
+.property-listings-no-ads-message{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    border: 1px solid black;
+    height: 1.5em;
+    font-size: 1.3em;
+}
+
+@media screen and (max-width: 900px){
+    #property-listings{
+        grid-template: auto / 1fr;
+        min-height: 15em;
+    }
+}

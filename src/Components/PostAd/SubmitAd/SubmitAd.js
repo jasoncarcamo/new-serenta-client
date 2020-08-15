@@ -1,8 +1,9 @@
 import React from "react";
 import PostContextAd from "../../../Contexts/PostAdContext/PostAdContext";
 import UserToken from "../../../Services/UserToken/UserToken";
+import "./SubmitAd.css";
 
-export default class SUbmitAd extends React.Component{
+export default class SubmitAd extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -41,7 +42,7 @@ export default class SUbmitAd extends React.Component{
                     success: true
                 });
                 
-                
+
                 this.context.setAdDefault();
             })
             .catch(err => {
@@ -68,9 +69,9 @@ export default class SUbmitAd extends React.Component{
 
     renderAdPostedSuccess = ()=>{
         return (
-            <div>
-                <p>{this.state.message}</p>
-                <button type="button" onClick={this.handleConfirm}>Ok</button>
+            <div id="post-ad-success-container">
+                <p id="post-ad-success-message">{this.state.message}</p>
+                <button id="post-ad-success-button" type="button" onClick={this.handleConfirm}>Ok</button>
             </div>
         );
     };
@@ -102,7 +103,7 @@ export default class SUbmitAd extends React.Component{
             <>
                 {this.state.success === true ? this.renderAdPostedSuccess() : ""}
                 {this.context.ad.posted === true && this.state.success === false ? this.renderUpdateAdButton() : ""}
-                {this.context.ad.posted ===false &&  this.state.success === false ? this.renderPostAdButton() : ""}
+                {this.context.ad.posted === false &&  this.state.success === false ? this.renderPostAdButton() : ""}
             </>
         )
     };

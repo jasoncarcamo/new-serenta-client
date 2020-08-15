@@ -110,7 +110,7 @@ export class PostAdProvider extends React.Component{
     }
 
     handleAdSuccess = ()=>{
-        this.setAdDefault()
+        this.setAdDefault();
     }
 
     removeStartedAd = async (ad)=>{
@@ -134,9 +134,8 @@ export class PostAdProvider extends React.Component{
 
     // adds ad to user context
     addToUserAds = (ad)=>{
-        this.props.userContext.addToAds(ad)
+        this.props.userContext.addToAds(ad);
     }
-
 
     // hads ad to ad context
     addAd = (ad)=>{
@@ -146,7 +145,6 @@ export class PostAdProvider extends React.Component{
     handleAdSubmit = async ()=>{
 
         return await this.handlePatchAd();
-    
     }
 
     toggleAdPosted = (bool)=>{
@@ -258,6 +256,7 @@ export class PostAdProvider extends React.Component{
 
     // handles address input form our start ad form in /properties
     handleAddressInput = (address)=>{
+        console.log(address);
         let newAddress = address.split(", ");
         const ad = this.state.ad;
 
@@ -267,13 +266,12 @@ export class PostAdProvider extends React.Component{
             ad.state = newAddress[2].split(" ")[0];
             ad.country = newAddress[newAddress.length - 1]
             ad.zip_code = newAddress[2].split(" ")[1];
-        }
+        };
 
         this.setState({
             address,
             ad
         });
-
     }
 
     // handles radio inputs from our post ad form

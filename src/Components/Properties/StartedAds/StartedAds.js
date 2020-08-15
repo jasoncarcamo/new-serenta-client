@@ -13,7 +13,7 @@ export default class StartedAds extends React.Component{
         if(ads.length === 0){
             return (
                 <>
-                    <p>You have not created an ad listing</p>
+                    <p className="property-listings-no-ads-message">You have not created an ad listing</p>
                 </>
             );
         };

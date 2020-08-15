@@ -3,6 +3,7 @@ import PostAdContext from "../../../Contexts/PostAdContext/PostAdContext";
 import PlacesAutocomplete from "react-places-autocomplete";
 import SearchSpacesInput from "../../SearchSpacesInput/SearchSpacesInput";
 import UserToken from "../../../Services/UserToken/UserToken";
+import "./AdListing.css";
 
 export default class AdListing extends React.Component{
     constructor(props){
@@ -46,9 +47,22 @@ export default class AdListing extends React.Component{
         };
     }
 
-    handleSelectInput = (address)=>{
+    handleAddressSelect = (address)=>{
+
+        this.setState({
+            address
+        });
 
         this.getAddressDetails(address);
+    }
+
+    handleSelectInput = (e)=>{
+
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+
+        this.context.handleSelectInput(e);
     }
 
     toPostAd = ()=>{
@@ -130,19 +144,19 @@ export default class AdListing extends React.Component{
     render(){
         console.log(this.context)
         return (
-            <section>
-                <form onSubmit={this.startPostAd}>
-                    <legend>
-                        <h3>Add Property</h3>
-                    </legend>
-                    <fieldset>
+            <section id="ad-listing-form-section">
+                <form id="ad-listing-form" onSubmit={this.startPostAd}>
+                    <fieldset id="ad-listing-fieldset">
+                        <legend id="ad-listing-legend">
+                            <h3 id="ad-listing-h3">Add Property</h3>
+                        </legend>
 
-                        <label htmlFor="search-address-input">Property Address <span>*</span></label>
+                        <label htmlFor="search-address-input" className="ad-listing-label">Property Address <span>*</span></label>
                         <PlacesAutocomplete
                         name="address"
                         value={this.context.address ? this.context.address : this.state.address}
                         onChange={this.handleAddressInput}
-                        onSelect={this.handleSelectInput}>
+                        onSelect={this.handleAddressSelect}>
                             {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                                 <div id="search-spaces-input-container">
 
@@ -150,7 +164,7 @@ export default class AdListing extends React.Component{
                                         <input
                                         {...getInputProps({
                                             placeholder: 'Address...',
-                                            className: 'location-search-input',
+                                            className: 'location-search-input ad-listing-input1',
                                             id: "search-address-input"
                                         })}
                                         />
@@ -182,17 +196,19 @@ export default class AdListing extends React.Component{
                             )}
                         </PlacesAutocomplete>
 
-                        <label htmlFor="ad-listing-property-apt-num">Suite / Apartment number</label>
-                        <input id="" type="text" name="apt_num" onChange={this.handleTextInput} value={this.context.ad.apt_num ? this.context.ad.apt_num : this.state.apt_num} placeholder="If applicable"></input>
+                        <label htmlFor="ad-listing-property-apt-num" className="ad-listing-label">Suite / Apartment number</label>
+                        <input id="ad-listing-property-apt-num" className="ad-listing-input2" type="text" name="apt_num" onChange={this.handleTextInput} value={this.context.ad.apt_num ? this.context.ad.apt_num : this.state.apt_num} placeholder="If applicable"></input>
 
-                        <label htmlFor="ad-listing-property-type">Space listing type</label>
+                        <label htmlFor="ad-listing-property-type" className="ad-listing-label">Space listing type <span>*</span></label>
                         <select id="ad-listing-property-type" name="type" value={this.context.ad.type ? this.context.ad.type : this.state.type} onChange={this.handleSelectInput}>
                             <option value="Room">Room</option>
                             <option value="Apartment">Apartment</option>
                         </select>
 
-                        <button type="submit">Create Listing</button>
-                        <button type="button" onClick={this.toggleAdListing}>Manage Lsitings</button>
+                        <div id="ad-listing-form-buttons-container">
+                            <button className="ad-listing-form-btn" type="submit">Create Listing</button>
+                            <button className="ad-listing-form-btn" type="button" onClick={this.toggleAdListing}>Manage Listings</button>
+                        </div>
                     </fieldset>
                 </form>
             </section>

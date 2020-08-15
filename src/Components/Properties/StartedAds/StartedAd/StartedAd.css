@@ -1,3 +1,9 @@
 .started-ad-listing{
-    border: 1px solid black;
+    border: 3px solid purple;
+}
+
+@media screen and (max-width: 900px){
+    .started-ad-listing{
+        height: 10em;
+    }
 }
