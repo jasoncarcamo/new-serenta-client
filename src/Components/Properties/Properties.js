@@ -9,7 +9,7 @@ export default class Properties extends React.Component{
         super(props);
         this.state = {
 
-        }
+        };
     };
 
     static contextType = PostAdContext;
@@ -17,10 +17,10 @@ export default class Properties extends React.Component{
     adListing = ()=>{
         this.context.setAdDefault();
         this.context.toggleAdListing();
-    }
+    };
 
     render(){
-        console.log(this.context)
+        console.log(this.context);
         return (
             <section id="properties-section">
                 <div id="properties-section-header-container">
