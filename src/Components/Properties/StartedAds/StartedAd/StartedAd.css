@@ -1,5 +1,48 @@
 .started-ad-listing{
+    padding: 0;
     border: 3px solid purple;
+}
+
+.started-ad-listing-first-section{
+    display: flex;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border-bottom: .5em solid lightblue;
+}
+
+.started-ad-listing-address-container{
+    width: 60%;
+    height: 5.5em;
+    margin: 0;
+    padding: 0;
+    border: 1px solid orange;
+}
+.started-ad-listing-address-container p{
+    text-align: center;
+    width: 100%;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0;
+    margin: 0;
+    border: 1px solid black;
+}
+
+.started-ad-listing-buttons-container{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    border: 2px solid green;
+    margin: 0;
+    padding: 0;
+}
+
+.started-ad-listing-buttons{
+    display: block;
+    margin: auto;
+    width: 7em;
+    height: 2em;
 }
 
 @media screen and (max-width: 900px){

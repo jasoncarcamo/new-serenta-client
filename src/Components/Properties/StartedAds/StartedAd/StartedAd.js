@@ -99,28 +99,41 @@ export default class StartedAd extends React.Component{
     };
 
     renderEditAdButton = ()=>{
-        return <button type="button" onClick={this.toPostAd}>Edit</button>
+        return <button type="button" onClick={this.toPostAd} className="started-ad-listing-buttons">Edit</button>
     }
 
     renderListAdButton = ()=>{
-        return <button onClick={this.toPostAd}>List ad</button>;
+        return <button onClick={this.toPostAd} className="started-ad-listing-buttons">List ad</button>;
     }
 
     renderRemoveAdButton = ()=>{
-        return <button type="button" onClick={this.handleRemove}>Remove ad</button>;
+        return <button type="button" onClick={this.handleRemove} className="started-ad-listing-buttons">Remove ad</button>;
     }
 
     render(){
         return (
             <section className="started-ad-listing">
-                <h4>{this.props.ad.street_address}</h4>
+                <div className="started-ad-listing-first-section">
+                    <div className="started-ad-listing-address-container">
+                        <p>{this.props.ad.street_address}, {this.props.ad.city}, {this.props.ad.state}, {this.props.ad.zip_code}</p>
+                    </div>
+                    
+                    <div className="started-ad-listing-buttons-container">
+                        {!this.state.cancel && (!this.state.cancelSuccess) && (!this.props.ad.posted) ? this.renderListAdButton() : ""}
+                        {!this.state.cancel && (!this.state.cancelSuccess) && (this.props.ad.posted) ? this.renderEditAdButton() : ""}
+                        {!this.state.cancel && (!this.state.cancelSuccess) ? this.renderRemoveAdButton() : "" }
+                        {this.state.cancel && (!this.state.cancelSuccess) ? this.renderCancelOptions() : ""}
+                        {this.state.cancelSuccess ? this.renderRemoveSuccess() : ""}
+                    </div>
+                </div>
 
-                {!this.state.cancel && (!this.state.cancelSuccess) && (!this.props.ad.posted) ? this.renderListAdButton() : ""}
-                {!this.state.cancel && (!this.state.cancelSuccess) && (this.props.ad.posted) ? this.renderEditAdButton() : ""}
-                {!this.state.cancel && (!this.state.cancelSuccess) ? this.renderRemoveAdButton() : "" }
-                {this.state.cancel && (!this.state.cancelSuccess) ? this.renderCancelOptions() : ""}
-                {this.state.cancelSuccess ? this.renderRemoveSuccess() : ""}
-            
+                <div>
+                    <p><span>Monthly price:</span> {this.props.ad.price}</p>
+                </div>     
+
+                <div>
+                    <p><span>Comments from lister:</span> {this.props.ad.comments}</p>
+                </div>            
             </section>
         )
     }
