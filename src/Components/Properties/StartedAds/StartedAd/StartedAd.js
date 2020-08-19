@@ -135,6 +135,6 @@ export default class StartedAd extends React.Component{
                     <p><span>Comments from lister:</span> {this.props.ad.comments}</p>
                 </div>            
             </section>
-        )
-    }
-}
+        );
+    };
+};
