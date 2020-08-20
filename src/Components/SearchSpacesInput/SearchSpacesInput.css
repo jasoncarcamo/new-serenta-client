@@ -1,6 +1,6 @@
 #search-spaces-form{
     position: absolute;
-    top: 10em;
+    top: 8em;
     left: 50%;
     transform: translateX(-50%);
     margin: 0 auto;
@@ -73,7 +73,6 @@
 @media screen and (max-width: 1030px){
     #search-spaces-form{
         position: absolute;
-        top: 10em;
         left: 50%;
         transform: translateX(-50%);
         margin: 0 auto;

@@ -7,7 +7,7 @@
 #signup-form{
     width: 25.75em;
     border: .06em solid lightgrey;
-    margin: 8em auto 0 auto;
+    margin: 5em auto 0 auto;
     padding: 0 2em;
 }
 
@@ -33,7 +33,11 @@
 .signup-input{
     display: block;
     width: 100%;
-    height: 2.8em;
+    height: 3em;
+}
+
+.signup-missing-input{
+    border: .075em solid red;
 }
 
 #signup-submit{
@@ -70,7 +74,7 @@
     #signup-form{
         width: 100%;
         border: none;
-        margin: 5em auto 0 auto;
+        margin: 3em auto 0 auto;
         padding: 0 .5em;
     }
     

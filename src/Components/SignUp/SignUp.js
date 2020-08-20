@@ -22,8 +22,22 @@ export default class SignUp extends React.Component{
         })
     }
 
+    checkRequirement = (e)=>{
+        if(e.target.value === "" || !(e.target.value)){
+            e.target.classList.add("login-missing-input");
+        } else{
+            e.target.classList.remove("login-missing-input");
+        }
+    }
+
     handleSubmit = (e)=>{
         e.preventDefault();
+
+        this.setState({
+            error: ""
+        })
+
+        this.interateRequiremnts();
 
         fetch(`http://localhost:8000/api/register`, {
             method: "POST",
@@ -54,8 +68,27 @@ export default class SignUp extends React.Component{
                 console.log(err);
                 this.setState({
                     error: err.error
-                })
+                });
             });
+    }
+
+    interateRequiremnts = ()=>{
+        const first_name = document.getElementById("first_name");
+        const last_name = document.getElementById("last_name");
+
+        if(first_name.nodeValue === "" || !(first_name.nodeValue)){
+            window.scrollTo("signup-missing-input");
+            first_name.classList.add("signup-missing-input");
+        } else{
+            first_name.classList.remove("signup-missing-input");
+        };
+
+        if(last_name.nodeValue === "" || !(last_name.nodeValue)){
+            window.scrollTo("signup-missing-input");
+            last_name.classList.add("signup-missing-input");
+        } else{
+            last_name.classList.remove("signup-missing-input");
+        };
     }
     
     render(){
@@ -74,6 +107,7 @@ export default class SignUp extends React.Component{
                                 className="signup-input"
                                 type="text"
                                 onChange={this.handleTextInput}
+                                onBlur={this.checkRequirement}
                                 value={this.state.first_name}
                                 name="first_name"
                                 required></input>
@@ -84,6 +118,7 @@ export default class SignUp extends React.Component{
                                 className="signup-input"
                                 type="text"
                                 onChange={this.handleTextInput}
+                                onBlur={this.checkRequirement}
                                 value={this.state.last_name}
                                 name="last_name"
                                 required></input>
@@ -94,6 +129,7 @@ export default class SignUp extends React.Component{
                                 className="signup-input"
                                 type="text"
                                 onChange={this.handleTextInput}
+                                onBlur={this.checkRequirement}
                                 value={this.state.mobile_number}
                                 name="mobile_number"
                                 required></input>
@@ -104,6 +140,7 @@ export default class SignUp extends React.Component{
                                 className="signup-input"
                                 type="text"
                                 onChange={this.handleTextInput}
+                                onBlur={this.checkRequirement}
                                 value={this.state.email}
                                 name="email"
                                 required></input>
@@ -114,6 +151,7 @@ export default class SignUp extends React.Component{
                                 className="signup-input"
                                 type="password"
                                 onChange={this.handleTextInput}
+                                onBlur={this.checkRequirement}
                                 value={this.state.password}
                                 name="password"
                                 required></input>
@@ -124,6 +162,7 @@ export default class SignUp extends React.Component{
                                 className="signup-input"
                                 type="password"
                                 onChange={this.handleTextInput}
+                                onBlur={this.checkRequirement}
                                 value={this.state.confirm_password}
                                 name="confirm_password"
                                 required></input>

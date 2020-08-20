@@ -95,9 +95,9 @@ export default class Header extends React.Component{
                 
                 <nav id="nav-container">
 
-                    <button id="nav-burger" class="hamburger hamburger--collapse" type="button" onClick={this.mobileNavMenuHandler}>
-                        <span class="hamburger-box" >
-                            <span class="hamburger-inner"></span>
+                    <button id="nav-burger" className="hamburger hamburger--collapse" type="button" onClick={this.mobileNavMenuHandler}>
+                        <span className="hamburger-box" >
+                            <span className="hamburger-inner"></span>
                         </span>
                     </button>
 

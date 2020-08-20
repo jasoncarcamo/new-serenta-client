@@ -26,8 +26,59 @@ export default class Login extends React.Component{
         this.props.history.push("/signup");
     }
 
+    checkRequirement = (e)=>{
+        if(e.target.value === "" || !(e.target.value)){
+            e.target.classList.add("login-missing-input");
+        } else{
+            e.target.classList.remove("login-missing-input");
+        }
+    }
+
+    interateRequirements = ()=>{
+        const email = document.getElementById("login-email");
+        const password = document.getElementById("login-password");
+        
+        if(email.value === "" || !(email.value)){
+            email.scrollIntoView({behavior: "smooth"});
+            email.classList.add("login-missing-input");
+
+            this.setState({
+                error: "Missing requirements"
+            });
+            
+        } else{
+            email.classList.remove("login-missing-input");
+        };
+
+        if(password.value === "" || !(password.value)){
+            password.scrollIntoView({behavior: "smooth"});
+            password.classList.add("login-missing-input");
+
+            this.setState({
+                error: "Missing requirements"
+            });
+
+        } else{
+            password.classList.remove("login-missing-input");
+        };
+    }
+
     handleSubmit = (e)=>{
         e.preventDefault();
+
+        this.setState({
+            error: ""
+        });
+
+        this.interateRequirements();
+
+        if(this.state.email === "" || this.state.password === ""){
+            return;
+        };
+
+        if(this.state.error === "Missing requirements"){
+            return;
+        };
 
         fetch("http://localhost:8000/api/login", {
             method: "POST",
@@ -69,23 +120,25 @@ export default class Login extends React.Component{
                             <h3>Log in to your account</h3>
                         </legend>
 
-                        <label className="login-label" htmlFor="login-email">Email:</label>
+                        <label className="login-label" htmlFor="login-email">Email <span>*</span></label>
                         <input
                             id="login-email"
                             type="text"
+                            onBlur={this.checkRequirement}
                             onChange={this.handleTextInput}
                             value={this.state.email}
                             name="email"
-                            required></input>
+                            ></input>
 
-                        <label className="login-label" htmlFor="login-password">Password:</label>
+                        <label className="login-label" htmlFor="login-password">Password <span>*</span></label>
                         <input
                             id="login-password"
                             type="password"
+                            onBlur={this.checkRequirement}
                             onChange={this.handleTextInput}
                             value={this.state.password}
                             name="password"
-                            required></input>
+                            ></input>
                         <p className="login-user-helpers">Forgot you password?</p>
                         {this.state.error ? <p id="login-error">{this.state.error}</p> : ""}
 

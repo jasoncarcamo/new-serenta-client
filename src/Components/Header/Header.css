@@ -7,6 +7,7 @@
     margin: 0;
     padding: 0;
     z-index: 4;
+    backdrop-filter: blur(.7em);
 }
 
 #nav-container{
@@ -32,7 +33,6 @@
     margin: 0;
     padding: 0;
     backdrop-filter: blur(.7em);
-    -webkit-backdrop-filter: blur(.7em);
 }
 
 .nav-link, .nav-link a{
@@ -80,6 +80,7 @@
         margin: 0;
         padding: 0;
         z-index: 5;
+        backdrop-filter: none;
     }
     
     #nav-container{
@@ -102,7 +103,7 @@
         display: none;
         flex-direction: column;
         position: relative;
-        justify-content: space-around;
+        justify-content: space-evenly;
         z-index: 5;
         top: 0;
         left: 0;
@@ -136,8 +137,7 @@
         position: unset;
         transform: translateY(0);
         width: 100%;
-        height: auto;
-        padding: 1em;
+        padding: 0;
         color: black;
     }
     

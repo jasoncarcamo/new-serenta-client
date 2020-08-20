@@ -1,5 +1,4 @@
 #properties-section{
-    border: 1px solid orange;
     width: 90%;
     margin: 0 auto;
     padding: 0;
@@ -20,14 +19,16 @@
     border: 1px solid black;
     position: absolute;
     top: 0;
-    left: 1em;
+    left: .5em;
 }
 
 #properties-section-container-button{
     position: absolute;
-    right: 0;
+    right: 1em;
     height: 3em;
-    border: 1px solid red;
+    border: none;
+    background-color: transparent;
+    color: lightskyblue
 }
  
 @media screen and (max-width: 900px){

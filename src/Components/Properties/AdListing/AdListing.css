@@ -3,7 +3,7 @@
     border-radius: .3em;
     position: absolute;
     z-index: 1;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 35em;
