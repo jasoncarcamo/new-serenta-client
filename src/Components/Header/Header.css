@@ -6,7 +6,7 @@
     height: 4em;
     margin: 0;
     padding: 0;
-    z-index: 2;
+    z-index: 4;
 }
 
 #nav-container{
@@ -56,7 +56,8 @@
     transform: translateY(-50%);
     width: 100%;
     height: auto;
-    padding: 2em 1em;
+    padding: 2em 0;
+    margin: 0 auto;
     color: black;
 }
 
@@ -67,8 +68,8 @@
 
 .nav-link a img{
     height: 2.5em;
-    padding: 0 0 0 1em;
-    margin: 0;
+    padding: 0;
+    margin: 0 1em 0 0;
 }
 
 @media screen and (max-width: 1030px){
@@ -76,10 +77,9 @@
         top: 0;
         left:0;
         width: 100%;
-        height: 100vh;
         margin: 0;
         padding: 0;
-        z-index: 4;
+        z-index: 5;
     }
     
     #nav-container{
@@ -95,7 +95,7 @@
         width: 1.35em;
         top: 1.5em;
         right: 1.5em;
-        z-index: 5;
+        z-index: 8;
     }
     
     #nav-list{
@@ -103,12 +103,12 @@
         flex-direction: column;
         position: relative;
         justify-content: space-around;
-        z-index: 2;
+        z-index: 5;
         top: 0;
         left: 0;
         transform: translateY(0);
         width: 100%;
-        height: 100%;
+        height: 100vh;
         margin: 0;
         padding: 0;
     }

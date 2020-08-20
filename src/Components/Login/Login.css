@@ -1,0 +1,86 @@
+#login-section{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#login-form{
+    width: 25.75em;
+    border: .06em solid lightgrey;
+    margin: 8em auto 0 auto;
+    padding: 0 2em;
+}
+
+#login-fieldset{
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+#login-legend{
+    width: 100%;
+    margin: 0;
+    padding: 3.5em 0 2em 0;
+    border: none;
+    text-align: center;
+}
+
+.login-label{
+    display: block;
+    margin-top: 1em;
+}
+
+#login-email{
+    display: block;
+    width: 100%;
+    height: 2.8em;
+}
+
+#login-password{
+    display: block;
+    width: 100%;
+    height: 2.8em;
+}
+
+#login-submit{
+    display: block;
+    width: 100%;
+    height: 2.5em;
+    font-size: 1em;
+    margin: 2.25em auto 0 auto;
+}
+
+#to-signup{
+    margin-bottom: 5em;;
+}
+
+.login-user-helpers{
+    display: block;
+    width: 100%;
+    height: 2.5em;
+    font-size: .9em;
+    margin: .5em auto 0 auto;
+}
+
+#login-error{
+    color: red;
+    text-align: center;
+    margin: .5em 0 0 0;
+    padding: 0;
+}
+
+@media screen and (max-width: 900px){
+    #login-section{
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    
+    #login-form{
+        width: 100%;
+        border: none;
+        margin: 5em auto 0 auto;
+        padding: 0 .5em;
+    }
+    
+}

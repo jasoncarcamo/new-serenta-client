@@ -1,6 +1,8 @@
 import React from "react";
+import "./Login.css";
 import UserToken from "../../Services/UserToken/UserToken";
 import AppContext from "../../Contexts/AppContext/AppContext";
+import { Link } from "react-router-dom";
 
 export default class Login extends React.Component{
     constructor(props){
@@ -18,6 +20,10 @@ export default class Login extends React.Component{
         this.setState({
             [e.target.name]: e.target.value
         });
+    }
+
+    toSignUp = ()=>{
+        this.props.history.push("/signup");
     }
 
     handleSubmit = (e)=>{
@@ -56,30 +62,35 @@ export default class Login extends React.Component{
     render(){
 
         return (
-            <section>
-                <form onSubmit={this.handleSubmit}>
-                    <fieldset>
-                        <legend>
-                            <h2>Log in to your account</h2>
+            <section id="login-section">
+                <form id="login-form" onSubmit={this.handleSubmit}>
+                    <fieldset id="login-fieldset">
+                        <legend id="login-legend">
+                            <h3>Log in to your account</h3>
                         </legend>
 
-                        <label htmlFor="login-email">Email:</label>
+                        <label className="login-label" htmlFor="login-email">Email:</label>
                         <input
                             id="login-email"
                             type="text"
                             onChange={this.handleTextInput}
                             value={this.state.email}
-                            name="email"></input>
+                            name="email"
+                            required></input>
 
-                        <label htmlFor="login-password">Password:</label>
+                        <label className="login-label" htmlFor="login-password">Password:</label>
                         <input
                             id="login-password"
                             type="password"
                             onChange={this.handleTextInput}
                             value={this.state.password}
-                            name="password"></input>
+                            name="password"
+                            required></input>
+                        <p className="login-user-helpers">Forgot you password?</p>
+                        {this.state.error ? <p id="login-error">{this.state.error}</p> : ""}
 
-                        <button type="submit">Log In</button>
+                        <button id="login-submit" type="submit">Log In</button>
+                        <p id="login-to-signup" id="to-signup" className="login-user-helpers">Need an account? <Link to="/signup">Sign Up</Link></p>
                     </fieldset>
                 </form>
             </section>

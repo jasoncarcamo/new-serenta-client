@@ -44,7 +44,7 @@ class App extends React.Component{
                     <Route exact path="/post-ad" component={PostAd}></Route>
                     <Route exact path="/properties" component={Properties}></Route>
                     <Route exact path="/login" component={LogIn}></Route>
-                    <Route exact path="/register" component={SignUp}></Route>
+                    <Route exact path="/signup" component={SignUp}></Route>
                     <Route exact path="/about" component={About}></Route>                  
                 </main>
 

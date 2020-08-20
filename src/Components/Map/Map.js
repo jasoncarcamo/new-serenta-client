@@ -41,11 +41,12 @@ export default class Map extends React.Component{
                     position: "absolute",
                     top: 0,
                     left: 0,
+                    flex: 1,
                     height: "100%",
-                    width: "100%",
+                    width: "100vw",
                     padding: 0,
                     margin: 0,
-                    zIndex: 1
+                    zIndex: 3
                 }}
                 zoom={this.context.zoom}
                 center={{
@@ -56,10 +57,6 @@ export default class Map extends React.Component{
                     fullscreenControl: false, 
                     mapTypeControl: false              
             }}>
-                {this.context.path.length > 0 ? <Polygon
-                    onLoad={this.onLoad}
-                    path={this.context.path}
-                    options={this.polylineOptions}></Polygon> : ""}
             </GoogleMap>
         );
     };

@@ -43,7 +43,7 @@ export default class Header extends React.Component{
         return (
             <>
                 <li className="nav-link" onClick={this.mobileNavMenuHandler}><NavLink to="/login">Log In</NavLink></li>
-                <li className="nav-link" onClick={this.mobileNavMenuHandler}><NavLink to="/register">Sign up</NavLink></li>
+                <li className="nav-link" onClick={this.mobileNavMenuHandler}><NavLink to="/signup">Sign up</NavLink></li>
             </>
         )
     }
@@ -72,10 +72,11 @@ export default class Header extends React.Component{
     lockNavListScroll = ()=>{
         const navList = document.getElementById("nav-list");
 
-        navList.addEventListener("scroll", (e)=>{
+        window.addEventListener("scroll", (e)=>{
             if(this.state.screenWidth <= 1030){
-                console.log("Scrolled")
-                e.preventDefault();
+                if(navList.classList.contains("display-nav-list")){
+                    e.preventDefault();
+                };
             };
         });
     };
@@ -84,9 +85,7 @@ export default class Header extends React.Component{
         const navList = document.getElementById("nav-list");
 
         window.addEventListener("touchmove", (e)=>{
-            if(navList.classList.contains("display-nav-list")){
-                e.preventDefault();
-            };
+            e.preventDefault();
         });
     };
 
@@ -103,7 +102,7 @@ export default class Header extends React.Component{
                     </button>
 
                     <ul id="nav-list">
-                        <li className="nav-link" onClick={this.mobileNavMenuHandler}><NavLink to="/"><img src={Logo} alt="Serenta logo" onClick={this.mobileNavMenuHandler}></img></NavLink></li>
+                        <li className="nav-link" onClick={this.mobileNavMenuHandler}><NavLink to="/"><img src={Logo} alt="Serenta logo"></img></NavLink></li>
 
                         <li className="nav-link" onClick={this.mobileNavMenuHandler}>
                             <NavLink 

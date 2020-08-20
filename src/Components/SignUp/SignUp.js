@@ -1,5 +1,7 @@
 import React from "react";
+import "./SignUp.css";
 import UserToken from "../../Services/UserToken/UserToken";
+import { Link } from "react-router-dom";
 
 export default class SignUp extends React.Component{
     constructor(props){
@@ -48,68 +50,88 @@ export default class SignUp extends React.Component{
                 UserToken.setToken(resData.token);
                 this.props.history.push("/user");
             })
-            .catch( err => console.log(err));
+            .catch( err => {
+                console.log(err);
+                this.setState({
+                    error: err.error
+                })
+            });
     }
     
     render(){
         console.log(this.state);
         return (
-            <section>
-                <form onSubmit={this.handleSubmit}>
-                    <fieldset>
-                        <legend>
-                            <h2>Sign up today!</h2>
+            <section id="signup-section">
+                <form id="signup-form" onSubmit={this.handleSubmit}>
+                    <fieldset id='signup-fieldset'>
+                        <legend id="signup-legend">
+                            <h3>Sign up</h3>
+                        </legend>
 
-                            <label htmlFor="first_name">First name:</label>
+                        <label className="signup-label" htmlFor="first_name">First name:</label>
                             <input 
                                 id="first_name"
+                                className="signup-input"
                                 type="text"
                                 onChange={this.handleTextInput}
                                 value={this.state.first_name}
-                                name="first_name"></input>
+                                name="first_name"
+                                required></input>
 
-                            <label htmlFor="last_name">Last name:</label>
+                            <label className="signup-label" htmlFor="last_name">Last name:</label>
                             <input
                                 id="last_name"
+                                className="signup-input"
                                 type="text"
                                 onChange={this.handleTextInput}
                                 value={this.state.last_name}
-                                name="last_name"></input>
+                                name="last_name"
+                                required></input>
 
-                            <label htmlFor="mobile_number">Mobile number:</label>
+                            <label className="signup-label" htmlFor="mobile_number">Mobile number:</label>
                             <input
                                 id="mobile_number"
+                                className="signup-input"
                                 type="text"
                                 onChange={this.handleTextInput}
                                 value={this.state.mobile_number}
-                                name="mobile_number"></input>
+                                name="mobile_number"
+                                required></input>
 
-                            <label htmlFor="sign-up-email">Email:</label>
+                            <label className="signup-label" htmlFor="sign-up-email">Email:</label>
                             <input
                                 id="sign-up-email"
+                                className="signup-input"
                                 type="text"
                                 onChange={this.handleTextInput}
                                 value={this.state.email}
-                                name="email"></input>
+                                name="email"
+                                required></input>
 
-                            <label htmlFor="sign-sup-password">Password:</label>
+                            <label className="signup-label" htmlFor="sign-sup-password">Password:</label>
                             <input
                                 id="sign-up-password"
+                                className="signup-input"
                                 type="password"
                                 onChange={this.handleTextInput}
                                 value={this.state.password}
-                                name="password"></input>
+                                name="password"
+                                required></input>
 
-                            <label htmlFor="confirm-password">Confirm password:</label>
+                            <label className="signup-label" htmlFor="confirm-password">Confirm password:</label>
                             <input 
                                 id="confirm-password"
+                                className="signup-input"
                                 type="password"
                                 onChange={this.handleTextInput}
                                 value={this.state.confirm_password}
-                                name="confirm_password"></input>
+                                name="confirm_password"
+                                required></input>
 
-                            <button type="submit">Sign up</button>
-                        </legend>
+                            <p id="login-error">{this.state.error ? this.state.error : ""}</p>
+
+                            <button id="signup-submit" type="submit">Sign up</button>
+                            <Link to="/login" className="signup-user-helpers">Already have an account?</Link>
                     </fieldset>
                 </form>
             </section>
