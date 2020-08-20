@@ -48,8 +48,15 @@ code {
     monospace;
 }
 
+
+
 @media screen and (max-width: 1375px){
     body{
         font-size: 17px;
+        min-height: 100vh;
+    }
+
+    #root{
+        height: 100%;
     }
 }
