@@ -32,8 +32,8 @@ export default class PostAd extends React.Component{
 
     render(){
         return (
-            <section>
-                <h2>Posting an ad listing has never been this easy</h2>
+            <section id="post-ad-section">
+                <h2 id="post-ad-header">Posting an ad listing has never been this easy</h2>
                 
                 <Details/>
                 <Amenities/>

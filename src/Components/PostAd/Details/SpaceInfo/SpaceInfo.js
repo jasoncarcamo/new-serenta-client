@@ -1,5 +1,6 @@
 import React from "react";
 import PostAdContext from "../../../../Contexts/PostAdContext/PostAdContext";
+import "./SpaceInfo.css";
 
 export default class SpaceInfo extends React.Component{
     constructor(props){

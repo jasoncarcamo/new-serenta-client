@@ -33,7 +33,7 @@ export default class SubmitAd extends React.Component{
         // sets ad to posted 
         this.context.toggleAdPosted(true);
 
-        this.context.handleAdSubmit()
+        this.context.handlePatchAd()
             .then( resData => {
 
                 this.context.addAd(this.context.ad);
@@ -42,7 +42,6 @@ export default class SubmitAd extends React.Component{
                     success: true
                 });
                 
-
                 this.context.setAdDefault();
             })
             .catch(err => {

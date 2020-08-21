@@ -5,7 +5,6 @@
     padding: 0;
     height: 100%;
     min-height: 30em;
-    border: 1px solid red;
 }
 
 .property-listings-no-ads-message{
@@ -14,7 +13,6 @@
     left: 100%;
     transform: translate(0, -50%);
     text-align: center;
-    border: 1px solid black;
     height: 1.5em;
     font-size: 1.3em;
 }
@@ -31,7 +29,6 @@
         left: 50%;
         transform: translate(-50%, -50%);
         text-align: center;
-        border: 1px solid black;
         height: 1.5em;
         font-size: 1.3em;
     }

@@ -21,6 +21,11 @@ export default class AdListing extends React.Component{
         return <p className="loading-icon">Loading...</p>
     }
 
+    handleCancel = ()=>{
+        this.toggleAdListing();
+        this.context.setAdDefault();
+    }
+
     toggleAdListing = ()=>{
         this.context.toggleAdListing();
     }
@@ -208,6 +213,7 @@ export default class AdListing extends React.Component{
                         <div id="ad-listing-form-buttons-container">
                             <button className="ad-listing-form-btn" type="submit">Create Listing</button>
                             <button className="ad-listing-form-btn" type="button" onClick={this.toggleAdListing}>Manage Listings</button>
+                            <button className="ad-listing-form-btn" type="button" onClick={this.handleCancel}>Cancel</button>
                         </div>
                     </fieldset>
                 </form>

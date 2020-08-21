@@ -97,3 +97,9 @@
     text-align: center;
     border-left: .1em solid lightgrey;
 }
+
+@media screen and (max-width: 1030px){
+    .post-ad-amenities-input-container{
+        width: 100%;
+    }
+}

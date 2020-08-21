@@ -77,10 +77,10 @@ export default class StartedAd extends React.Component{
 
     renderRemoveSuccess = ()=>{
         return (
-            <div>
-                <p>This ad own been succesfully removed.</p>
+            <div id="ad-listing-cancel-success-container">
+                <p id="ad-listing-cancel-success-message">Ad succesfully removed.</p>
 
-                <button type="button" onClick={this.handleAdSuccess}>Ok</button>
+                <button id="ad-listing-cancel-success-button" type="button" onClick={this.handleAdSuccess}>Ok</button>
             </div>
         );
     }
@@ -88,7 +88,7 @@ export default class StartedAd extends React.Component{
     renderCancelOptions = ()=>{
         return (
             <div id="ad-listing-cancel-options">
-                <p>Are you sure?</p>
+                <p id="ad-listing-cancel-options-confirm-message">Are you sure?</p>
 
                 <div>
                     <button type="button" onClick={this.handleRemoveAd}>Yes</button>
@@ -103,7 +103,7 @@ export default class StartedAd extends React.Component{
     }
 
     renderListAdButton = ()=>{
-        return <button onClick={this.toPostAd} className="started-ad-listing-buttons">List ad</button>;
+        return <button onClick={this.toPostAd} className="started-ad-listing-buttons">Post ad</button>;
     }
 
     renderRemoveAdButton = ()=>{
@@ -111,29 +111,28 @@ export default class StartedAd extends React.Component{
     }
 
     render(){
+        console.log(this.props.ad)
         return (
             <section className="started-ad-listing">
                 <div className="started-ad-listing-first-section">
                     <div className="started-ad-listing-address-container">
                         <p>{this.props.ad.street_address}, {this.props.ad.city}, {this.props.ad.state}, {this.props.ad.zip_code}</p>
                     </div>
-                    
-                    <div className="started-ad-listing-buttons-container">
-                        {!this.state.cancel && (!this.state.cancelSuccess) && (!this.props.ad.posted) ? this.renderListAdButton() : ""}
-                        {!this.state.cancel && (!this.state.cancelSuccess) && (this.props.ad.posted) ? this.renderEditAdButton() : ""}
-                        {!this.state.cancel && (!this.state.cancelSuccess) ? this.renderRemoveAdButton() : "" }
-                        {this.state.cancel && (!this.state.cancelSuccess) ? this.renderCancelOptions() : ""}
-                        {this.state.cancelSuccess ? this.renderRemoveSuccess() : ""}
-                    </div>
                 </div>
 
-                <div>
-                    <p><span>Monthly price:</span> {this.props.ad.price}</p>
-                </div>     
+                <div className="started-ad-listing-buttons-container">
+                    {!this.state.cancel && (!this.state.cancelSuccess) && (!this.props.ad.posted) ? this.renderListAdButton() : ""}
+                    {!this.state.cancel && (!this.state.cancelSuccess) && (this.props.ad.posted) ? this.renderEditAdButton() : ""}
+                    {!this.state.cancel && (!this.state.cancelSuccess) ? this.renderRemoveAdButton() : "" }
+                    {this.state.cancel && (!this.state.cancelSuccess) ? this.renderCancelOptions() : ""}
+                    {this.state.cancelSuccess ? this.renderRemoveSuccess() : ""}
+                </div>
 
-                <div>
-                    <p><span>Comments from lister:</span> {this.props.ad.comments}</p>
-                </div>            
+                <div className="started-ad-listing-dates">
+                    <p><span>Date created:</span> {new Date(this.props.ad.date_created).toDateString()}</p>
+                    <p><span>Last modified:</span> { this.props.ad.date_last_modified !== null ? new Date(this.props.ad.date_last_modified).toDateString() : "Has not been modified yet"}</p>
+                </div>     
+        
             </section>
         );
     };

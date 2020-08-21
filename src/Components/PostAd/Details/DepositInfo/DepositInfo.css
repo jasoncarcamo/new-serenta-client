@@ -1,0 +1,50 @@
+.post-ad-info{
+    padding: 0;
+    margin: 0 0 1em 0;
+}
+
+.post-ad-header{
+    font-size: .9em;
+    margin: 0 0 .25em 0;
+    padding: 0;
+}
+
+.post-ad-header span{
+    color: red;
+}
+
+.post-ad-input-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 25.5em;
+    height: 2.35em;
+    padding: 0;
+}
+
+.post-ad-dollar{
+    width: 2em;
+    height: 100%;
+    padding-top: .5em;
+    margin: 0;
+    text-align: center;
+}
+
+#post-ad-input-price{
+    height: 3em;
+    width: 25em;
+    border: .05em solid black;
+}
+
+.post-ad-price-info{
+    text-align: center;
+    width: 5em;
+    height: 100%;
+    padding-top: .5em;
+    align-items: center;
+}
+
+#post-ad-input-deposit{
+    width: 100%;
+    height: 3em;
+}

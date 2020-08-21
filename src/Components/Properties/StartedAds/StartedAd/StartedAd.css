@@ -1,6 +1,6 @@
 .started-ad-listing{
     padding: 0;
-    border: 3px solid purple;
+    border: .075em solid black;
 }
 
 .started-ad-listing-first-section{
@@ -12,12 +12,20 @@
 }
 
 .started-ad-listing-address-container{
-    width: 60%;
-    height: 5.5em;
+    width: 100%;
+    height: 5em;
     margin: 0;
     padding: 0;
-    border: 1px solid orange;
 }
+
+.started-ad-listing-close-btn{
+    display: block;
+    height: 2em;
+    align-self: center;
+    margin-right: 1.25em;
+    font-size: 1em;
+}
+
 .started-ad-listing-address-container p{
     text-align: center;
     width: 100%;
@@ -26,27 +34,67 @@
     transform: translateY(-50%);
     padding: 0;
     margin: 0;
-    border: 1px solid black;
 }
 
 .started-ad-listing-buttons-container{
     display: flex;
-    flex-direction: column;
-    width: 40%;
-    border: 2px solid green;
+    width: 100%;
+    height: 6em;
     margin: 0;
     padding: 0;
+}
+
+.started-ad-listing-dates{
+    padding-left: 1em;
 }
 
 .started-ad-listing-buttons{
     display: block;
     margin: auto;
-    width: 7em;
-    height: 2em;
+    font-size: 1em;
+}
+
+/* ad-listing-cancel-success-container style starts here */
+#ad-listing-cancel-success-container{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#ad-listing-cancel-success-message{
+    text-align: center;
+}
+
+#ad-listing-cancel-success-button{
+    display: block;
+    margin: 0 auto .5em auto;
+    font-size: 1em;
+}
+
+/* ad-listing-canel-options style starts here */
+#ad-listing-cancel-options{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#ad-listing-cancel-options-confirm-message{
+    text-align: center;
+}
+
+#ad-listing-cancel-options div{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#ad-listing-cancel-options div button{
+    font-size: 1em;
 }
 
 @media screen and (max-width: 900px){
     .started-ad-listing{
-        height: 20em;
+        height: auto;
     }
 }
