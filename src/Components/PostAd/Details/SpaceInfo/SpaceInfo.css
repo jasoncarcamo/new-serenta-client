@@ -1,13 +1,12 @@
 .post-ad-space-info{
     display: flex;
     flex-direction: row;
-    border: 1px solid black;
 }
 
 .post-ad-space-info-option{
-    border: 1px solid black;
     padding: 0;
     margin: 0 3em 0 0;
+    width: 100%;
 }
 
 .post-ad-space-info-option-container{
@@ -16,20 +15,19 @@
     align-items: center;
     padding: 0;
     height: 2.25em;
-    border: .05em solid black;
     border-radius: .25em;
 }
 
 .post-ad-select{
     width: 18em;
     height: 3em;
-    border: .05em solid black;
+    border: .075em solid black;
 }
 
 #post-ad-squareft{
     width: 24em;
     height: 3em;
-    border: .05em solid black;
+    border: .075em solid black !important;
 }
 
 .post-ad-squareft-label{
@@ -37,7 +35,7 @@
     height: 100%;
     padding-top: .4em;
     text-align: center;
-    border-left: .1em solid lightgrey;
+    border: .1em solid lightgrey;
 }
 
 @media screen and (max-width: 1030px){

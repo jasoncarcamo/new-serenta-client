@@ -12,7 +12,7 @@ export default class Details extends React.Component{
             <section>
                 <form id="post-ad-form">
                     <fieldset id="post-ad-fieldset">
-                        <legend>
+                        <legend id="post-ad-legend">
                             <h3>Details</h3>
                         </legend>
 

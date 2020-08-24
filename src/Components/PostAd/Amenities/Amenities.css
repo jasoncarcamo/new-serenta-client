@@ -1,7 +1,7 @@
 #post-ad-amenities-form{
-    margin: 0;
+    margin: 5em 0 0 0;
     padding: 0;
-
+    border: none;
 }
 
 #post-ad-amenities-form input{
@@ -12,17 +12,21 @@
 #post-ad-amenities-fieldset{
     margin: 0;
     padding: 0;
+    border: none;
 }
 
 .post-ad-amenities-info{
-    border: 1px solid black;
     padding: 0;
-    margin: 0 0 1em 0;
+    margin: 0 0 2em 0;
+}
+
+#post-ad-amenitites-legend{
+    text-align: center;
 }
 
 .post-ad-amenities-header{
     font-size: .9em;
-    margin: 0 0 .25em 0;
+    margin: 0;
     padding: 0;
 }
 
@@ -34,7 +38,6 @@
     width: 25.5em;
     height: auto;
     padding: 0;
-    border: 1px solid black;
 }
 
 .post-ad-amenities-input-container label{

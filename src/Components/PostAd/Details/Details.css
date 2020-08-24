@@ -11,6 +11,11 @@
 #post-ad-fieldset{
     margin: 0;
     padding: 0;
+    border: none;
+}
+
+#post-ad-legend{
+    text-align: center;
 }
 
 

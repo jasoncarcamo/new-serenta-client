@@ -1,6 +1,5 @@
 import React from "react";
 import PostContextAd from "../../../Contexts/PostAdContext/PostAdContext";
-import UserToken from "../../../Services/UserToken/UserToken";
 import "./SubmitAd.css";
 
 export default class SubmitAd extends React.Component{
@@ -89,12 +88,12 @@ export default class SubmitAd extends React.Component{
 
     renderUpdateAdButton = ()=>{
 
-        return <button type="button" onClick={this.handleForm}>Update Ad</button>
+        return <button id="submit-ad-patch-btn" type="button" onClick={this.handleForm}>Update Ad</button>
     }
 
     renderPostAdButton = ()=>{
 
-        return <button type="button" onClick={this.handleForm}>Post Ad</button>;
+        return <button id="submit-ad-post-btn" type="button" onClick={this.handleForm}>Post Ad</button>;
     };
 
     render(){

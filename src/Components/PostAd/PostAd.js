@@ -33,7 +33,7 @@ export default class PostAd extends React.Component{
     render(){
         return (
             <section id="post-ad-section">
-                <h2 id="post-ad-header">Posting an ad listing has never been this easy</h2>
+                <h2 id="post-ad-section-header">Posting an ad listing has never been this easy</h2>
                 
                 <Details/>
                 <Amenities/>

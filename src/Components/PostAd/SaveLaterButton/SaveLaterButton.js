@@ -1,5 +1,6 @@
 import React from "react";
 import PostAdContext from "../../../Contexts/PostAdContext/PostAdContext";
+import "./SaveLaterButton.css";
 
 export default class SaveLaterButton extends React.Component{
     constructor(props){
@@ -38,15 +39,15 @@ export default class SaveLaterButton extends React.Component{
     };
 
     renderSaveButton = ()=>{
-        return <button type="button" onClick={this.handleSave}>Save for later</button>;
+        return <button id="save-for-later-btn" type="button" onClick={this.handleSave}>Save for later</button>;
     };
 
     renderSaved = ()=>{
-        return <p>Saved!</p>;
+        return <p className="save-later-message">Saved!</p>;
     }
 
     renderLoading = ()=>{
-        return <p>Loading...</p>;
+        return <p classname="save-later-message">Loading...</p>;
     };
 
     // this will revert saved message back to button after 2.5 seconds on successful save

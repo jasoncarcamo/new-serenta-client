@@ -1,11 +1,18 @@
+#submit-ad-patch-btn{
+    display: block;
+    margin: 1em auto;
+    font-size: 1em;
+}
+
+#submit-ad-post-btn{
+    display: block;
+    margin: 2em auto;
+    font-size: 1em;
+}
+
 #post-ad-success-container{
-    position: absolute;
-    left: 50%;
-    bottom: 12.5em;
-    transform: translateX(-50%);
-    width: 25em;
-    height: 12em;
     background-color: white;
+    border-top: .075em solid black;
 }
 
 #post-ad-success-message{
@@ -16,12 +23,9 @@
 
 #post-ad-success-button{
     display: block;
-    position: absolute;
-    bottom: 1.5em;
-    left: 50%;
-    transform: translateX(-50%);
     width: 5em;
     height: 2em;
+    margin: 2em auto;
 }
 
 @media screen and (max-width: 900px){

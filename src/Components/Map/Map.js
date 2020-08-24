@@ -48,6 +48,7 @@ export default class Map extends React.Component{
                     margin: 0,
                     zIndex: 3
                 }}
+                onZoomChanged={()=>{console.log()}}
                 zoom={this.context.zoom}
                 center={{
                     lat: this.context.lat,

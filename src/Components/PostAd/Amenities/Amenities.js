@@ -14,7 +14,7 @@ export default class Amenities extends React.Component{
             <section id="post-ad-amenities-section">
                 <form id="post-ad-amenities-form">
                     <fieldset id="post-ad-amenities-fieldset">
-                        <legend>
+                        <legend id="post-ad-amenitites-legend">
                             <h3>Amenities</h3>
                         </legend>
 
