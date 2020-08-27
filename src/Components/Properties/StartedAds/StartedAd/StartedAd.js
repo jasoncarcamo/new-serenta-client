@@ -129,8 +129,8 @@ export default class StartedAd extends React.Component{
                 </div>
 
                 <div className="started-ad-listing-dates">
-                    <p><span>Date created:</span> {new Date(this.props.ad.date_created).toDateString()}</p>
-                    <p><span>Last modified:</span> { this.props.ad.date_last_modified !== null ? new Date(this.props.ad.date_last_modified).toDateString() : "Has not been modified yet"}</p>
+                    <p className="started-ad-listing-dates-label"><strong>Date created:</strong> {new Date(this.props.ad.date_created).toDateString()}</p>
+                    <p className="started-ad-listing-dates-label"><strong>Last modified:</strong> { this.props.ad.date_last_modified !== null ? new Date(this.props.ad.date_last_modified).toDateString() : "Has not been modified yet"}</p>
                 </div>     
         
             </section>

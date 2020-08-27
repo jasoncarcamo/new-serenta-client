@@ -42,15 +42,6 @@ export default class Header extends React.Component{
                                 fontWeight: "bold"
                         }}>Properties</NavLink>
                     </li>
-                    <li className="nav-link" onClick={this.mobileNavMenuHandler}>
-                        <NavLink 
-                            to="/messages"
-                            activeStyle={{
-                                backgroundColor: "black",
-                                color: "white",
-                                fontWeight: "bold"
-                        }}>Messages</NavLink>
-                    </li>
                     <li className="nav-link" onClick={this.mobileNavMenuHandler}><NavLink to="/" onClick={this.handleSignOut}>Sign Out</NavLink></li>
                 </>
             )

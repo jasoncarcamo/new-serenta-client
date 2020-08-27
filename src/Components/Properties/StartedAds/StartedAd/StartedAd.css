@@ -45,7 +45,12 @@
 }
 
 .started-ad-listing-dates{
-    padding-left: 1em;
+    padding: 0 0 0 1em;
+}
+
+.started-ad-listing-dates-label{
+    font-size: .8em;
+    margin: 0;
 }
 
 .started-ad-listing-buttons{
