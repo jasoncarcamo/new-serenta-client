@@ -19,7 +19,7 @@ export default class StartedAds extends React.Component{
         };
 
         ads = ads.map((ad, index)=>{
-            return <StartedAd key={index} ad={ad} history={this.props.history} userContext={this.context}></StartedAd>;
+            return <StartedAd key={index} index={index} ad={ad} history={this.props.history} userContext={this.context}></StartedAd>;
         });
 
         return ads;

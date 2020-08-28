@@ -4,7 +4,9 @@ import UserToken from "../../Services/UserToken/UserToken";
 const AdsContext = React.createContext({
     ads: [],
     loading: Boolean,
-    addAdd: ()=>{}
+    addAdd: ()=>{},
+    updateAd: ()=>{},
+    deleteAd: ()=>{}
 });
 
 export default AdsContext;
@@ -68,11 +70,32 @@ export class AdsProvider extends React.Component{
         });
     }
 
+    updateAd = (ad, index) => {
+        const ads = this.state.ads;
+
+        ads[index] = ad;
+
+        this.setState({
+            ads
+        });
+    }
+
+    deleteAd = (index)=>{
+        let ads = this.state.ads;
+        let removedAd = ads.splice(index, 1);
+
+        this.setState({
+            ads
+        });
+    }
+
     render(){
         const value = {
             ads: this.state.ads,
             loading: this.state.loading,
-            addAd: this.addAd
+            addAd: this.addAd,
+            updateAd: this.updateAd,
+            deleteAd: this.deleteAd
         };
         console.log(value);
         return (

@@ -35,8 +35,13 @@ export default class SubmitAd extends React.Component{
         this.context.handlePatchAd()
             .then( resData => {
 
-                this.context.addAd(this.context.ad);
-                console.log(resData);
+                if(this.context.ad.posted === true){
+                    console.log(this.context, this.context.adIndex)
+                    this.context.updateAd(this.context.ad, this.context.adIndex);
+                } else if(this.context.ad.posted === false){
+                    this.context.addAd(this.context.ad);
+                };
+
                 this.setState({
                     success: true
                 });
@@ -48,6 +53,9 @@ export default class SubmitAd extends React.Component{
 
                 // sets ad to not post if we get a failed request
                 this.context.toggleAdPosted(false);
+                
+                // set ad index to null
+                this.context.setAdIndex(null);
 
                 this.setState({
                     success: false,
@@ -63,6 +71,9 @@ export default class SubmitAd extends React.Component{
 
     handleConfirm = ()=>{ 
         this.goToProperties();
+
+        // set ad index
+        this.context.setAdIndex(null);
     };
 
     renderAdPostedSuccess = ()=>{

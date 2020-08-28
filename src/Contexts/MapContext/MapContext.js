@@ -19,7 +19,7 @@ export class MapProvider extends React.Component{
         this.state = {
             lat: 38.885512,
             lng: -99.383977,
-            zoom: 5,
+            zoom: 4,
             path: [],
             enableGps: false
         }

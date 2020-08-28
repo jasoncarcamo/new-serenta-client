@@ -29,6 +29,10 @@ export default class StartedAd extends React.Component{
 
         // sets current ad to this ad for editing
         this.context.setCurrentAd(this.props.ad);
+
+        // sets index of current ad
+        this.context.setAdIndex(this.props.index);
+
         this.props.history.push("/post-ad");
     };
 
@@ -50,7 +54,14 @@ export default class StartedAd extends React.Component{
 
         this.context.removeStartedAd(this.props.ad)
             .then( resData => {
+
+                //removes ad upon success
+                this.context.deleteAd(this.props.index);
+
+                // set ad index to null
+                this.context.setAdIndex(null);
                 
+                // sets state properties to show success message
                 this.setState({
                     cancel: false,
                     cancelSuccess: true
@@ -111,7 +122,7 @@ export default class StartedAd extends React.Component{
     }
 
     render(){
-        console.log(this.props.ad)
+        console.log(this.props)
         return (
             <section className="started-ad-listing">
                 <div className="started-ad-listing-first-section">

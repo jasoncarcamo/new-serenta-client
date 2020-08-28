@@ -6,9 +6,12 @@ const PostAdContext = React.createContext({
     ad: {},
     address: "",
     adListing: Boolean,
+    adIndex: "",
     addToUserAds: ()=>{},
     managingListings: Boolean,
     addAd:()=>{},
+    updateAd: ()=>{},
+    deleteAd: ()=>{},
     handleAddressInput: ()=>{},
     handleRadioInput: ()=>{},
     handleCheckboxInput: ()=>{},
@@ -24,7 +27,8 @@ const PostAdContext = React.createContext({
     handleAdSuccess: ()=>{},
     setCoordinates: ()=>{},
     resetState: ()=>{},
-    toggleAdPosted: ()=>{}
+    toggleAdPosted: ()=>{},
+    setAdIndex: ()=>{}
 });
 
 export default PostAdContext;
@@ -59,11 +63,31 @@ export class PostAdProvider extends React.Component{
                 lng: ""
             },
             adListing: false,
+            adIndex: "",
             managingListings: false
         };
     };
 
     static contextType = AdsContext;
+
+    setAdIndex = (adIndex)=>{
+        this.setState({
+            adIndex
+        });
+    }
+
+    // hads ad to ad context
+    addAd = (ad)=>{
+        this.context.addAd(ad);
+    }
+
+    updateAd = (ad, index) => {
+        this.context.updateAd(ad, index);
+    }
+
+    deleteAd = (index)=>{
+        this.context.deleteAd(index);
+    }
 
     // resets this state to default when user signs out
     resetState = ()=>{
@@ -94,6 +118,7 @@ export class PostAdProvider extends React.Component{
                 lng: ""
             },
             adListing: false,
+            adIndex: "",
             managingListings: false
         });
     }
@@ -135,11 +160,6 @@ export class PostAdProvider extends React.Component{
     // adds ad to user context
     addToUserAds = (ad)=>{
         this.props.userContext.addToAds(ad);
-    }
-
-    // hads ad to ad context
-    addAd = (ad)=>{
-        this.context.addAd(ad);
     }
 
     handleAdSubmit = async ()=>{
@@ -343,7 +363,10 @@ export class PostAdProvider extends React.Component{
             adListing: this.state.adListing,
             managingListings: this.state.managingListings,
             address: this.state.address,
+            adIndex: this.state.adIndex,
             addAd: this.addAd,
+            updateAd: this.updateAd,
+            deleteAd: this.deleteAd,
             handleAddressInput: this.handleAddressInput,
             handleRadioInput: this.handleRadioInput,
             handleCheckboxInput: this.handleCheckboxInput,
@@ -360,7 +383,8 @@ export class PostAdProvider extends React.Component{
             setCoordinates: this.setCoordinates,
             addToUserAds: this.addToUserAds,
             resetState: this.resetState,
-            toggleAdPosted: this.toggleAdPosted
+            toggleAdPosted: this.toggleAdPosted,
+            setAdIndex: this.setAdIndex
         };
         console.log(value);
         return (
