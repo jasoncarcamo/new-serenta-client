@@ -1,5 +1,5 @@
 import React from "react";
-import {InfoWindow, Marker} from "@react-google-maps/api";
+import {Marker} from "@react-google-maps/api";
 import AdInfo from "./AdInfo/AdInfo";
 
 export default class CustomMarker extends React.Component{
