@@ -1,0 +1,37 @@
+.ad-info-img-container{
+    position: relative;
+    width: 100%;
+    border: 1px solid black;
+}
+
+.ad-info-img{
+    width: 100%;
+}
+
+.ad-info-img-btn-left{
+    position: absolute;
+    top: 50%;
+    left: 1em;
+    height: 2em;
+    width: 1em;
+    transform: translateY(-50%);
+    font-size: 3em;
+    border: none;
+}
+
+.ad-info-img-btn-right{
+    position: absolute;
+    top: 50%;
+    right: 1em;
+    height: 2em;
+    width: 1em;
+    transform: translateY(-50%);
+    font-size: 3em;
+    border: none;
+}
+
+.fade-btn{
+    cursor: unset !important;
+    opacity: .3;
+
+}

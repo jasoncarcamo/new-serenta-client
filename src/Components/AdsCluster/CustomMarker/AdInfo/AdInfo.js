@@ -2,6 +2,7 @@ import React from "react";
 import {InfoWindow} from "@react-google-maps/api";
 import "./AdInfo.css";
 import LivingRoomWide from "../../../../assets/livingroom.jpg";
+import ImgSlider from "./ImgSlider/ImgSlider";
 
 export default class AdInfo extends React.Component{
 
@@ -27,7 +28,7 @@ export default class AdInfo extends React.Component{
                 onCloseClick={this.toggleInfo}>
                 <section className="ad-info-window">
 
-                    <img src={LivingRoomWide} alt="Living room" className="ad-info-img"/>
+                    <ImgSlider/>
                     
                     <div>
                         <h2 className="ad-info-header">{this.props.ad.type}</h2>
