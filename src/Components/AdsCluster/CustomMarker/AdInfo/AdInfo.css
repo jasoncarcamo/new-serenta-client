@@ -1,9 +1,100 @@
-.gm-style-iw{
-    border: 1px solid red;
+.gm-style-iw-t{
+    width: 50vw;
+    max-width: unset !important;
+    z-index: 15 !important;
+}
 
-    width: 100vw;
+.gm-ui-hover-effect{
+    right: 2em !important;
+    width: 3em !important;
+    height: 3em !important;
+}
+
+.gm-ui-hover-effect img{
+    width: 3em !important;
+    height: 3em !important;
 }
 
 .ad-info-window{
+    padding: 3em 0 0 0;
+}
+
+.ad-info-window p{
+    font-size: 1.15em;
+}
+
+.ad-info-window strong{
+    font-weight: 600;
+}
+
+.ad-info-window > div{
+    padding: 0 2em;
+}
+
+.ad-info-header{
+    font-size: 2.1em;
+    font-weight: 900;
+    text-align: center;
+}
+
+#ad-info-contact-container{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+.ad-info-img{
+    width: 100%;
+}
+
+.ad-info-h3{
+    font-weight: 800;
+    font-size: 1.75em;
+}
+
+.ad-info-comment{
+    margin: -1em 0 2.5em 0;
+}
+
+.ad-info-contact-link{
+    display: block;
+    width: 100%;
+    font-size: 1.25em;
+    padding: 1em;
+    text-align: center;
     border: 1px solid black;
+    color: white;
+    background-color: black;
+    margin: .5em auto 0 auto;
+    text-decoration: none;
+}
+
+.ad-info-contact-link:hover{
+    background-color: white;
+    color: black;
+}
+
+.ad-info-close-btn{
+    display: block;
+    width: 100%;
+    font-size: 1.25em;
+    padding: 1em;
+    margin: .5em  0 0 0;
+    text-align: center;
+    border: 1px solid black;
+    color: white;
+    background-color: black;
+}
+
+.ad-info-close-btn:hover{
+    background-color: white;
+    color: black;
+}
+
+@media screen and (max-width: 1030px){
+    .gm-style-iw{
+        width: 95vw;
+        max-width: unset !important;
+    }
 }

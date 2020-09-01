@@ -14,13 +14,15 @@ export default class CustomMarker extends React.Component{
         this.setState({
             toggleInfo: !this.state.toggleInfo
         });
+        console.log(window.innerWidth, window.innerHeight)
+       
     }
     renderMarker = ()=>{
         return <Marker onClick={this.toggleInfo} position={this.props.position} clusterer={this.props.clusterer}></Marker>;
     }
 
     renderAdInfo = ()=>{
-        return <AdInfo position={this.props.position} toggleInfo={this.toggleInfo}></AdInfo>
+        return <AdInfo position={this.props.position} toggleInfo={this.toggleInfo} ad={this.props.ad}></AdInfo>
     }
 
     render(){

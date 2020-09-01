@@ -75,17 +75,20 @@ export default class SignUp extends React.Component{
     interateRequiremnts = ()=>{
         const first_name = document.getElementById("first_name");
         const last_name = document.getElementById("last_name");
+        const missingInput = document.querySelector(".signup-missing-input");
 
-        if(first_name.nodeValue === "" || !(first_name.nodeValue)){
-            window.scrollTo("signup-missing-input");
+        if(!this.state.first_name){
             first_name.classList.add("signup-missing-input");
+            console.log(missingInput);
+            missingInput.scrollIntoView();
         } else{
             first_name.classList.remove("signup-missing-input");
         };
 
-        if(last_name.nodeValue === "" || !(last_name.nodeValue)){
-            window.scrollTo("signup-missing-input");
+        if(!this.state.last_name){
             last_name.classList.add("signup-missing-input");
+            console.log(missingInput);
+            missingInput.scrollIntoView();
         } else{
             last_name.classList.remove("signup-missing-input");
         };
