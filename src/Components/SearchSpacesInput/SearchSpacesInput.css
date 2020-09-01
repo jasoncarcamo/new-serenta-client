@@ -12,7 +12,11 @@
     box-shadow: 0 .4em 1em gray;
     border-radius: .4em;
     overflow: hidden;
-    z-index: 4;
+    z-index: 2;
+}
+
+.hide-search-space-form{
+    display: none !important;
 }
 
 #search-spaces-fieldset{
@@ -84,7 +88,7 @@
         box-shadow: 0 .4em 1em gray;
         border-radius: .4em;
         overflow: hidden;
-        z-index: 4;
+        z-index: 2;
     }
     
     #search-spaces-fieldset{

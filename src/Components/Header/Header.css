@@ -6,7 +6,7 @@
     height: 4em;
     margin: 0;
     padding: 0;
-    z-index: 4;
+    z-index: 3;
     backdrop-filter: blur(.7em);
 }
 
@@ -25,7 +25,7 @@
     display: flex;
     position: relative;
     justify-content: space-around;
-    z-index: 2;
+    z-index: 3;
     top: 50%;
     transform: translateY(-50%);
     width: 100%;
@@ -80,7 +80,7 @@
         width: 100%;
         margin: 0;
         padding: 0;
-        z-index: 5;
+        z-index: 3;
         backdrop-filter: none;
         background-color: white;
         box-shadow: 1em 0 1em lightgrey;
@@ -99,7 +99,7 @@
         width: 1.35em;
         top: 1.5em;
         right: 1.5em;
-        z-index: 8;
+        z-index: 4;
     }
     
     #nav-list{
@@ -107,7 +107,7 @@
         flex-direction: column;
         position: relative;
         justify-content: space-evenly;
-        z-index: 5;
+        z-index: 3;
         top: 0;
         left: 0;
         transform: translateY(0);

@@ -27,19 +27,19 @@ export default class SubmitAd extends React.Component{
             this.setPatchMessage();
         } else if(this.context.ad.posted === false){
             this.setPostMessage();
+            // sets ad to posted 
+            this.context.toggleAdPosted(true);
         };
-
-        // sets ad to posted 
-        this.context.toggleAdPosted(true);
 
         this.context.handlePatchAd()
             .then( resData => {
 
-                if(this.context.ad.posted === true){
+                if(this.state.message === "Your ad has been posted!"){
                     console.log(this.context, this.context.adIndex)
-                    this.context.updateAd(this.context.ad, this.context.adIndex);
-                } else if(this.context.ad.posted === false){
+                    
                     this.context.addAd(this.context.ad);
+                } else {
+                    this.context.updateAd(this.context.ad, this.context.adIndex);
                 };
 
                 this.setState({

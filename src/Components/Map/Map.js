@@ -29,7 +29,7 @@ export default class Map extends React.Component{
                     width: "100vw",
                     padding: 0,
                     margin: 0,
-                    zIndex: 3
+                    zIndex: 1
                 }}
                 onZoomChanged={()=>{console.log()}}
                 zoom={this.context.zoom}

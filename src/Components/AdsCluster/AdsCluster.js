@@ -7,8 +7,7 @@ export default class AdsCluster extends React.Component{
     
     static contextType = AdsContext;
 
-    renderAds = (clusterer)=>{
-        let ads = this.context.ads;
+    renderAds = (clusterer, ads)=>{
 
         ads = ads.map( ( ad, index) => {
             
@@ -29,7 +28,7 @@ export default class AdsCluster extends React.Component{
         };
 
         return (
-            <MarkerClusterer options={options}>{(clusterer) => this.renderAds(clusterer)}</MarkerClusterer>
+            <MarkerClusterer options={options}>{(clusterer) => this.renderAds(clusterer, this.context.ads)}</MarkerClusterer>
         );
     };
 };
