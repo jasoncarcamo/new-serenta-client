@@ -43,6 +43,7 @@
     height: 2.35em;
     padding: 0;
     border: 1px solid black;
+    border-radius: .25em;
 }
 
 .post-ad-dollar{

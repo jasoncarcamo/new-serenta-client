@@ -25,7 +25,8 @@ export default class AdInfo extends React.Component{
             <InfoWindow
                 className="ad-info-container"
                 position={this.props.position}
-                onCloseClick={this.toggleInfo}>
+                onCloseClick={this.toggleInfo}
+                zIndex={this.props.zIndex}>
                 <section className="ad-info-window">
 
                     <ImgSlider/>

@@ -21,7 +21,7 @@ export default class CustomMarker extends React.Component{
     }
 
     renderAdInfo = ()=>{
-        return <AdInfo position={this.props.position} toggleInfo={this.toggleInfo} ad={this.props.ad}></AdInfo>
+        return <AdInfo position={this.props.position} toggleInfo={this.toggleInfo} ad={this.props.ad} zIndex={this.props.zIndex}></AdInfo>
     }
 
     render(){
