@@ -5,6 +5,7 @@ import Details from "./Details/Details";
 import Amenities from "./Amenities/Amenities";
 import Description from "./Description/Description";
 import SaveLaterButton from "./SaveLaterButton/SaveLaterButton";
+import UploadImgs from "./UploadImgs/UploadImgs"
 import SubmitAd from "./SubmitAd/SubmitAd";
 
 export default class PostAd extends React.Component{
@@ -39,6 +40,7 @@ export default class PostAd extends React.Component{
                 <Amenities/>
                 <Description/>
                 {this.context.ad.posted === false ? <SaveLaterButton/> : ""}
+                <UploadImgs/>
                 <SubmitAd history={this.props.history}/>
             </section>
         );
