@@ -62,56 +62,58 @@ export default class UploadImgs extends React.Component{
 
     handleUpload = (images)=>{
         const newImages = images;
-        const formData = new FormData();
+        const fetchRequests = [];
 
         for(let key of Object.keys(newImages)){
-            console.log(newImages[key])
+            let formData = new FormData();
+
+            formData.append("living_space_id", this.context.ad.id);
             formData.append(`images`, newImages[key]);
+            console.log(newImages[key])
+            fetchRequests[key] = fetch("http://localhost:8000/api/living-space-images", {
+                method: "POST",
+                headers: {
+                    'authorization': `bearer ${UserToken.getToken()}`
+                },
+                body: formData
+            });
         };
+
+        console.log(fetchRequests);
 
         this.setState({
             uploading: true
         });
 
-        console.log(formData);
+        Promise.all(fetchRequests)
+            .then( responses => {
+                console.log(responses);
 
-        fetch("http://localhost:8000/api/living-space-images", {
-                method: "POST",
-                headers: {
-                    
-                    'authorization': `bearer ${UserToken.getToken()}`
-                },
-                body: formData
-            })
-            .then( res => {
-                if(!res.ok){
-                    return res.json().then( e => Promise.reject(e));
+                for( let i = 0; i < responses.length; i++){
+                    console.log(responses[i]);
+                    if(!responses[i].ok){
+                        return responses[i].json().then( e => Promise.reject(e));
+                    };
                 };
 
-                return res.json();
+                return Promise.all(responses.map(( response, index)=> response.json()));
             })
-            .then( resData => {
-                console.log(resData);
-
+            .then( resDatas => {
+                console.log(resDatas);
                 this.setState({
                     uploading: false
                 });
             })
             .catch( err => {
                 console.log(err);
-
                 this.setState({
                     uploading: false
                 });
-
-                this.setState({
-                    error: err.error
-                });
-            });
+            })
     }
 
     render(){
-        console.log(this.state.files)
+        console.log(this.context)
         return (
             <section className="post-ad-amenities-info">
                 <h4 className="post-ad-header">Upload Images of your space <span>*</span></h4>

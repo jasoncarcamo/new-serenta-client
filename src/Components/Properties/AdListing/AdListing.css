@@ -3,9 +3,9 @@
     border-radius: .3em;
     position: fixed;
     z-index: 1;
-    top: 5em;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%, 0);
+    transform: translate(-50%, -50%);
     width: 35em;
     height: auto;
     padding: 0;
