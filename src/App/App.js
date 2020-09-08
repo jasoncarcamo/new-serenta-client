@@ -24,14 +24,6 @@ class App extends React.Component{
         );
     };
 
-    notLoggedIn =()=>{
-        return (
-            <>
-
-            </>
-        )
-    }
-
     render(){
         console.log(this.props)
         return(
