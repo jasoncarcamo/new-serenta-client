@@ -19,23 +19,22 @@ export default class UploadImgs extends React.Component{
     handleChange = (e)=>{
         const fileInputFiles = document.getElementById("post-ad-images").files;
         let files = this.state.files;
+        let newFiles = [];
 
         console.log(fileInputFiles)
         
         for(let key of Object.keys(fileInputFiles)){
             console.log(key);
-            if(!files[key]){
-                files[key] = fileInputFiles[key];
-            }
+            newFiles[key] = fileInputFiles[key];
         }
 
         this.setState({
-           files
+           files: newFiles
         });
         console.log(files)
 
         console.log(fileInputFiles)
-        this.handleUpload(files);
+        this.handleUpload(newFiles);
     }
 
     displayFileAmountMessage = ()=>{
