@@ -35,7 +35,6 @@ export default class SubmitAd extends React.Component{
             .then( resData => {
 
                 if(this.state.message === "Your ad has been posted!"){
-                    console.log(this.context, this.context.adIndex)
                     
                     this.context.addAd(this.context.ad);
                 } else {
@@ -49,7 +48,6 @@ export default class SubmitAd extends React.Component{
                 this.context.setAdDefault();
             })
             .catch(err => {
-                console.log(err);
 
                 // sets ad to not post if we get a failed request
                 this.context.toggleAdPosted(false);

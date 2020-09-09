@@ -33,7 +33,7 @@ export default class SpaceInfo extends React.Component{
     }
 
     render(){
-        console.log(this.state)
+        
         return (
             <section className="post-ad-space-info">
                 <section className="post-ad-space-info-option">

@@ -21,7 +21,7 @@ export default class AcInfo extends React.Component{
     };
 
     render(){
-        console.log(this.state)
+        
         return(
             <section className="post-ad-amenities-info">
                 <h4 className="post-ad-header">A/C <span>*</span></h4>

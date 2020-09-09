@@ -52,8 +52,6 @@ export class MapProvider extends React.Component{
             newPath[i] = path;
         };
 
-        console.log(newPath);
-
         this.setState({
             path: newPath
         });
@@ -70,8 +68,6 @@ export class MapProvider extends React.Component{
             setArea: this.setArea,
             setPath: this.setPath
         };
-
-        console.log(value);
 
         return (
             <MapContext.Provider value={value}>

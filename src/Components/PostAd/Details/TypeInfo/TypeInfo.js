@@ -22,7 +22,7 @@ export default class AcInfo extends React.Component{
     };
 
     render(){
-        console.log(this.state)
+        
         return(
             <section className="post-ad-amenities-info">
                 <h4 className="post-ad-header">Space Type <span>*</span></h4>

@@ -26,7 +26,7 @@ export default class StartedAds extends React.Component{
     };
 
     render(){
-        console.log(this.context);
+        
         return (
             <section id="property-listings"> 
                 {this.renderUserStartedAds()}

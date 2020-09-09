@@ -20,7 +20,7 @@ export default class Properties extends React.Component{
     };
 
     render(){
-        console.log(this.context);
+        
         return (
             <section id="properties-section">
                 <div id="properties-section-header-container">

@@ -60,12 +60,10 @@ export default class SignUp extends React.Component{
                 return res.json();
             })
             .then( resData => {
-                console.log(resData)
                 UserToken.setToken(resData.token);
                 this.props.history.push("/user");
             })
             .catch( err => {
-                console.log(err);
                 this.setState({
                     error: err.error
                 });
@@ -79,7 +77,7 @@ export default class SignUp extends React.Component{
 
         if(!this.state.first_name){
             first_name.classList.add("signup-missing-input");
-            console.log(missingInput);
+            
             missingInput.scrollIntoView();
         } else{
             first_name.classList.remove("signup-missing-input");
@@ -87,7 +85,7 @@ export default class SignUp extends React.Component{
 
         if(!this.state.last_name){
             last_name.classList.add("signup-missing-input");
-            console.log(missingInput);
+            
             missingInput.scrollIntoView();
         } else{
             last_name.classList.remove("signup-missing-input");
@@ -95,7 +93,7 @@ export default class SignUp extends React.Component{
     }
     
     render(){
-        console.log(this.state);
+        
         return (
             <section id="signup-section">
                 <form id="signup-form" onSubmit={this.handleSubmit}>

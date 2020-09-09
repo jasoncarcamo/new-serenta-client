@@ -98,7 +98,6 @@ export default class Login extends React.Component{
                 return res.json();
             })
             .then( resData => {
-                console.log(resData)
                 UserToken.setToken(resData.token);
 
                 this.context.userContext.handleLogIn();

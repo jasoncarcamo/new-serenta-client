@@ -77,7 +77,6 @@ export default class AdListing extends React.Component{
     // This starts ad, so it will be used even the user returns and continues on the ad
     startPostAd =  (e)=>{
         e.preventDefault();
-        console.log(this.context.ad)
 
         // check if the ad has already been created on the backend
         if((this.context.ad.posted === false) && (this.context.ad.posted !== undefined)){
@@ -90,13 +89,11 @@ export default class AdListing extends React.Component{
 
         this.context.handlePostAd()
             .then( resData => {
-                console.log(resData);
                 this.context.setCurrentAd(resData.createdAd);
                 this.context.addToUserAds(resData.createdAd);
                 this.toPostAd();
             })
             .catch(err => {
-                console.log(err)
                 this.setState({
                     error: err.error
                 })
@@ -147,7 +144,7 @@ export default class AdListing extends React.Component{
     }
 
     render(){
-        console.log(this.context)
+        
         return (
             <section id="ad-listing-form-section">
                 <form id="ad-listing-form" onSubmit={this.startPostAd}>

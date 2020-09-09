@@ -7,6 +7,7 @@ const UserContext = React.createContext({
     loading: Boolean,
     refresh: ()=>{},
     addtoAds: ()=>{},
+    addImagesToAd: ()=>{},
     resetState: ()=>{},
     handleLogIn: ()=>{},
     loading: Boolean
@@ -26,7 +27,6 @@ export class UserProvider extends React.Component{
     };
 
     componentDidMount(){
-        console.log("Hello");
         this.getUserInfo()
             .then(([userData, userAdsData])=>{
 
@@ -37,12 +37,22 @@ export class UserProvider extends React.Component{
                 
             })
             .catch( err => {
-                console.log(err)
                 this.setState({
                     error: err.error
-                })
+                });
             });
     };
+
+    addImagesToAd = (ad, images)=>{
+        let ads = this.state.ads;
+        const adIndex= ads.indexOf(ad);
+
+        ads[adIndex].images = images;
+
+        this.setState({
+            ads
+        });
+    }
 
     handleLogIn = ()=>{
         this.setState({
@@ -51,9 +61,6 @@ export class UserProvider extends React.Component{
 
         this.getUserInfo()
             .then(([userData, userAdsData])=>{
-                console.log(userData);
-                console.log(userAdsData);
-                console.log("Hello");
                 this.setState({
                     user: userData.user,
                     ads: userAdsData.userAds,
@@ -62,7 +69,6 @@ export class UserProvider extends React.Component{
                 
             })
             .catch( err => {
-                console.log(err)
                 this.setState({
                     loading: false,
                     error: err.error
@@ -103,7 +109,6 @@ export class UserProvider extends React.Component{
                 
             })
             .catch( err => {
-                console.log(err)
                 this.setState({
                     error: err.error
                 });
@@ -149,11 +154,12 @@ export class UserProvider extends React.Component{
             loading: this.state.loading,
             refresh: this.refresh,
             addToAds: this.addToAds,
+            addImagesToAd: this.addImagesToAd,
             resetState: this.resetState,
             loading: this.state.loading,
             handleLogIn: this.handleLogIn
         };
-        console.log(value)
+        console.log(value);
         return (
             <UserContext.Provider value={value}>
                 {this.props.children}

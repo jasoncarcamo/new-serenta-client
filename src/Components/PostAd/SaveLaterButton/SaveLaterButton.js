@@ -30,7 +30,6 @@ export default class SaveLaterButton extends React.Component{
                 this.handleSuccessSave();
             })
             .catch( err => {
-                console.log(err);
                 this.setState({
                     saving: false,
                     error: err.error

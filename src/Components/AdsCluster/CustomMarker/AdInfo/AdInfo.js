@@ -20,7 +20,7 @@ export default class AdInfo extends React.Component{
     }
 
     render(){
-        console.log(this.props);
+        console.log(this.props.ad);
         return (
             <InfoWindow
                 className="ad-info-container"
@@ -29,7 +29,7 @@ export default class AdInfo extends React.Component{
                 zIndex={this.props.zIndex}>
                 <section className="ad-info-window">
 
-                    <ImgSlider/>
+                    <ImgSlider images={this.props.ad.images}/>
                     
                     <div>
                         <h2 className="ad-info-header">{this.props.ad.type}</h2>

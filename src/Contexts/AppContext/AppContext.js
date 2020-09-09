@@ -3,7 +3,8 @@ import React from "react";
 const AdContext = React.createContext({
     history: {},
     userContext: {},
-    postAdContext: {}
+    postAdContext: {},
+    mapContext: ()=>{}
 })
 
 export default AdContext;

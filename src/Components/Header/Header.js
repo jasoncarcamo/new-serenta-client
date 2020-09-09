@@ -57,6 +57,7 @@ export default class Header extends React.Component{
 
     handleSignOut = ()=>{
         
+        // sets states to default upon sign out
         this.context.userContext.resetState();
         this.context.postAdContext.resetState();
         

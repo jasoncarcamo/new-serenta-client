@@ -139,7 +139,7 @@ export class PostAdProvider extends React.Component{
     }
 
     removeStartedAd = async (ad)=>{
-        console.log(ad);
+        
         return fetch(`http://localhost:8000/api/living-space/${ad.id}`, {
             method: "DELETE",
             headers: {
@@ -148,7 +148,7 @@ export class PostAdProvider extends React.Component{
             }
         })
             .then( res => {
-                console.log(res)
+                
                 if(!res.ok){
                     return res.json().then( e => Promise.reject(e));
                 };
@@ -276,7 +276,6 @@ export class PostAdProvider extends React.Component{
 
     // handles address input form our start ad form in /properties
     handleAddressInput = (address)=>{
-        console.log(address);
         let newAddress = address.split(", ");
         const ad = this.state.ad;
 

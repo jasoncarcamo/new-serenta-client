@@ -54,7 +54,7 @@ export default class ParkingInfo extends React.Component{
     }
 
     render(){
-        console.log(this.state);
+        
         return (
             <section className="post-ad-amenities-info">
                 <h4 className="post-ad-amenities-header">Parking <span>*</span></h4>

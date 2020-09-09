@@ -25,7 +25,7 @@ class App extends React.Component{
     };
 
     render(){
-        console.log(this.props)
+        
         return(
             <>
                 <Route path="/" component={Header}></Route>

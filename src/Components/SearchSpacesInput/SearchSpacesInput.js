@@ -50,7 +50,7 @@ export default class SearchSpacesInput extends React.Component{
         };
 
         address = address.join(" ").split(", ").join("+").split(" ").join("+");
-        console.log(address)
+        
         fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyAAPqYeOSuJKs63H8A4NwaKp8fjVZo_jao`)
             .then( res => {
                 if(!res.ok){
@@ -60,7 +60,6 @@ export default class SearchSpacesInput extends React.Component{
                 return res.json();
             })
             .then( resData => {
-                console.log(resData)
 
                 fetch(`https://nominatim.openstreetmap.org/search.php?q=${address}&polygon_geojson=1&format=json`)
                     .then( polygonRes => {
@@ -71,7 +70,6 @@ export default class SearchSpacesInput extends React.Component{
                         return polygonRes.json();
                     })
                     .then( polygonData => {
-                        console.log(polygonData)
                         this.context.searchArea(resData.results[0].geometry.location.lat, resData.results[0].geometry.location.lng, zoom);
                         this.context.setPath(polygonData[0].geojson.coordinates)
                     })
@@ -88,8 +86,7 @@ export default class SearchSpacesInput extends React.Component{
     }
 
     render(){
-        console.log(this.context)
-        console.log(this.state)
+        
         return (
             <form id="search-spaces-form" onSubmit={this.handleSubmit}>
                 <fieldset id="search-spaces-fieldset">

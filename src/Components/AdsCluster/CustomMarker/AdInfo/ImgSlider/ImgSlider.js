@@ -7,7 +7,7 @@ export default class ImgSlider extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            images: [LivingRoom, LivingRoomWide],
+            images: this.props.images,
             imgIndex: 0
         };
     }
@@ -63,10 +63,11 @@ export default class ImgSlider extends React.Component{
 
     renderImg = (imgs)=>{
 
-        return <img src={imgs[this.state.imgIndex]} alt="" className="ad-info-img"/>
+        return <img src={imgs[this.state.imgIndex] || ""} alt="" className="ad-info-img"/>
     };
 
     render(){
+        console.log(this.props.images)
         return (
             <section className="ad-info-img-container">
                 <button onClick={this.leftButton} className="ad-info-img-btn-left fade-btn">{"<"}</button>

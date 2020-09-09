@@ -1,7 +1,7 @@
 import React from "react";
 import "./UploadImgs.css";
 import UserToken from "../../../Services/UserToken/UserToken";
-
+import AppContext from "../../../Contexts/AppContext/AppContext";
 import PostAdContext from "../../../Contexts/PostAdContext/PostAdContext";
 
 export default class UploadImgs extends React.Component{
@@ -14,33 +14,27 @@ export default class UploadImgs extends React.Component{
         }
     }
 
-    static contextType = PostAdContext;
+    static contextType = AppContext;
 
     handleChange = (e)=>{
         const fileInputFiles = document.getElementById("post-ad-images").files;
         let files = this.state.files;
         let newFiles = [];
-
-        console.log(fileInputFiles)
         
         for(let key of Object.keys(fileInputFiles)){
-            console.log(key);
             newFiles[key] = fileInputFiles[key];
-        }
+        };
 
         this.setState({
            files: newFiles
         });
-        console.log(files)
 
-        console.log(fileInputFiles)
         this.handleUpload(newFiles);
     }
 
     displayFileAmountMessage = ()=>{
         const files = this.state.files;
         let length = 0;
-        console.log(files)
 
         for(let key of Object.keys(files)){
             if(key){
@@ -63,12 +57,13 @@ export default class UploadImgs extends React.Component{
         const newImages = images;
         const fetchRequests = [];
 
+        // loop through the image keys
         for(let key of Object.keys(newImages)){
             let formData = new FormData();
 
-            formData.append("living_space_id", this.context.ad.id);
+            formData.append("living_space_id", this.context.postAdContext.ad.id);
             formData.append(`images`, newImages[key]);
-            console.log(newImages[key])
+
             fetchRequests[key] = fetch("http://localhost:8000/api/living-space-images", {
                 method: "POST",
                 headers: {
@@ -78,18 +73,14 @@ export default class UploadImgs extends React.Component{
             });
         };
 
-        console.log(fetchRequests);
-
         this.setState({
             uploading: true
         });
 
         Promise.all(fetchRequests)
             .then( responses => {
-                console.log(responses);
 
                 for( let i = 0; i < responses.length; i++){
-                    console.log(responses[i]);
                     if(!responses[i].ok){
                         return responses[i].json().then( e => Promise.reject(e));
                     };
@@ -97,14 +88,14 @@ export default class UploadImgs extends React.Component{
 
                 return Promise.all(responses.map(( response, index)=> response.json()));
             })
-            .then( resDatas => {
-                console.log(resDatas);
+            .then( resData => {
                 this.setState({
                     uploading: false
                 });
+
+                this.context.userContext.addImagesToAd(this.context.postAdContext.ad, resData[0].images);
             })
             .catch( err => {
-                console.log(err);
                 this.setState({
                     uploading: false
                 });
@@ -112,7 +103,7 @@ export default class UploadImgs extends React.Component{
     }
 
     render(){
-        console.log(this.context)
+        
         return (
             <section className="post-ad-amenities-info">
                 <h4 className="post-ad-header">Upload Images of your space <span>*</span></h4>

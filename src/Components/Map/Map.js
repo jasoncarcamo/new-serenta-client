@@ -15,7 +15,7 @@ export default class Map extends React.Component{
     ];
     
     render(){
-        console.log(this.context)
+        
         return (
             <GoogleMap 
                 id="map"
@@ -31,7 +31,6 @@ export default class Map extends React.Component{
                     margin: 0,
                     zIndex: 1
                 }}
-                onZoomChanged={()=>{console.log()}}
                 zoom={this.context.zoom}
                 center={{
                     lat: this.context.lat,
