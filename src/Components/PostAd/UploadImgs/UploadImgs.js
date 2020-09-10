@@ -2,7 +2,7 @@ import React from "react";
 import "./UploadImgs.css";
 import UserToken from "../../../Services/UserToken/UserToken";
 import AppContext from "../../../Contexts/AppContext/AppContext";
-import PostAdContext from "../../../Contexts/PostAdContext/PostAdContext";
+import UploadedImages from "./UploadedImages/UploadedImages";
 
 export default class UploadImgs extends React.Component{
     constructor(props){
@@ -110,9 +110,11 @@ export default class UploadImgs extends React.Component{
 
                 <div className="post-ad-images-container">
                     
-                    <label htmlFor="post-ad-images">{this.state.uploading ? this.displayLoading() : this.displayFileAmountMessage()}</label>
+                    <label htmlFor="post-ad-images">Upload Image(s)</label>
                     <input id="post-ad-images" name="images" type="file" onChange={this.handleChange} multiple={true}></input>        
                 </div>
+
+                <UploadedImages images={this.context.postAdContext.ad.images}/>
             </section>
         )
     }

@@ -1,0 +1,19 @@
+.uploaded-image-container{
+    display: flex;
+    justify-content: baseline;
+    border: .05em solid black;
+    padding: 0;
+}
+
+.uploaded-image{
+    margin: 0;
+    width: 2.5em;
+    height: 2.5em;
+}
+
+.uploaded-image-btn{
+    display: block;
+    width: 5em;
+    height: 2em;
+    margin: auto 0 auto 1.5em;
+}
