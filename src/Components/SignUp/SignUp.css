@@ -5,7 +5,7 @@
 }
 
 #signup-form{
-    width: 25.75em;
+    width: 27.75em;
     border: .06em solid lightgrey;
     margin: 5em auto 0 auto;
     padding: 0 2em;
@@ -55,6 +55,30 @@
     font-size: .9em;
     margin: .5em auto 4em auto;
     text-decoration: none;
+}
+
+#password-confirm-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 auto;
+    border: 1px solid gray;
+    border-radius: .3em;
+    background-color: rgb(255, 255, 245);
+}
+
+#password-confirm-box span{
+    margin-bottom: .5em;
+    padding-left: .5em;
+}
+
+#password-matches{
+    width: 100%;
+    margin: 0 auto;
+    height: .4em;
+    background-color: gray;
+    border-radius: .2em;
 }
 
 #signup-error{

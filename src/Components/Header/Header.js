@@ -49,8 +49,24 @@ export default class Header extends React.Component{
 
         return (
             <>
-                <li className="nav-link" onClick={this.mobileNavMenuHandler}><NavLink to="/login">Log In</NavLink></li>
-                <li className="nav-link" onClick={this.mobileNavMenuHandler}><NavLink to="/signup">Sign up</NavLink></li>
+                <li className="nav-link" onClick={this.mobileNavMenuHandler}>
+                    <NavLink 
+                        to="/login" 
+                        activeStyle={{
+                            backgroundColor: "black",
+                            color: "white",
+                            fontWeight: "bold"
+                    }}>Log In</NavLink>
+                </li>
+                <li className="nav-link" onClick={this.mobileNavMenuHandler}>
+                    <NavLink 
+                        to="/signup"
+                        activeStyle={{
+                            backgroundColor: "black",
+                            color: "white",
+                            fontWeight: "bold"
+                    }}>Sign up</NavLink>
+                </li>
             </>
         )
     }
@@ -110,7 +126,16 @@ export default class Header extends React.Component{
                     </button>
 
                     <ul id="nav-list">
-                        <li className="nav-link" onClick={this.mobileNavMenuHandler}><NavLink to="/"><img src={Logo} alt="Serenta logo"></img></NavLink></li>
+                        <li className="nav-link" onClick={this.mobileNavMenuHandler}>
+                            <NavLink 
+                                exact to="/"
+                                activeStyle={{
+                                    backgroundColor: "black",
+                                    color: "white",
+                                    fontWeight: "bold"
+                                }}>
+                                <img src={Logo} alt="Serenta logo"></img>
+                            </NavLink></li>
 
                         <li className="nav-link" onClick={this.mobileNavMenuHandler}>
                             <NavLink 
@@ -123,7 +148,7 @@ export default class Header extends React.Component{
 
                         <li className="nav-link" onClick={this.mobileNavMenuHandler}>
                             <NavLink 
-                                to="post-ad" 
+                                to="/post-ad" 
                                 activeStyle={{
                                 backgroundColor: "black",
                                 color: "white",

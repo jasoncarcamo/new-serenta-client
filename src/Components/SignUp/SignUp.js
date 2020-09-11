@@ -12,8 +12,64 @@ export default class SignUp extends React.Component{
             mobile_number: "",
             email: "",
             password: "",
-            confirm_password: ""
+            confirm_password: "",
+            error: ""
         }
+    }
+
+    passwordMatch = ()=>{
+        const div = document.getElementById("password-matches");
+        
+        if(this.state.password === this.state.confirm_password){
+            div.style.backgroundColor = "green";
+
+            this.setState({
+                error: ""
+            });
+        } else{
+            div.style.backgroundColor = "red";
+        }
+        
+    };
+
+    validatePassword = (password) => {
+        
+        const REGEX_UPPER_LOWER_NUMBER_SPECIAL = (/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&])[\S]+/);
+
+        const requirements = [ 
+            <span key={0} className="reg_error" style={{color: 'gray'}}>Password must be longer than 8 characters</span>,
+            <span key={1} className="reg_error" style={{color: 'gray'}}>Password must be less than 72 characters</span>,
+            <span key={2} className="reg_error" style={{color: 'gray'}}>Password must not start or end with empty spaces</span>,
+            <span key={3} className="reg_error" style={{color: 'gray'}}>Password must contain one upper case, lower case, number and special character</span>
+        ]
+
+        if(password.length > 1){
+            if (password.length > 8) {
+                requirements[0] = <span key={0} className="reg_error" style={{color: 'green'}}>Password must be longer than 8 characters</span>
+              } else{
+      
+              }
+      
+              if (password.length < 72) {
+                requirements[1] = <span key={1} className="reg_error" style={{color: 'green'}}>Password must be less than 72 characters</span>
+              } else{
+      
+              };
+      
+              if (!password.startsWith(' ') || !password.endsWith(' ')) {
+                requirements[2] = <span key={2} className="reg_error" style={{color: 'green'}}>Password must not start or end with empty spaces</span>
+              } else{
+                
+              };
+      
+              if (!REGEX_UPPER_LOWER_NUMBER_SPECIAL.test(password)) {
+                  requirements[3] = <span key={3} className="reg_error" style={{color: 'gray'}}>Password must contain one upper case, lower case, number and special character</span>
+              } else{
+                  requirements[3] = <span key={3} className="reg_error" style={{color: 'green'}}>Password must contain one upper case, lower case, number and special character</span>
+              };
+        }
+        
+        return requirements
     }
 
     handleTextInput = (e)=>{
@@ -37,7 +93,9 @@ export default class SignUp extends React.Component{
             error: ""
         })
 
-        this.interateRequiremnts();
+        if(!this.interateRequiremnts()){
+            return;
+        }
 
         fetch(`http://localhost:8000/api/register`, {
             method: "POST",
@@ -73,12 +131,17 @@ export default class SignUp extends React.Component{
     interateRequiremnts = ()=>{
         const first_name = document.getElementById("first_name");
         const last_name = document.getElementById("last_name");
+        const password = this.state.password;
+        const confirmPassword = this.state.confirm_password;
+        const confirmPasswordInput = document.getElementById("confirm-password");
         const missingInput = document.querySelector(".signup-missing-input");
 
         if(!this.state.first_name){
             first_name.classList.add("signup-missing-input");
             
             missingInput.scrollIntoView();
+
+            return false;
         } else{
             first_name.classList.remove("signup-missing-input");
         };
@@ -87,13 +150,30 @@ export default class SignUp extends React.Component{
             last_name.classList.add("signup-missing-input");
             
             missingInput.scrollIntoView();
+
+            return false;
         } else{
             last_name.classList.remove("signup-missing-input");
         };
+        
+        if(password !== confirmPassword){
+            console.log(password, confirmPassword)
+            confirmPasswordInput.classList.add("signup-missing-input");
+
+            this.setState({
+                error: "Password confirmation does not match"
+            });
+
+            return false;
+        } else{
+            confirmPasswordInput.classList.remove("signup-missing-input");
+        }
+
+        return true;
     }
     
     render(){
-        
+        console.log(this.state)
         return (
             <section id="signup-section">
                 <form id="signup-form" onSubmit={this.handleSubmit}>
@@ -156,6 +236,9 @@ export default class SignUp extends React.Component{
                                 value={this.state.password}
                                 name="password"
                                 required></input>
+                            <div id="password-confirm-box">
+                                {this.validatePassword(this.state.password)}
+                            </div>
 
                             <label className="signup-label" htmlFor="confirm-password">Confirm password:</label>
                             <input 
@@ -167,6 +250,8 @@ export default class SignUp extends React.Component{
                                 value={this.state.confirm_password}
                                 name="confirm_password"
                                 required></input>
+                            <div id="password-matches"></div>
+                            {this.state.password && this.state.confirm_password ? this.passwordMatch() : ""}
 
                             <p id="login-error">{this.state.error ? this.state.error : ""}</p>
 
