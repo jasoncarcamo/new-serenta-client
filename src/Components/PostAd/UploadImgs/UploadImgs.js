@@ -3,6 +3,7 @@ import "./UploadImgs.css";
 import UserToken from "../../../Services/UserToken/UserToken";
 import AppContext from "../../../Contexts/AppContext/AppContext";
 import UploadedImages from "./UploadedImages/UploadedImages";
+import ImageCompression from 'browser-image-compression';
 
 export default class UploadImgs extends React.Component{
     constructor(props){
@@ -53,16 +54,25 @@ export default class UploadImgs extends React.Component{
         return "Loading..."
     }
 
-    handleUpload = (images)=>{
+    handleUpload = async (images)=>{
         const newImages = images;
         const fetchRequests = [];
 
         // loop through the image keys
         for(let key of Object.keys(newImages)){
             let formData = new FormData();
+            const options = {
+                maxSizeMB: 50000,
+                maxWidthOrHeight: 5920,
+                useWebWorker: true
+            };
+            const compressedImage = await ImageCompression(newImages[key], options);
+
+            console.log(compressedImage)
 
             formData.append("living_space_id", this.context.postAdContext.ad.id);
-            formData.append(`images`, newImages[key]);
+            formData.append("image_name", compressedImage.name);
+            formData.append(`images`, compressedImage);
 
             fetchRequests[key] = fetch("http://localhost:8000/api/living-space-images", {
                 method: "POST",
