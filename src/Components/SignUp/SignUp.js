@@ -19,13 +19,11 @@ export default class SignUp extends React.Component{
 
     passwordMatch = ()=>{
         const div = document.getElementById("password-matches");
+
         
         if(this.state.password === this.state.confirm_password){
             div.style.backgroundColor = "green";
 
-            this.setState({
-                error: ""
-            });
         } else{
             div.style.backgroundColor = "red";
         }
@@ -83,6 +81,10 @@ export default class SignUp extends React.Component{
             e.target.classList.add("login-missing-input");
         } else{
             e.target.classList.remove("login-missing-input");
+
+            this.setState({
+                error: ""
+            });
         }
     }
 
