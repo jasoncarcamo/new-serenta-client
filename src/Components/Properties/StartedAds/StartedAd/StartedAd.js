@@ -13,13 +13,13 @@ export default class StartedAd extends React.Component{
 
     static contextType = PostAdContext;
 
-    finish = ()=>[
+    finish = ()=>{
         this.setState({
             cancel: false,
             cancelSuccess: false,
             error: ""
-        })
-    ]
+        });
+    }
 
     setAdContext = ()=>{
         this.context.setCurrentAd(this.props.ad);
