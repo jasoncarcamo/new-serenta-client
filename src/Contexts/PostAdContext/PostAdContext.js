@@ -140,7 +140,7 @@ export class PostAdProvider extends React.Component{
 
     removeStartedAd = async (ad)=>{
         
-        return fetch(`http://localhost:8000/api/living-space/${ad.id}`, {
+        return fetch(`${process.env.REACT_APP_FETCH_API_URL}/api/living-space/${ad.id}`, {
             method: "DELETE",
             headers: {
                 'content-type': "application/json",
@@ -179,7 +179,7 @@ export class PostAdProvider extends React.Component{
 
     // handles saving the instance of the current ad
     handlePatchAd = async ()=>{
-        return fetch(`http://localhost:8000/api/living-space/${this.state.ad.id}`, {
+        return fetch(`${process.env.REACT_APP_FETCH_API_URL}/api/living-space/${this.state.ad.id}`, {
             method: "PATCH",
             headers: {
                 'content-type': "application/json",
@@ -199,7 +199,7 @@ export class PostAdProvider extends React.Component{
     // handles the instance of creating an ad
     // POST request to create and save current ad
     handlePostAd = async ()=>{
-        return fetch(`http://localhost:8000/api/living-space`, {
+        return fetch(`${process.env.REACT_APP_FETCH_API_URL}/api/living-space`, {
             method: "POST",
             headers: {
                 'content-type': "application/json",
@@ -385,7 +385,7 @@ export class PostAdProvider extends React.Component{
             toggleAdPosted: this.toggleAdPosted,
             setAdIndex: this.setAdIndex
         };
-        console.log(value);
+
         return (
             <PostAdContext.Provider value={value}>
                 {this.props.children}

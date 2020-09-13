@@ -7,6 +7,7 @@ import Description from "./Description/Description";
 import SaveLaterButton from "./SaveLaterButton/SaveLaterButton";
 import UploadImgs from "./UploadImgs/UploadImgs"
 import SubmitAd from "./SubmitAd/SubmitAd";
+import UserToken from "../../Services/UserToken/UserToken";
 
 export default class PostAd extends React.Component{
     constructor(props){
@@ -19,16 +20,16 @@ export default class PostAd extends React.Component{
     static contextType = PostAdContext;
 
     componentDidMount(){
+        if(!UserToken.hasToken()){
+            return this.props.history.push("/login");
+        };
+
         if(!this.context.address){
 
             this.context.toggleAdListing();
 
             return this.props.history.push("/properties");
-        }
-
-        if(!this.context.address){
-            return this.props.history.push("/properties")
-        }
+        };
     }
 
     render(){

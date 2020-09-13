@@ -58,6 +58,10 @@ export default class UploadImgs extends React.Component{
         const newImages = images;
         const fetchRequests = [];
 
+        this.setState({
+            uploading: true
+        });
+
         // loop through the image keys
         for(let key of Object.keys(newImages)){
             let formData = new FormData();
@@ -68,13 +72,11 @@ export default class UploadImgs extends React.Component{
             };
             const compressedImage = await ImageCompression(newImages[key], options);
 
-            console.log(compressedImage)
-
             formData.append("living_space_id", this.context.postAdContext.ad.id);
             formData.append("image_name", compressedImage.name);
             formData.append(`images`, compressedImage);
 
-            fetchRequests[key] = fetch("http://localhost:8000/api/living-space-images", {
+            fetchRequests[key] = fetch(`${process.env.REACT_APP_FETCH_API_URL}/api/living-space-images`, {
                 method: "POST",
                 headers: {
                     'authorization': `bearer ${UserToken.getToken()}`
@@ -82,10 +84,6 @@ export default class UploadImgs extends React.Component{
                 body: formData
             });
         };
-
-        this.setState({
-            uploading: true
-        });
 
         Promise.all(fetchRequests)
             .then( responses => {
@@ -120,7 +118,7 @@ export default class UploadImgs extends React.Component{
 
                 <div className="post-ad-images-container">
                     
-                    <label htmlFor="post-ad-images">Upload Image(s)</label>
+                    <label htmlFor="post-ad-images">{this.state.uploading ? "Loading.." : "Upload Image(s)"}</label>
                     <input id="post-ad-images" name="images" type="file" onChange={this.handleChange} multiple={true}></input>        
                 </div>
 

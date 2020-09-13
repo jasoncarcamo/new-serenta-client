@@ -120,13 +120,13 @@ export class UserProvider extends React.Component{
     getUserInfo = async ()=>{
         if(UserToken.hasToken()){
             return Promise.all([
-                fetch("http://localhost:8000/api/user", {
+                fetch(`${process.env.REACT_APP_FETCH_API_URL}/api/user`, {
                     headers: {
                         'content-type': "application/json",
                         'authorization': `bearer ${UserToken.getToken()}`
                     }
                 }),
-                fetch("http://localhost:8000/api/living-space", {
+                fetch(`${process.env.REACT_APP_FETCH_API_URL}/api/living-space`, {
                     headers: {
                         'content-type': "application/json",
                         'authorization': `bearer ${UserToken.getToken()}`
@@ -159,7 +159,7 @@ export class UserProvider extends React.Component{
             loading: this.state.loading,
             handleLogIn: this.handleLogIn
         };
-        console.log(value);
+
         return (
             <UserContext.Provider value={value}>
                 {this.props.children}

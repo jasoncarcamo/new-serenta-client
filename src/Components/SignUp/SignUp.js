@@ -97,7 +97,7 @@ export default class SignUp extends React.Component{
             return;
         }
 
-        fetch(`http://localhost:8000/api/register`, {
+        fetch(`${process.env.REACT_APP_FETCH_API_URL}/api/register`, {
             method: "POST",
             headers: {
                 'content-type': "application/json",
@@ -157,7 +157,6 @@ export default class SignUp extends React.Component{
         };
         
         if(password !== confirmPassword){
-            console.log(password, confirmPassword)
             confirmPasswordInput.classList.add("signup-missing-input");
 
             this.setState({
@@ -173,7 +172,7 @@ export default class SignUp extends React.Component{
     }
     
     render(){
-        console.log(this.state)
+
         return (
             <section id="signup-section">
                 <form id="signup-form" onSubmit={this.handleSubmit}>

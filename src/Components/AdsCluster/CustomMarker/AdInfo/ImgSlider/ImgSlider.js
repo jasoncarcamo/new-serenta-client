@@ -67,7 +67,7 @@ export default class ImgSlider extends React.Component{
     };
 
     render(){
-        console.log(this.props.images)
+        
         return (
             <section className="ad-info-img-container">
                 <button onClick={this.leftButton} className="ad-info-img-btn-left fade-btn">{"<"}</button>

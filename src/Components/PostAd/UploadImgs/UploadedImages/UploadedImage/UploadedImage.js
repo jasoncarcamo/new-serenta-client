@@ -16,7 +16,7 @@ export default class UploadedImage extends React.Component{
     handleDelete = ()=>{
         const living_space_id = this.context.postAdContext.ad.id;
 
-        fetch(`http://localhost:8000/api/living-space-images/${living_space_id}`, {
+        fetch(`${process.env.REACT_APP_FETCH_API_URL}/api/living-space-images/${living_space_id}`, {
             method: "DELETE",
             headers: {
                 'content-type': "application/json",
@@ -34,11 +34,9 @@ export default class UploadedImage extends React.Component{
                 return res.json();
             })
             .then( resData => {
-                console.log(resData);
                 this.context.userContext.addImagesToAd(this.context.postAdContext.ad, resData.updatedSpace.images);
             })
             .catch( err => {
-                console.log(err);
                 this.setState({
                     error: err.error
                 });
@@ -46,7 +44,7 @@ export default class UploadedImage extends React.Component{
     }
 
     render(){
-        console.log(this.context.postAdContext.ad.id);
+
         return (
             <div className="uploaded-image-container">
                 <img src={this.props.image} alt="upload image" className="uploaded-image"/>

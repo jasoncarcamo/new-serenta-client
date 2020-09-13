@@ -67,6 +67,10 @@ export default class StartedAd extends React.Component{
                     cancelSuccess: true
                 });
 
+                const button = document.getElementById("ad-listing-cancel-success-button");
+
+                button.scrollIntoView({behavior: "smooth"});
+
             })
             .catch( err => {
                 this.setState({

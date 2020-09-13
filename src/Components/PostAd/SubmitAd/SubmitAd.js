@@ -46,6 +46,10 @@ export default class SubmitAd extends React.Component{
                 });
                 
                 this.context.setAdDefault();
+
+                const button = document.getElementById("post-ad-success-button");
+
+                button.scrollIntoView({behavior: "smooth"})
             })
             .catch(err => {
 

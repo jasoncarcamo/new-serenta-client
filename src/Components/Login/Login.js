@@ -80,7 +80,7 @@ export default class Login extends React.Component{
             return;
         };
 
-        fetch("http://localhost:8000/api/login", {
+        fetch(`${process.env.REACT_APP_FETCH_API_URL}/api/login`, {
             method: "POST",
             headers: {
                 "content-type": "application/json"

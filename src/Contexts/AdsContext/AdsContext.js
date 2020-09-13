@@ -33,7 +33,7 @@ export class AdsProvider extends React.Component{
             loading: true
         });
 
-        fetch("http://localhost:8000/api/living-spaces", {
+        fetch(`${process.env.REACT_APP_FETCH_API_URL}/api/living-spaces`, {
             headers: {
                 'content-type': 'application/json'
             }
@@ -96,7 +96,7 @@ export class AdsProvider extends React.Component{
             updateAd: this.updateAd,
             deleteAd: this.deleteAd
         };
-        console.log(value);
+
         return (
             <AdsContext.Provider value={value}>
                 {this.props.children}
