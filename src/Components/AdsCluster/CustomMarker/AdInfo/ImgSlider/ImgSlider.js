@@ -89,7 +89,7 @@ export default class ImgSlider extends React.Component{
 
     renderImg = (imgs)=>{
 
-        return <img src={imgs[this.state.imgIndex].url || ""} alt="" className="ad-info-img"/>
+        return <img src={!imgs[this.state.imgIndex].url ? LivingRoom : imgs[this.state.imgIndex].url} alt="" className="ad-info-img"/>
     };
 
     render(){
