@@ -1,5 +1,4 @@
 .post-ad-images-container{
-    border: 1px solid black;
     width: 100%;
 }
 
@@ -8,6 +7,7 @@
     width: 15em;
     height: 3.8em;
     padding: 1em .5em;
+    margin: 0 auto;
     text-align: center;
     border: 1px solid black;
     cursor: pointer;
@@ -17,7 +17,13 @@
     display: block;
     margin: 1em auto;
     border: 1px solid black;
-    width: 0.01px;
-    height: 0.01px;
+    width: 0px;
+    height: 0px;
     overflow: hidden;
+}
+
+@media screen and (max-width: 1030px){
+    .post-ad-images-container label{
+        margin: 0 auto;
+    }
 }

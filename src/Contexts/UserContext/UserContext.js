@@ -3,11 +3,13 @@ import UserToken from "../../Services/UserToken/UserToken";
 
 const UserContext = React.createContext({
     user: {},
+    userImages: [],
     ads: [],
     loading: Boolean,
     refresh: ()=>{},
     addtoAds: ()=>{},
-    addImagesToAd: ()=>{},
+    addImages: ()=>{},
+    removeImage: ()=>{},
     resetState: ()=>{},
     handleLogIn: ()=>{},
     loading: Boolean
@@ -20,6 +22,7 @@ export class UserProvider extends React.Component{
         super(props);
         this.state = {
             user: {},
+            userImages: [],
             ads: [],
             loading: false,
             error: ""
@@ -28,11 +31,12 @@ export class UserProvider extends React.Component{
 
     componentDidMount(){
         this.getUserInfo()
-            .then(([userData, userAdsData])=>{
+            .then(([userData, userAdsData, userImagesData])=>{
 
                 this.setState({
                     user: userData.user,
-                    ads: userAdsData.userAds
+                    ads: userAdsData.userAds,
+                    userImages: userImagesData.userImages,
                 });
                 
             })
@@ -43,14 +47,32 @@ export class UserProvider extends React.Component{
             });
     };
 
-    addImagesToAd = (ad, images)=>{
-        let ads = this.state.ads;
-        const adIndex= ads.indexOf(ad);
+    removeImage = (image)=>{
+        const userImages = this.state.userImages;
+        const imageIndex = userImages.indexOf(image);
 
-        ads[adIndex].images = images;
+        for(let i = 0; i < userImages.length; i++){
+            if(userImages[i].id === image.id){
+                userImages.splice(i, 1);
+            }
+        }
 
         this.setState({
-            ads
+            userImages
+        });
+    }
+
+    addImages = (images)=>{
+        let userImages = this.state.userImages;
+
+        for(let i = 0; i < images.length; i++){
+            if(!userImages.includes(images[i])){
+                userImages.push(images[i]);
+            }
+        };
+
+        this.setState({
+            userImages
         });
     }
 
@@ -60,10 +82,11 @@ export class UserProvider extends React.Component{
         });
 
         this.getUserInfo()
-            .then(([userData, userAdsData])=>{
+            .then(([userData, userAdsData, userImagesData])=>{
                 this.setState({
                     user: userData.user,
                     ads: userAdsData.userAds,
+                    userImages: userImagesData.userImages,
                     loading: false
                 });
                 
@@ -98,11 +121,12 @@ export class UserProvider extends React.Component{
 
     refresh = async ()=>{
         this.getUserInfo()
-            .then(([userData, userAdsData])=>{
+            .then(([userData, userAdsData, userImagesData])=>{
 
                 this.setState({
                     user: userData.user,
-                    ads: userAdsData.userAds
+                    ads: userAdsData.userAds,
+                    userImages: userImagesData.userImages
                 });
 
                 return true;
@@ -119,7 +143,8 @@ export class UserProvider extends React.Component{
     
     getUserInfo = async ()=>{
         if(UserToken.hasToken()){
-            return Promise.all([
+            
+            return await Promise.all([
                 fetch(`${process.env.REACT_APP_FETCH_API_URL}/api/user`, {
                     headers: {
                         'content-type': "application/json",
@@ -131,9 +156,15 @@ export class UserProvider extends React.Component{
                         'content-type': "application/json",
                         'authorization': `bearer ${UserToken.getToken()}`
                     }
+                }),
+                fetch(`${process.env.REACT_APP_FETCH_API_URL}/api/living-space-images/user`, {
+                    headers: {
+                        'content-type': "application/json",
+                        'authorization': `bearer ${UserToken.getToken()}`
+                    }
                 })
             ])
-                .then(([userRes, userAdsRes]) => {
+                .then(([userRes, userAdsRes, userImagesRes]) => {
                     if(!userRes.ok){
                         return userRes.json().then( e => Promise.reject(e));
                     };
@@ -142,7 +173,11 @@ export class UserProvider extends React.Component{
                         return userAdsRes.json().then( e => Promise.reject(e));
                     };
 
-                    return Promise.all([ userRes.json(), userAdsRes.json()]);
+                    if(!userImagesRes.ok){
+                        return userImagesRes.json().then( e => Promise.reject(e));
+                    };
+
+                    return Promise.all([ userRes.json(), userAdsRes.json(), userImagesRes.json()]);
                 });
         }
     }
@@ -150,16 +185,18 @@ export class UserProvider extends React.Component{
     render(){
         const value = {
             user: this.state.user,
+            userImages: this.state.userImages,
             ads: this.state.ads,
             loading: this.state.loading,
             refresh: this.refresh,
             addToAds: this.addToAds,
-            addImagesToAd: this.addImagesToAd,
+            addImages: this.addImages,
+            removeImage: this.removeImage,
             resetState: this.resetState,
             loading: this.state.loading,
             handleLogIn: this.handleLogIn
         };
-
+        
         return (
             <UserContext.Provider value={value}>
                 {this.props.children}

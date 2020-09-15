@@ -7,6 +7,7 @@ export default class UploadedImage extends React.Component{
     constructor(props){
         super(props);
         this.state = {
+            deleteing: false,
             error: ""
         };
     }
@@ -16,14 +17,18 @@ export default class UploadedImage extends React.Component{
     handleDelete = ()=>{
         const living_space_id = this.context.postAdContext.ad.id;
 
-        fetch(`${process.env.REACT_APP_FETCH_API_URL}/api/living-space-images/${living_space_id}`, {
+        this.setState({
+            deleteing: true
+        });
+
+        fetch(`${process.env.REACT_APP_FETCH_API_URL}/api/living-space-images/${this.props.image.id}`, {
             method: "DELETE",
             headers: {
                 'content-type': "application/json",
                 'authorization': `bearer ${UserToken.getToken()}`
             },
             body: JSON.stringify({
-                image: this.props.image
+                image_name: this.props.image.image_name
             })
         })
             .then( res => {
@@ -34,7 +39,7 @@ export default class UploadedImage extends React.Component{
                 return res.json();
             })
             .then( resData => {
-                this.context.userContext.addImagesToAd(this.context.postAdContext.ad, resData.updatedSpace.images);
+                this.context.userContext.removeImage(resData.deletedImage);
             })
             .catch( err => {
                 this.setState({
@@ -44,10 +49,10 @@ export default class UploadedImage extends React.Component{
     }
 
     render(){
-
+        
         return (
             <div className="uploaded-image-container">
-                <img src={this.props.image} alt="upload image" className="uploaded-image"/>
+                <img src={this.props.image.url} alt="upload image" className="uploaded-image"/>
                 <button type="button" onClick={this.handleDelete} className="uploaded-image-btn">Delete</button>
             </div>
         );

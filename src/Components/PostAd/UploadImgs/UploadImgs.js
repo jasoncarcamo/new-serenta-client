@@ -97,11 +97,17 @@ export default class UploadImgs extends React.Component{
                 return Promise.all(responses.map(( response, index)=> response.json()));
             })
             .then( resData => {
+                let images = [];
+
                 this.setState({
                     uploading: false
                 });
 
-                this.context.userContext.addImagesToAd(this.context.postAdContext.ad, resData[0].images);
+                resData.forEach((res, i)=>{
+                    images[i] = res.createdImage;
+                });
+
+                this.context.userContext.addImages(images);
             })
             .catch( err => {
                 this.setState({
@@ -122,7 +128,7 @@ export default class UploadImgs extends React.Component{
                     <input id="post-ad-images" name="images" type="file" onChange={this.handleChange} multiple={true}></input>        
                 </div>
 
-                <UploadedImages images={this.context.postAdContext.ad.images}/>
+                <UploadedImages images={this.context.userContext.userImages}/>
             </section>
         )
     }

@@ -40,8 +40,8 @@ export default class PostAd extends React.Component{
                 <Details/>
                 <Amenities/>
                 <Description/>
-                {this.context.ad.posted === false ? <SaveLaterButton/> : ""}
                 <UploadImgs/>
+                {this.context.ad.posted === false ? <SaveLaterButton/> : ""}
                 <SubmitAd history={this.props.history}/>
             </section>
         );
