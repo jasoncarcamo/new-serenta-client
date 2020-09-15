@@ -49,10 +49,10 @@ export default class UploadedImage extends React.Component{
     }
 
     render(){
-        
+
         return (
             <div className="uploaded-image-container">
-                <img src={this.props.image.url} alt="upload image" className="uploaded-image"/>
+                <img src={this.props.image.url || ""} alt="upload image" className="uploaded-image"/>
                 <button type="button" onClick={this.handleDelete} className="uploaded-image-btn">Delete</button>
             </div>
         );
