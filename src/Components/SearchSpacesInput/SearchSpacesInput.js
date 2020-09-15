@@ -13,6 +13,9 @@ export default class SearchSpacesInput extends React.Component{
 
     static contextType = MapContext;
 
+    componentDidMount(){
+    }    
+
     handleChange = (address)=>{
         this.setState({
             address

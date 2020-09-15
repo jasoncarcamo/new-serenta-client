@@ -3,12 +3,19 @@ import {InfoWindow} from "@react-google-maps/api";
 import "./AdInfo.css";
 import LivingRoomWide from "../../../../assets/livingroom.jpg";
 import ImgSlider from "./ImgSlider/ImgSlider";
+import AppContext from "../../../../Contexts/AppContext/AppContext";
 
 export default class AdInfo extends React.Component{
+
+    static contextType = AppContext;
 
     toggleInfo = ()=>{
         this.props.toggleInfo();
     };
+
+    showSearchForm = ()=>{
+        this.props.showSearchForm();
+    }
 
     displayLastModifies = (ad)=>{
 
@@ -19,17 +26,30 @@ export default class AdInfo extends React.Component{
         };
     }
 
+    getCurrentAdImages = (images)=>{
+        let userImages = images;
+
+        userImages = userImages.filter((image, i)=>{
+            if(image.living_space_id === this.props.ad.id){
+                return image;
+            };
+        });
+
+        return userImages
+    }
+
     render(){
         
         return (
             <InfoWindow
+                onLoad={this.handleResize}
                 className="ad-info-container"
                 position={this.props.position}
-                onCloseClick={this.toggleInfo}
+                onCloseClick={this.showSearchForm}
                 zIndex={this.props.zIndex}>
                 <section className="ad-info-window">
 
-                    <ImgSlider images={this.props.ad.images}/>
+                    <ImgSlider ad={this.props.ad} images={this.getCurrentAdImages(this.context.userContext.userImages)}/>
                     
                     <div>
                         <h2 className="ad-info-header">{this.props.ad.type}</h2>
