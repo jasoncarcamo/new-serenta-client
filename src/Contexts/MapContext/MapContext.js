@@ -17,11 +17,23 @@ export class MapProvider extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            lat: 38.885512,
-            lng: -99.383977,
-            zoom: 4,
+            lat: 39.847075,
+            lng: -96.587319,
+            zoom: 2.5,
             path: [],
             enableGps: false
+        }
+    }
+
+    componentDidMount(){
+        if(window.innerWidth >= 1030){
+            this.setState({
+                zoom: 4
+            })
+        } else{
+            this.setState({
+                zoom: 2.5
+            });
         }
     }
 

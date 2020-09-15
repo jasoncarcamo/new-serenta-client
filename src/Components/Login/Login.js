@@ -102,7 +102,7 @@ export default class Login extends React.Component{
 
                 this.context.userContext.handleLogIn();
                 
-                this.props.history.push("/user");
+                this.props.history.push("/properties");
             })
             .catch( err => this.setState({
                 error: err.error
