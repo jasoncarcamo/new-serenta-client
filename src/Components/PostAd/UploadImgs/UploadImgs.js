@@ -74,7 +74,8 @@ export default class UploadImgs extends React.Component{
 
             formData.append("living_space_id", this.context.postAdContext.ad.id);
             formData.append("image_name", compressedImage.name);
-            formData.append(`images`, compressedImage);
+            formData.append(`images`, compressedImage)
+            formData.append("ImageFiles", newImages);
 
             fetchRequests[key] = fetch(`${process.env.REACT_APP_FETCH_API_URL}/api/living-space-images`, {
                 method: "POST",
@@ -98,7 +99,7 @@ export default class UploadImgs extends React.Component{
             })
             .then( resData => {
                 let images = [];
-
+                console.log(resData);
                 this.setState({
                     uploading: false
                 });

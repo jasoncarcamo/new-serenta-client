@@ -46,6 +46,7 @@ export class AdsProvider extends React.Component{
                 return res.json();
             })
             .then( resData => {
+                console.log(resData.ads);
                 this.setState({
                     ads: resData.ads,
                     loading: false
