@@ -1,5 +1,6 @@
 import React from "react";
 import UserToken from "../../Services/UserToken/UserToken";
+import AppContext from "../../Contexts/AppContext/AppContext";
 
 const UserContext = React.createContext({
     user: {},
@@ -29,74 +30,62 @@ export class UserProvider extends React.Component{
         };
     };
 
-    componentDidMount(){
-        this.getUserInfo()
-            .then(([userData, userAdsData, userImagesData])=>{
+    static contextType = AppContext;
 
-                this.setState({
-                    user: userData.user,
-                    ads: userAdsData.userAds,
-                    userImages: userImagesData.userImages,
-                });
-                
-            })
-            .catch( err => {
-                this.setState({
-                    error: err.error
-                });
-            });
+    componentDidMount(){
+        this.getUserInfo();
     };
 
-    removeImage = (image)=>{
-        const userImages = this.state.userImages;
-        const imageIndex = userImages.indexOf(image);
+    removeImage = (ad, images, index)=>{
+        const ads = this.state.ads;
+        let newImages = images;
+        const updateAd = ad;
+        let adIndex = index;
 
-        for(let i = 0; i < userImages.length; i++){
-            if(userImages[i].id === image.id){
-                userImages.splice(i, 1);
-            }
-        }
+        console.log(adIndex)
+
+        newImages = newImages.map((image, i)=>{
+            return JSON.parse(image);
+        });
+
+        updateAd.images = newImages;
+
+        console.log(updateAd);
+
+        ads[adIndex] = updateAd;
 
         this.setState({
-            userImages
+            ads
         });
+
+        return updateAd;
     }
 
-    addImages = (images)=>{
-        let userImages = this.state.userImages;
+    addImages = (ad, images)=>{
+        const ads = this.state.ads
+        const updateAd = ad;
+        let adIndex = ads.indexOf(updateAd);
+
+        console.log(adIndex)
 
         for(let i = 0; i < images.length; i++){
-            if(!userImages.includes(images[i])){
-                userImages.push(images[i]);
+            if(!updateAd.images.includes(images[i])){
+                updateAd.images.push(images[i]);
             }
         };
 
+        ads[adIndex] = updateAd;
+
         this.setState({
-            userImages
+            ads
         });
+
+        return updateAd;
     }
 
     handleLogIn = ()=>{
-        this.setState({
-            loading: true
-        });
 
-        this.getUserInfo()
-            .then(([userData, userAdsData, userImagesData])=>{
-                this.setState({
-                    user: userData.user,
-                    ads: userAdsData.userAds,
-                    userImages: userImagesData.userImages,
-                    loading: false
-                });
-                
-            })
-            .catch( err => {
-                this.setState({
-                    loading: false,
-                    error: err.error
-                })
-            });
+        this.getUserInfo();
     }   
 
     // resets this state when user signs out
@@ -120,25 +109,7 @@ export class UserProvider extends React.Component{
     }
 
     refresh = async ()=>{
-        this.getUserInfo()
-            .then(([userData, userAdsData, userImagesData])=>{
-
-                this.setState({
-                    user: userData.user,
-                    ads: userAdsData.userAds,
-                    userImages: userImagesData.userImages
-                });
-
-                return true;
-                
-            })
-            .catch( err => {
-                this.setState({
-                    error: err.error
-                });
-
-                return false;
-            });
+        return await this.getUserInfo();
     }
     
     getUserInfo = async ()=>{
@@ -178,6 +149,28 @@ export class UserProvider extends React.Component{
                     };
 
                     return Promise.all([ userRes.json(), userAdsRes.json(), userImagesRes.json()]);
+                })
+                .then(([userData, userAdsData, userImagesData])=>{
+                    let userAds = userAdsData.userAds.map((ad, i)=>{
+
+                        for(let j = 0; j < ad.images.length; j++){
+                            ad.images[j] = JSON.parse(ad.images[j]);
+                        }
+
+                        return ad;
+                    });
+
+                    this.setState({
+                        user: userData.user,
+                        ads: userAds,
+                        userImages: userImagesData.userImages,
+                    });
+                    
+                })
+                .catch( err => {
+                    this.setState({
+                        error: err.error
+                    });
                 });
         }
     }

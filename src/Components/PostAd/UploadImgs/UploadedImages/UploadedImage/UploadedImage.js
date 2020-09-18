@@ -39,7 +39,9 @@ export default class UploadedImage extends React.Component{
                 return res.json();
             })
             .then( resData => {
-                this.context.userContext.removeImage(resData.deletedImage);
+                const updatedAd = this.context.userContext.removeImage(resData.updatedSpaceAd, resData.updatedSpaceAd.images, this.context.postAdContext.adIndex);
+
+                this.context.postAdContext.setCurrentAd(updatedAd);
             })
             .catch( err => {
                 this.setState({
@@ -49,7 +51,7 @@ export default class UploadedImage extends React.Component{
     }
 
     render(){
-
+        console.log(this.context)
         return (
             <div className="uploaded-image-container">
                 <img src={this.props.image.url || ""} alt="upload image" className="uploaded-image"/>

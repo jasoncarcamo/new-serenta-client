@@ -12,8 +12,6 @@ class HashMap{
             hashCode += hashCode + key.charCodeAt(i);
         };
 
-        console.log(hashCode % this.hashmap.length)
-
         return hashCode % this.hashmap.length;
     }
 

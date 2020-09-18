@@ -39,7 +39,7 @@ export default class AdInfo extends React.Component{
     }
 
     render(){
-        
+        console.log(this.props)
         return (
             <InfoWindow
                 onLoad={this.handleResize}
@@ -49,7 +49,7 @@ export default class AdInfo extends React.Component{
                 zIndex={this.props.zIndex}>
                 <section className="ad-info-window">
 
-                    <ImgSlider ad={this.props.ad} images={this.getCurrentAdImages(this.context.userContext.userImages)}/>
+                    <ImgSlider ad={this.props.ad} images={this.getCurrentAdImages(this.context.adsContext.ads)}/>
                     
                     <div>
                         <h2 className="ad-info-header">{this.props.ad.type}</h2>

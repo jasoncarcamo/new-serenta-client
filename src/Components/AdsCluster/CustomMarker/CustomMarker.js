@@ -23,8 +23,7 @@ export default class CustomMarker extends React.Component{
         });
 
         window.addEventListener("resize", (e)=>{
-            const screenWidth = window.innerWidth
-            console.log(document.getElementsByClassName("ad-info-container"))
+            const screenWidth = window.innerWidth;
             this.setState({
                 screenWidth
             });
@@ -86,7 +85,7 @@ export default class CustomMarker extends React.Component{
     
 
     render(){
-        console.log(this.state)
+        
         return this.state.toggleInfo === true ? this.renderAdInfo() : this.renderMarker();
     }
 }

@@ -47,9 +47,15 @@ export class AdsProvider extends React.Component{
             })
             .then( resData => {
                 console.log(resData.ads);
+
+                resData.ads.forEach((ad, i)=>{
+                    for(let j = 0; j < ad.images.length; j++){
+                        
+                    };
+                });
+
                 this.setState({
-                    ads: resData.ads,
-                    loading: false
+                    ads: resData.ads
                 });
             })
             .catch( err => {
@@ -97,7 +103,7 @@ export class AdsProvider extends React.Component{
             updateAd: this.updateAd,
             deleteAd: this.deleteAd
         };
-
+        console.log(value)
         return (
             <AdsContext.Provider value={value}>
                 {this.props.children}

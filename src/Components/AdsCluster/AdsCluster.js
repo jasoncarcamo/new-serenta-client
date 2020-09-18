@@ -16,7 +16,7 @@ export default class AdsCluster extends React.Component{
                 lng: Number(ad.lng)
             };
             
-            if(ad.posted){
+            if(ad.posted === false){
                 return <CustomMarker key={index} ad={ad} position={position} clusterer={clusterer} zIndex={index}/>
             };
         });

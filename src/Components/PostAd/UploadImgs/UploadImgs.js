@@ -97,18 +97,43 @@ export default class UploadImgs extends React.Component{
 
                 return Promise.all(responses.map(( response, index)=> response.json()));
             })
-            .then( resData => {
+            .then( async resData => {
                 let images = [];
-                console.log(resData);
-                this.setState({
-                    uploading: false
-                });
 
                 resData.forEach((res, i)=>{
                     images[i] = res.createdImage;
                 });
 
-                this.context.userContext.addImages(images);
+                const updatedAd = this.context.userContext.addImages(this.context.postAdContext.ad, images);
+
+                fetch(`${process.env.REACT_APP_FETCH_API_URL}/api/living-space/${updatedAd.id}`, {
+                    method: "PATCH",
+                    headers: {
+                        'content-type': "application/json",
+                        'authorization': `bearer ${UserToken.getToken()}`
+                    },
+                    body: JSON.stringify(updatedAd)
+                })
+                    .then( imageUploaded => {
+                        if(!imageUploaded.ok){
+                            return imageUploaded.json().then( e => Promise.reject(e));
+                        };
+
+                        return imageUploaded.json();
+                    })
+                    .then( uploadedData => {
+
+                        this.setState({
+                            uploading: false
+                        });
+
+                    })
+                    .catch( uploadErr => {
+
+                        this.setState({
+                            error: uploadErr.error
+                        });
+                    })
             })
             .catch( err => {
                 this.setState({
@@ -118,7 +143,7 @@ export default class UploadImgs extends React.Component{
     }
 
     render(){
-        
+        console.log(this.context)
         return (
             <section className="post-ad-amenities-info">
                 <h4 className="post-ad-header">Upload Images of your space <span>*</span></h4>
@@ -129,7 +154,7 @@ export default class UploadImgs extends React.Component{
                     <input id="post-ad-images" name="images" type="file" onChange={this.handleChange} multiple={true}></input>        
                 </div>
 
-                <UploadedImages images={this.context.userContext.userImages}/>
+                <UploadedImages images={this.context.postAdContext.ad.images}/>
             </section>
         )
     }

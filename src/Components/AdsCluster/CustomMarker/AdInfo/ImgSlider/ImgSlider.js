@@ -16,9 +16,8 @@ export default class ImgSlider extends React.Component{
     static contextType = AppContext;
 
     componentDidMount(){
-
         let userImages = [];
-        console.log(this.props, this.context)
+
         for(let i = 0; i < this.props.images; i++){
             if(this.props.images[i].living_space_id === this.props.ad.id){
                 userImages.push(this.props.images[i]);
@@ -96,7 +95,7 @@ export default class ImgSlider extends React.Component{
     };
 
     render(){
-        console.log(this.props)
+        
         return (
             <section className="ad-info-img-container">
                 <button onClick={this.leftButton} className="ad-info-img-btn-left fade-btn">{"<"}</button>

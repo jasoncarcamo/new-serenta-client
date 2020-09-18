@@ -2,6 +2,7 @@ import React from "react";
 
 const AdContext = React.createContext({
     history: {},
+    adsContext: ()=>{},
     userContext: {},
     postAdContext: {},
     mapContext: ()=>{}
@@ -19,6 +20,7 @@ export class AppProvider extends React.Component{
 
     render(){
         const value = {
+            adsContext: this.props.adsContext,
             userContext: this.props.userContext,
             postAdContext: this.props.postAdContext,
             mapContext: this.props.mapContext
