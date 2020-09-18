@@ -143,7 +143,7 @@ export default class UploadImgs extends React.Component{
     }
 
     render(){
-        console.log(this.context)
+        
         return (
             <section className="post-ad-amenities-info">
                 <h4 className="post-ad-header">Upload Images of your space <span>*</span></h4>

@@ -46,11 +46,10 @@ export class AdsProvider extends React.Component{
                 return res.json();
             })
             .then( resData => {
-                console.log(resData.ads);
 
                 resData.ads.forEach((ad, i)=>{
                     for(let j = 0; j < ad.images.length; j++){
-                        
+                        ad.images[j] = JSON.parse(ad.images)
                     };
                 });
 
@@ -103,7 +102,7 @@ export class AdsProvider extends React.Component{
             updateAd: this.updateAd,
             deleteAd: this.deleteAd
         };
-        console.log(value)
+        
         return (
             <AdsContext.Provider value={value}>
                 {this.props.children}

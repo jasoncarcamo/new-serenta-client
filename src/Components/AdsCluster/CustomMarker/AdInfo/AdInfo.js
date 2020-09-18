@@ -49,7 +49,7 @@ export default class AdInfo extends React.Component{
                 zIndex={this.props.zIndex}>
                 <section className="ad-info-window">
 
-                    <ImgSlider ad={this.props.ad} images={this.getCurrentAdImages(this.context.adsContext.ads)}/>
+                    <ImgSlider ad={this.props.ad} images={this.props.ad.images}/>
                     
                     <div>
                         <h2 className="ad-info-header">{this.props.ad.type}</h2>

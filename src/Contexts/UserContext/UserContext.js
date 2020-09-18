@@ -42,15 +42,11 @@ export class UserProvider extends React.Component{
         const updateAd = ad;
         let adIndex = index;
 
-        console.log(adIndex)
-
         newImages = newImages.map((image, i)=>{
             return JSON.parse(image);
         });
 
         updateAd.images = newImages;
-
-        console.log(updateAd);
 
         ads[adIndex] = updateAd;
 
@@ -65,8 +61,6 @@ export class UserProvider extends React.Component{
         const ads = this.state.ads
         const updateAd = ad;
         let adIndex = ads.indexOf(updateAd);
-
-        console.log(adIndex)
 
         for(let i = 0; i < images.length; i++){
             if(!updateAd.images.includes(images[i])){

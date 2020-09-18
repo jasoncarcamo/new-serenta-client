@@ -12,9 +12,8 @@ export default class UploadedImages extends React.Component{
         if(!images){
             return;
         };
-        console.log(this.props)
+        
         images = images.map((image, index)=>{
-            console.log(image)
             if(image.living_space_id === this.context.postAdContext.ad.id){
                 return <UploadedImage key={index} image={image} index={index}/>
             }
