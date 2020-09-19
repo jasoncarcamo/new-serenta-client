@@ -46,10 +46,9 @@ export class AdsProvider extends React.Component{
                 return res.json();
             })
             .then( resData => {
-
                 resData.ads.forEach((ad, i)=>{
                     for(let j = 0; j < ad.images.length; j++){
-                        ad.images[j] = JSON.parse(ad.images)
+                        ad.images[j] = JSON.parse(ad.images[j])
                     };
                 });
 
@@ -75,10 +74,19 @@ export class AdsProvider extends React.Component{
         });
     }
 
-    updateAd = (ad, index) => {
+    updateAd = (ad) => {
         const ads = this.state.ads;
+        let adIndex;
+        const foundAd = ads.filter((currentAd, index) => {
+            
+            adIndex = index;
 
-        ads[index] = ad;
+            return currentAd.id === ad.id ? currentAd : null;
+        });
+
+        if(adIndex > -1){
+            ads[adIndex] = ad;
+        };
 
         this.setState({
             ads

@@ -26,8 +26,15 @@
     right: 1em;
     height: 3em;
     border: none;
-    background-color: transparent;
+    background-color: black;
+    color: white;
     font-size: 1em;
+    padding: 0 .5em;
+}
+
+#properties-section-container-button:hover{
+    background-color: white;
+    color: black;
 }
  
 @media screen and (max-width: 900px){

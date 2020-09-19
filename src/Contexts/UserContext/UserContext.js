@@ -9,6 +9,7 @@ const UserContext = React.createContext({
     loading: Boolean,
     refresh: ()=>{},
     addtoAds: ()=>{},
+    removeFromAds: ()=>{},
     addImages: ()=>{},
     removeImage: ()=>{},
     resetState: ()=>{},
@@ -89,6 +90,27 @@ export class UserProvider extends React.Component{
             ads: [],
             loading: false,
             error: ""
+        })
+    }
+
+    removeFromAds = (ad)=>{
+        const ads = this.state.ads;
+        let adIndex;
+        const foundAd = ads.filter((currentAd, index)=>{
+            if(currentAd.id === ad.id){
+
+                adIndex = index;
+
+                return currentAd;
+            };
+        });
+
+        if(adIndex > -1){
+            ads.splice(adIndex, 1);
+        };
+
+        this.setState({
+            ads
         })
     }
 
@@ -177,6 +199,7 @@ export class UserProvider extends React.Component{
             loading: this.state.loading,
             refresh: this.refresh,
             addToAds: this.addToAds,
+            removeFromAds: this.removeFromAds,
             addImages: this.addImages,
             removeImage: this.removeImage,
             resetState: this.resetState,

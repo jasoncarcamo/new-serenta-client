@@ -1,17 +1,20 @@
 import React from "react";
 import "./StartedAd.css";
 import PostAdContext from "../../../../Contexts/PostAdContext/PostAdContext";
+import AppContext from "../../../../Contexts/AppContext/AppContext";
+import Map from "./Map/Map";
 
 export default class StartedAd extends React.Component{
     constructor(props){
         super(props);
         this.state = {
             cancel: false,
-            cancelSuccess: false
+            cancelSuccess: false,
+            error: ""
         }
     }
 
-    static contextType = PostAdContext;
+    static contextType = AppContext;
 
     finish = ()=>{
         this.setState({
@@ -22,16 +25,16 @@ export default class StartedAd extends React.Component{
     }
 
     setAdContext = ()=>{
-        this.context.setCurrentAd(this.props.ad);
+        this.context.postAdContext.setCurrentAd(this.props.ad);
     };
 
     toPostAd = ()=>{
 
         // sets current ad to this ad for editing
-        this.context.setCurrentAd(this.props.ad);
+        this.context.postAdContext.setCurrentAd(this.props.ad);
 
         // sets index of current ad
-        this.context.setAdIndex(this.props.index);
+        this.context.postAdContext.setAdIndex(this.props.index);
 
         this.props.history.push("/post-ad");
     };
@@ -52,14 +55,13 @@ export default class StartedAd extends React.Component{
 
     handleRemoveAd = ()=>{
 
-        this.context.removeStartedAd(this.props.ad)
+        this.context.postAdContext.removeStartedAd(this.props.ad)
             .then( resData => {
 
                 //removes ad upon success
-                this.context.deleteAd(this.props.index);
+                this.context.postAdContext.deleteAd(this.props.index);
 
-                // set ad index to null
-                this.context.setAdIndex(null);
+                this.context.postAdContext.resetState();
                 
                 // sets state properties to show success message
                 this.setState({
@@ -81,13 +83,10 @@ export default class StartedAd extends React.Component{
     }
 
     handleAdSuccess = ()=>{
-        this.context.handleAdSuccess();
-        this.props.userContext.refresh()
-            .then( refreshed => {
-                if(refreshed === true){
-                    this.finish();
-                };
-            });
+        this.context.userContext.removeFromAds(this.props.ad);
+        
+        this.finish();
+
     }
 
     renderRemoveSuccess = ()=>{
@@ -126,14 +125,16 @@ export default class StartedAd extends React.Component{
     }
 
     render(){
-        
+        console.log(this.props)
         return (
             <section className="started-ad-listing">
                 <div className="started-ad-listing-first-section">
                     <div className="started-ad-listing-address-container">
-                        <p>{this.props.ad.street_address}, {this.props.ad.city}, {this.props.ad.state}, {this.props.ad.zip_code}</p>
+                        <Map lat={Number(this.props.ad.lat)} lng={Number(this.props.ad.lng)}/>
                     </div>
                 </div>
+
+                <p>{this.props.ad.street_address}, {this.props.ad.city}, {this.props.ad.state}, {this.props.ad.zip_code}</p>
 
                 <div className="started-ad-listing-buttons-container">
                     {!this.state.cancel && (!this.state.cancelSuccess) && (!this.props.ad.posted) ? this.renderListAdButton() : ""}

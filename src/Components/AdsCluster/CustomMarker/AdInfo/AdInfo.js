@@ -57,7 +57,7 @@ export default class AdInfo extends React.Component{
                         <section>
                             <p><strong>Address:</strong> {this.props.ad.street_address}, {this.props.ad.city}, {this.props.ad.state}, {this.props.ad.zip_code}</p>
                             
-                            <p><strong>Monthly price:</strong> {this.props.ad.price}</p>
+                            <p><strong>Monthly price:</strong> ${this.props.ad.price}</p>
 
                             <p><strong>Bed rooms:</strong> {this.props.ad.bedrooms}</p>
 
@@ -84,7 +84,7 @@ export default class AdInfo extends React.Component{
 
                         <section>
                             <h3 className="ad-info-h3">Comments</h3>
-                            <p className="ad-info-comment">{this.props.ad.comments}</p>
+                            <p className="ad-info-comment">{this.props.ad.comments ||  "Lister did not provide comments."}</p>
                         </section>
 
                         <div id="ad-info-contact-container">

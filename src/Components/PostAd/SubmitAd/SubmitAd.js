@@ -38,7 +38,7 @@ export default class SubmitAd extends React.Component{
                     
                     this.context.addAd(this.context.ad);
                 } else {
-                    this.context.updateAd(this.context.ad, this.context.adIndex);
+                    this.context.updateAd(this.context.ad);
                 };
 
                 this.setState({

@@ -10,8 +10,8 @@
 .ad-info-img-btn-left{
     position: absolute;
     top: 50%;
-    left: 1em;
-    height: 2em;
+    left: .75em;
+    height: 1.75em;
     width: 1em;
     transform: translateY(-50%);
     font-size: 3em;
@@ -21,8 +21,8 @@
 .ad-info-img-btn-right{
     position: absolute;
     top: 50%;
-    right: 1em;
-    height: 2em;
+    right: .75em;
+    height: 1.75em;
     width: 1em;
     transform: translateY(-50%);
     font-size: 3em;

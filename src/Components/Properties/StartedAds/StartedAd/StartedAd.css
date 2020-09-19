@@ -8,7 +8,7 @@
     width: 100%;
     margin: 0;
     padding: 0;
-    border-bottom: .5em solid lightblue;
+    border-bottom: .05em solid black;
 }
 
 .started-ad-listing-address-container{
@@ -26,14 +26,11 @@
     font-size: 1em;
 }
 
-.started-ad-listing-address-container p{
+.started-ad-listing > p{
     text-align: center;
     width: 100%;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
     padding: 0;
-    margin: 0;
+    margin: 1.5em 0 0 0;
 }
 
 .started-ad-listing-buttons-container{

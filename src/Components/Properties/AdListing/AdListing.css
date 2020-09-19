@@ -100,6 +100,25 @@
     margin: .5em 0;
 }
 
+.autocomplete-dropdown-container{
+    width: 90%;
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+    background-color: white;
+}
+
+.autocomplete-dropdown-container li, .autocomplete-dropdown-container p{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.autocomplete-dropdown-container li{
+    border-bottom: .05em solid lightgrey;
+    padding: .7em 0 .7em 1em;
+}
+
 @media screen and (max-width: 1030px){
     #ad-listing-form-section{
         position: fixed;

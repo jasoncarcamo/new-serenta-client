@@ -9,7 +9,7 @@
     border-right: .04em solid lightgrey;
     border-bottom: .04em solid lightgrey;
     border-left: .04em solid lightgrey;
-    box-shadow: 0 .4em 1em gray;
+    box-shadow: 0 0 1em gray;
     border-radius: .4em;
     overflow: hidden;
     z-index: 2;
@@ -85,7 +85,6 @@
         border-right: .04em solid lightgrey;
         border-bottom: .04em solid lightgrey;
         border-left: .04em solid lightgrey;
-        box-shadow: 0 .4em 1em gray;
         border-radius: .4em;
         overflow: hidden;
         z-index: 2;
