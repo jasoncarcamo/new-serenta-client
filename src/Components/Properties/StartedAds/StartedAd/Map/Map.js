@@ -37,7 +37,7 @@ export default class Map extends React.Component{
                     fullscreenControl: false, 
                     mapTypeControl: false              
             }}>
-                <Marker onClick={this.hideSearchForm} position={position}></Marker>;
+                <Marker position={position}></Marker>;
             </GoogleMap>
         );
     };
