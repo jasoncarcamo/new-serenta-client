@@ -3,6 +3,7 @@ import {Route} from "react-router-dom";
 import './App.css';
 
 import Header from "../Components/Header/Header";
+import LandingPage from "../Components/LandingPage/LandingPage";
 import LogIn from "../Components/Login/Login";
 import SignUp from "../Components/SignUp/SignUp";
 import SearchSpacesInput from "../Components/SearchSpacesInput/SearchSpacesInput";
@@ -31,6 +32,7 @@ class App extends React.Component{
                 <Route path="/" component={Header}></Route>
 
                 <main>
+                    <Route exact path="/" component={LandingPage}></Route>
                     <Route exact path="/find-rent" component={SearchSpacesInput}></Route>
                     <Route exact path="/find-rent" render={(props)=> <GoogleMap {...props}></GoogleMap>}></Route>
                     <Route exact path="/post-ad" component={PostAd}></Route>
