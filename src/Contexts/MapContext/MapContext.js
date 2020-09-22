@@ -8,7 +8,8 @@ const MapContext = React.createContext({
     path: [],
     searchArea: ()=>{},
     setArea: ()=>{},
-    setpath: ()=>{}
+    setpath: ()=>{},
+    setPosition: ()=>{}
 });
 
 export default MapContext;
@@ -35,6 +36,13 @@ export class MapProvider extends React.Component{
                 zoom: 2.5
             });
         }
+    }
+
+    setPosition = (position)=>{
+        this.setState({
+            lat: position.lat,
+            lng: position.lng
+        });
     }
 
     searchArea = (lat, lng, zoom)=>{
@@ -78,13 +86,14 @@ export class MapProvider extends React.Component{
             path: this.state.path,
             searchArea: this.searchArea,
             setArea: this.setArea,
-            setPath: this.setPath
+            setPath: this.setPath,
+            setPosition: this.setPosition
         };
 
         return (
             <MapContext.Provider value={value}>
                 {this.props.children}
             </MapContext.Provider>
-        )
-    }
-}
+        );
+    };
+};

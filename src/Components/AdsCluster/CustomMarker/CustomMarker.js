@@ -1,6 +1,7 @@
 import React from "react";
 import {Marker} from "@react-google-maps/api";
 import AdInfo from "./AdInfo/AdInfo";
+import AppContext from "../../../Contexts/AppContext/AppContext";
 
 export default class CustomMarker extends React.Component{
     constructor(props){
@@ -11,8 +12,9 @@ export default class CustomMarker extends React.Component{
         }
     }
 
+    static contextType = AppContext;
+
     componentDidMount(){
-        this.handleResize();
     }
 
     handleResize = ()=>{
@@ -40,6 +42,21 @@ export default class CustomMarker extends React.Component{
         })
     }
 
+    setMapPosition = ()=>{
+        this.context.mapContext.setPosition(this.props.position);
+    }
+
+    closeAdInfo = ()=>{
+        this.showSearchForm();
+    }
+
+    showAdInfo = ()=>{
+        this.hideSearchForm();
+
+        //center the map to the current ad's postion
+        this.setMapPosition();
+    }
+
     toggleInfo = ()=>{
         this.setState({
             toggleInfo: !this.state.toggleInfo
@@ -52,11 +69,6 @@ export default class CustomMarker extends React.Component{
 
         this.toggleInfo();
 
-        if(screenWidth >= 1030){
-            
-            return;
-        }
-
         searchForm.classList.add("hide-search-space-form");
     }
 
@@ -66,26 +78,21 @@ export default class CustomMarker extends React.Component{
 
         this.toggleInfo();
 
-        if(screenWidth >= 1030){
-            
-            return;
-        }
-
         searchForm.classList.remove("hide-search-space-form");
     }
     
     renderMarker = ()=>{
-        return <Marker onClick={this.hideSearchForm} position={this.props.position} clusterer={this.props.clusterer}></Marker>;
+        return <Marker onClick={this.showAdInfo} position={this.props.position} clusterer={this.props.clusterer}></Marker>;
     }
 
     renderAdInfo = ()=>{
-        return <AdInfo position={this.props.position} toggleInfo={this.toggleInfo}  showSearchForm={this.showSearchForm} ad={this.props.ad} zIndex={this.props.zIndex}></AdInfo>
+        return <AdInfo position={this.props.position} closeAdInfo={this.closeAdInfo} ad={this.props.ad} zIndex={this.props.zIndex}></AdInfo>
     }
 
     
 
     render(){
-        
+        console.log(this.props.position);
         return this.state.toggleInfo === true ? this.renderAdInfo() : this.renderMarker();
     }
 }
