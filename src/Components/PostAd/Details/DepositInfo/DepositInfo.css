@@ -31,7 +31,7 @@
 }
 
 #post-ad-input-price{
-    height: 3em;
+    height: 2.8em;
     width: 25em;
     border: .05em solid black;
 }
@@ -46,5 +46,5 @@
 
 #post-ad-input-deposit{
     width: 100%;
-    height: 3em;
+    height: 2.8em;
 }

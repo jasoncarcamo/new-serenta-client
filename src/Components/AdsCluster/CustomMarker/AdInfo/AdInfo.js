@@ -35,60 +35,62 @@ export default class AdInfo extends React.Component{
     }
 
     render(){
-        
+        console.log(this.props)
         return (
             <section className="ad-info-container">
                 <section className="ad-info-window">
 
-                <button type="button" className="ad-info-close-window" onClick={this.closeAdInfo}>X</button>
+                    <button type="button" className="ad-info-close-window" onClick={this.closeAdInfo}>X</button>
 
-                <ImgSlider ad={this.props.ad} images={this.props.ad.images}/>
+                    <div className="ad-info-div1">
 
-                <div>
-                    <h2 className="ad-info-header">{this.props.ad.type}</h2>
-
-                    <section>
-                        <p><strong>Address:</strong> {this.props.ad.street_address}, {this.props.ad.city}, {this.props.ad.state}, {this.props.ad.zip_code}</p>
-                        
-                        <p><strong>Monthly price:</strong> ${this.props.ad.price}</p>
-
-                        <p><strong>Bed rooms:</strong> {this.props.ad.bedrooms}</p>
-
-                        <p><strong>Bathrooms:</strong> {this.props.ad.bathrooms}</p>
-                    </section>
-
-                    <section>
-                        <h3 className="ad-info-h3">Amenities</h3>
-
-                        <p><strong>Cable:</strong> {this.props.ad.cable}</p>
-
-                        <p><strong>Wifi:</strong> {this.props.ad.wifi}</p>
-
-                        <p><strong>A/c:</strong> {this.props.ad.ac}</p>
-
-                        <p><strong>Washer:</strong> {this.props.ad.washer}</p>
-
-                        <p><strong>Dryer:</strong> {this.props.ad.dryer}</p>
-
-                        <p><strong>Pets:</strong> {this.props.ad.pets}</p>
-
-                        <p><strong>Parking:</strong> {this.props.ad.parking.join(", ")}</p>
-                    </section>
-
-                    <section>
-                        <h3 className="ad-info-h3">Comments</h3>
-                        <p className="ad-info-comment">{this.props.ad.comments ||  "Lister did not provide comments."}</p>
-                    </section>
-
-                    <div id="ad-info-contact-container">
-                        <a href={`tel:${this.props.ad.mobile_number}`} className="ad-info-contact-link">Call or Text</a>
-                        <a href={`mailto:${this.props.ad.email}`} className="ad-info-contact-link">Email</a>
-                        <button type="button" onClick={this.closeAdInfo} className="ad-info-close-btn">Close</button>
+                        <ImgSlider ad={this.props.ad} images={this.props.ad.images}/>
                     </div>
 
-                    <p>Date posted: {new Date(this.props.ad.date_created).toDateString()}</p>
-                    <p>Last modified: {this.displayLastModifies(this.props.ad)}</p>
-                </div>
+                    <div className="ad-info-div2">
+                        <h2 className="ad-info-header">${this.props.ad.price} a month</h2>
+
+                        <section className="ad-info-details-container">
+                            <p><strong>Bed rooms:</strong> {this.props.ad.bedrooms}</p>
+
+                            <p><strong>Bathrooms:</strong> {this.props.ad.bathrooms}</p>
+
+                            <p><strong>Squarefeet: {this.props.ad.squareft}</strong></p>
+                        </section>
+
+                        <div className="ad-info-contact-container">
+                            <a href={`tel:${this.props.ad.mobile_number}`} className="ad-info-contact-link">Call or Text</a>
+                            <a href={`mailto:${this.props.ad.email}`} className="ad-info-contact-link">Email</a>
+                        </div>
+
+                        <section>
+                            <h3 className="ad-info-h3">Amenities</h3>
+
+                            <p><strong>Cable:</strong> {this.props.ad.cable}</p>
+
+                            <p><strong>Wifi:</strong> {this.props.ad.wifi}</p>
+
+                            <p><strong>A/c:</strong> {this.props.ad.ac}</p>
+
+                            <p><strong>Washer:</strong> {this.props.ad.washer}</p>
+
+                            <p><strong>Dryer:</strong> {this.props.ad.dryer}</p>
+
+                            <p><strong>Pets:</strong> {this.props.ad.pets}</p>
+
+                            <p><strong>Parking:</strong> {this.props.ad.parking.join(", ")}</p>
+                        </section>
+
+                        <section>
+                            <h3 className="ad-info-h3">Comments</h3>
+                            <p className="ad-info-comment">{this.props.ad.comments ||  "Lister did not provide comments."}</p>
+                        </section>
+
+                        <button type="button" onClick={this.closeAdInfo} className="ad-info-close-btn">Close</button>
+
+                        <p>Date posted: {new Date(this.props.ad.date_created).toDateString()}</p>
+                        <p>Last modified: {this.displayLastModifies(this.props.ad)}</p>
+                    </div>
                 </section>
             </section>
         )

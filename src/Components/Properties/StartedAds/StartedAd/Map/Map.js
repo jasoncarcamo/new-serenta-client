@@ -25,7 +25,7 @@ export default class Map extends React.Component{
                     width: "100%",
                     padding: 0,
                     margin: 0,
-                    zIndex: 1
+                    zIndex: 0
                 }}
                 zoom={13}
                 center={{

@@ -13,7 +13,7 @@ export default class PostAd extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-
+            loading: false
         };
     };
 
@@ -32,6 +32,16 @@ export default class PostAd extends React.Component{
         };
     }
 
+    toggleLoading = ()=>{
+        this.setState({
+            loading: !this.state.loading
+        })
+    }
+
+    renderLoading = ()=>{
+        return <p>Loading</p>;
+    }
+
     render(){
         return (
             <section id="post-ad-section">
@@ -40,9 +50,9 @@ export default class PostAd extends React.Component{
                 <Details/>
                 <Amenities/>
                 <Description/>
-                <UploadImgs/>
-                {this.context.ad.posted === false ? <SaveLaterButton/> : ""}
-                <SubmitAd history={this.props.history}/>
+                <UploadImgs toggleLoading={this.toggleLoading}/>
+                {this.context.ad.posted === false && !this.state.loading ? <SaveLaterButton/> : ""}
+                {this.state.loading ? "" : <SubmitAd history={this.props.history} toggleLoading={this.toggleLoading}/>}
             </section>
         );
     };

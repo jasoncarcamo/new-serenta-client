@@ -63,7 +63,7 @@ export default class SpaceInfo extends React.Component{
                 <section className="post-ad-space-info-option">
                     <h4 className="post-ad-header">Square Feet <span>*</span></h4>
                     <div className="post-ad-space-info-option-container">
-                        <input type="text" id="post-ad-squareft" name="squareft" value={this.context.ad.squareft ? this.context.ad.squareft : this.state.squareft} onChange={this.handleTextInput}/>
+                        <input type="number" id="post-ad-squareft" name="squareft" value={this.context.ad.squareft ? this.context.ad.squareft : this.state.squareft} onChange={this.handleTextInput}/>
                         <p className="post-ad-squareft-label">sq ft</p>
                     </div>
                 </section>

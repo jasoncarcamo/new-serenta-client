@@ -17,10 +17,16 @@ export default class UploadImgs extends React.Component{
 
     static contextType = AppContext;
 
+    toggleLoading = ()=>{
+        this.props.toggleLoading();
+    }
+
     handleChange = (e)=>{
         const fileInputFiles = document.getElementById("post-ad-images").files;
         let files = this.state.files;
         let newFiles = [];
+
+        this.toggleLoading();
         
         for(let key of Object.keys(fileInputFiles)){
             newFiles[key] = fileInputFiles[key];
@@ -127,19 +133,25 @@ export default class UploadImgs extends React.Component{
                             uploading: false
                         });
 
+                        this.toggleLoading();
+
                     })
                     .catch( uploadErr => {
 
                         this.setState({
                             error: uploadErr.error
                         });
-                        
+
+                        this.toggleLoading();
+
                     });
             })
             .catch( err => {
                 this.setState({
                     uploading: false
                 });
+
+                this.toggleLoading();
             });
     }
 

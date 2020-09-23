@@ -55,7 +55,7 @@
 }
 
 #post-ad-input-price{
-    height: 3em;
+    height: 2.8em;
     width: 25em;
 }
 
@@ -72,7 +72,7 @@
 /* Security deposit */
 #post-ad-input-deposit{
     width: 100%;
-    height: 3em;
+    height: 2.8em;
 }
 
 @media screen and (max-width: 1030px){
@@ -84,7 +84,7 @@
     }
     
     #post-ad-input-price{
-        height: 3em;
+        height: 2.8em;
         width: 100%;
     }
     

@@ -6,14 +6,29 @@
     backdrop-filter: blur(.3em);
 }
 
+.ad-info-div1{
+    width: 50%;
+    margin: 0;
+    padding: 0;
+}
+
+.ad-info-div2{
+    width: 50%;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+}
+
 .ad-info-window{
+    display: flex;
+    flex-direction: row-reverse;
     position: relative;
     top: 1em;
     left: 50%;
     width: 75vw;
     transform: translate(-50%, 0);
     height: 80%;
-    overflow: auto;
+    overflow: hidden;
     padding: 0;
     margin: 5em 0 0 0;
     background-color: white;
@@ -22,15 +37,21 @@
 .ad-info-close-window{
     display: block;
     position: sticky;
-    width: 2em;
-    height: 2em;
-    top: .25em;
-    right: 0;
+    width: auto;
+    height: auto;
+    top: 0;
+    right: .15em;
     margin-left: auto;
-    font-size: 1.5em;
+    font-size: 1.55em;
     z-index: 5;
     border: none;
     background-color: transparent;
+}
+
+.ad-info-details-container{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
 }
 
 .ad-info-window p{
@@ -41,14 +62,13 @@
     font-weight: 600;
 }
 
-.ad-info-window > div{
+.ad-info-window > div:nth-child(1){
     padding: 0 2em;
 }
 
 .ad-info-header{
     font-size: 2em;
     font-weight: 900;
-    text-align: center;
 }
 
 #ad-info-contact-container{
@@ -59,34 +79,44 @@
 }
 
 .ad-info-img-container{
-    margin: 3em 0 0 0;
+    margin: 0;
     padding: 0;
 }
 
 .ad-info-img{
-    width: 100%;
+    width: auto;
+    max-width: 100%;
+    height: auto;
 }
 
 .ad-info-h3{
     font-weight: 800;
-    font-size: 1.55em;
+    font-size: 1.25em;
 }
 
 .ad-info-comment{
     margin: -1em 0 2.5em 0;
 }
 
+.ad-info-contact-container{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 1.5em 0 3em 0;
+    padding: 0;
+}
+
 .ad-info-contact-link{
     display: block;
-    width: 100%;
-    font-size: 1em;
-    padding: 1em;
+    width: 35%;
+    font-size: .9em;
+    padding: .85em;
     text-align: center;
     border: 1px solid black;
     color: white;
     background-color: black;
     margin: .5em auto 0 auto;
     text-decoration: none;
+    border-radius: 5em;
 }
 
 .ad-info-contact-link:hover{
@@ -97,9 +127,9 @@
 .ad-info-close-btn{
     display: block;
     width: 100%;
-    font-size: 1em;
-    padding: 1em;
-    margin: .5em  0 0 0;
+    font-size: .9em;
+    padding: .85em;
+    margin: .5em 0 2em 0;
     text-align: center;
     border: 1px solid black;
     color: white;
@@ -112,14 +142,31 @@
 }
 
 @media screen and (max-width: 1030px){
+
+    .ad-info-div1{
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .ad-info-div2{
+        width: 100%;
+        overflow: unset
+    }
+
     .ad-info-window{
+        flex-direction: column;
         position: relative;
-        top: 0;
         left: 0;
         width: 100%;
         transform: unset;
         height: 80%;
         margin: 4em 0 0 0;
+        overflow: scroll !important;
+    }
+
+    .ad-info-header{
+        text-align: center;
     }
     
     .ad-info-img-container{

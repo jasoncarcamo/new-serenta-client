@@ -56,7 +56,7 @@
 /* Security deposit */
 #post-ad-amenities-input-deposit{
     width: 100%;
-    height: 3em;
+    height: 2.8em;
 }
 
 /* Space info section */
@@ -85,12 +85,12 @@
 
 .post-ad-amenities-select{
     width: 18em;
-    height: 3em;
+    height: 2.8em;
 }
 
 #post-ad-amenities-squareft{
     width: 24em;
-    height: 3em;
+    height: 2.8em;
 }
 
 .post-ad-amenities-squareft-label{

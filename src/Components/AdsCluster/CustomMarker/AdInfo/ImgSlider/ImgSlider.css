@@ -1,5 +1,8 @@
 .ad-info-img-container{
     position: relative;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 100%;
 }
 
@@ -11,22 +14,24 @@
     position: absolute;
     top: 50%;
     left: .75em;
-    height: 1.75em;
+    height: auto;
     width: 1em;
     transform: translateY(-50%);
-    font-size: 3em;
+    font-size: 2.8em;
     border: none;
+    background-color: rgb(230, 230, 230);
 }
 
 .ad-info-img-btn-right{
     position: absolute;
     top: 50%;
     right: .75em;
-    height: 1.75em;
+    height: auto;
     width: 1em;
     transform: translateY(-50%);
-    font-size: 3em;
+    font-size: 2.8em;
     border: none;
+    background-color: rgb(230, 230, 230);
 }
 
 .fade-btn{
