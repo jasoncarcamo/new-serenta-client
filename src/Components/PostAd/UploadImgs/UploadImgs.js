@@ -133,13 +133,14 @@ export default class UploadImgs extends React.Component{
                         this.setState({
                             error: uploadErr.error
                         });
-                    })
+                        
+                    });
             })
             .catch( err => {
                 this.setState({
                     uploading: false
                 });
-            })
+            });
     }
 
     render(){

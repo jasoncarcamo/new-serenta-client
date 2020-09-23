@@ -51,7 +51,7 @@ export default class UploadedImage extends React.Component{
     }
 
     render(){
-        console.log(this.context)
+        
         return (
             <div className="uploaded-image-container">
                 <img src={this.props.image.url || ""} alt="upload image" className="uploaded-image"/>

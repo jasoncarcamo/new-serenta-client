@@ -92,7 +92,7 @@ export default class CustomMarker extends React.Component{
     
 
     render(){
-        console.log(this.props.position);
+        
         return this.state.toggleInfo === true ? this.renderAdInfo() : this.renderMarker();
     }
 }

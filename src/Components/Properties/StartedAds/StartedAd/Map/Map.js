@@ -7,7 +7,6 @@ export default class Map extends React.Component{
     static contextType = MapContext;
     
     render(){
-        console.log(this.props)
         const position = {
             lat: this.props.lat,
             lng: this.props.lng

@@ -79,9 +79,12 @@ export class AdsProvider extends React.Component{
         let adIndex;
         const foundAd = ads.filter((currentAd, index) => {
             
-            adIndex = index;
+            if(currentAd.id === ad.id){
 
-            return currentAd.id === ad.id ? currentAd : null;
+                adIndex = index;
+
+                return currentAd;
+            };
         });
 
         if(adIndex > -1){

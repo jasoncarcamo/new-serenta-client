@@ -125,7 +125,7 @@ export default class StartedAd extends React.Component{
     }
 
     render(){
-        console.log(this.props)
+        
         return (
             <section className="started-ad-listing">
                 <div className="started-ad-listing-first-section">

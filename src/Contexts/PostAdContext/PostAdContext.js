@@ -81,8 +81,8 @@ export class PostAdProvider extends React.Component{
         this.context.addAd(ad);
     }
 
-    updateAd = (ad, index) => {
-        this.context.updateAd(ad, index);
+    updateAd = (ad) => {
+        this.context.updateAd(ad);
     }
 
     deleteAd = (index)=>{
