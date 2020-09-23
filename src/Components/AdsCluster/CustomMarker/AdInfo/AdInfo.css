@@ -15,7 +15,7 @@
 .ad-info-div2{
     width: 50%;
     margin: 0;
-    padding: 0;
+    padding: 0 2em;
     overflow: auto;
 }
 
@@ -38,8 +38,8 @@
     display: block;
     position: sticky;
     width: auto;
-    height: auto;
-    top: 0;
+    height: 1em;
+    top: 1em;
     right: .15em;
     margin-left: auto;
     font-size: 1.55em;
