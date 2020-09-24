@@ -57,6 +57,7 @@
     justify-content: space-evenly;
     width: 100%;
     font-size: .8em;
+    padding-bottom: 1em;
     border-bottom: .05em solid black;
 }
 
@@ -163,13 +164,25 @@
         top: 4em;
         right: 1em;
     }
-
-    .ad-info-header{
-        text-align: center;
-    }
     
     .ad-info-img-container{
         margin: 0;
         padding: 0;
+    }
+    
+    .ad-info-contact-link{
+        margin: .5em .5em;
+    }
+
+    .ad-info-details-container{
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+        font-size: .8em;
+        margin: 0;
+    }
+
+    .ad-info-details-container p{
+        margin: 0;
     }
 }

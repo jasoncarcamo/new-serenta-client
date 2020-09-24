@@ -1,9 +1,9 @@
 import React from "react";
-import {InfoWindow} from "@react-google-maps/api";
 import "./AdInfo.css";
-import LivingRoomWide from "../../../../assets/livingroom.jpg";
 import ImgSlider from "./ImgSlider/ImgSlider";
 import AppContext from "../../../../Contexts/AppContext/AppContext";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faBed,faBath, faCube, faTv, faWifi, faSnowflake, faSoap, faTshirt, faPaw, faWarehouse} from "@fortawesome/free-solid-svg-icons"
 
 export default class AdInfo extends React.Component{
 
@@ -57,11 +57,11 @@ export default class AdInfo extends React.Component{
                         <p className="ad-info-address">{this.displayAddress()}</p>
 
                         <section className="ad-info-details-container">
-                            <p><strong>Bed rooms:</strong> {this.props.ad.bedrooms}</p>
+                            <p><strong><FontAwesomeIcon icon={faBed}></FontAwesomeIcon> Bed rooms:</strong> {this.props.ad.bedrooms}</p>
 
-                            <p><strong>Bathrooms:</strong> {this.props.ad.bathrooms}</p>
+                            <p><strong><FontAwesomeIcon icon={faBath}></FontAwesomeIcon> Bathrooms:</strong> {this.props.ad.bathrooms}</p>
 
-                            <p><strong>Squarefeet: {this.props.ad.squareft}</strong></p>
+                            <p><strong><FontAwesomeIcon icon={faCube}></FontAwesomeIcon> Sqft: {this.props.ad.squareft}</strong></p>
                         </section>
 
                         <div className="ad-info-contact-container">
@@ -72,19 +72,19 @@ export default class AdInfo extends React.Component{
                         <section>
                             <h3 className="ad-info-h3">Amenities</h3>
 
-                            <p><strong>Cable:</strong> {this.props.ad.cable}</p>
+                            <p><strong><FontAwesomeIcon icon={faTv}></FontAwesomeIcon> Cable:</strong> {this.props.ad.cable}</p>
 
-                            <p><strong>Wifi:</strong> {this.props.ad.wifi}</p>
+                            <p><strong><FontAwesomeIcon icon={faWifi}></FontAwesomeIcon> Wifi:</strong> {this.props.ad.wifi}</p>
 
-                            <p><strong>A/c:</strong> {this.props.ad.ac}</p>
+                            <p><strong><FontAwesomeIcon icon={faSnowflake}></FontAwesomeIcon> A/c:</strong> {this.props.ad.ac}</p>
 
-                            <p><strong>Washer:</strong> {this.props.ad.washer}</p>
+                            <p><strong><FontAwesomeIcon icon={faSoap}></FontAwesomeIcon> Washer:</strong> {this.props.ad.washer}</p>
 
-                            <p><strong>Dryer:</strong> {this.props.ad.dryer}</p>
+                            <p><strong><FontAwesomeIcon icon={faTshirt}></FontAwesomeIcon> Dryer:</strong> {this.props.ad.dryer}</p>
 
-                            <p><strong>Pets:</strong> {this.props.ad.pets}</p>
+                            <p><strong><FontAwesomeIcon icon={faPaw}></FontAwesomeIcon> Pets:</strong> {this.props.ad.pets}</p>
 
-                            <p><strong>Parking:</strong> {this.props.ad.parking.join(", ")}</p>
+                            <p><strong><FontAwesomeIcon icon={faWarehouse}></FontAwesomeIcon> Parking:</strong> {this.props.ad.parking.join(", ")}</p>
                         </section>
 
                         <section>
