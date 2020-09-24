@@ -34,6 +34,10 @@ export default class AdInfo extends React.Component{
         return userImages
     }
 
+    displayAddress = ()=>{
+        return `${this.props.ad.street_address}, ${this.props.ad.apt_num ? `${this.props.ad.apt_num}, ${this.props.ad.city}` : this.props.ad.city}, ${this.props.ad.state}, ${this.props.ad.zip_code}`;
+    }
+
     render(){
         console.log(this.props)
         return (
@@ -49,6 +53,8 @@ export default class AdInfo extends React.Component{
 
                     <div className="ad-info-div2">
                         <h2 className="ad-info-header">${this.props.ad.price} a month</h2>
+
+                        <p className="ad-info-address">{this.displayAddress()}</p>
 
                         <section className="ad-info-details-container">
                             <p><strong>Bed rooms:</strong> {this.props.ad.bedrooms}</p>

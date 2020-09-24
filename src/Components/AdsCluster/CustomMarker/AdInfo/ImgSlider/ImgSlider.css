@@ -1,6 +1,6 @@
 .ad-info-img-container{
     position: relative;
-    top: 45%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
@@ -19,7 +19,8 @@
     transform: translateY(-50%);
     font-size: 2.8em;
     border: none;
-    background-color: rgb(230, 230, 230);
+    background-color: transparent;
+    color: white;
 }
 
 .ad-info-img-btn-right{
@@ -31,7 +32,8 @@
     transform: translateY(-50%);
     font-size: 2.8em;
     border: none;
-    background-color: rgb(230, 230, 230);
+    background-color: transparent;
+    color: white;
 }
 
 .fade-btn{
