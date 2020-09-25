@@ -39,7 +39,7 @@ export default class AdInfo extends React.Component{
     }
 
     render(){
-        console.log(this.props)
+        
         return (
             <section className="ad-info-container">
                 <section className="ad-info-window">

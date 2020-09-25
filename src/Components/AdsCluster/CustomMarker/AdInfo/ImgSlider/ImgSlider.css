@@ -7,7 +7,9 @@
 }
 
 .ad-info-img{
-    width: 100%;
+    width: auto;
+    max-width: 100%;
+    height: auto;
 }
 
 .ad-info-img-btn-left{
