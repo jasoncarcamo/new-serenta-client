@@ -10,7 +10,7 @@ export default class Header extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            screenWidth: ""
+            screenWidth: window.innerWidth
         }
     }
 
@@ -19,6 +19,7 @@ export default class Header extends React.Component{
     componentDidMount(){
         this.lockNavlistTouchmove();
         this.lockNavListScroll();
+        this.screenWidthHandler();
     }
 
     screenWidthHandler = ()=>{
@@ -96,21 +97,17 @@ export default class Header extends React.Component{
     lockNavListScroll = ()=>{
         const navList = document.getElementById("nav-list");
 
-        window.addEventListener("scroll", (e)=>{
-            if(this.state.screenWidth <= 1030){
-                if(navList.classList.contains("display-nav-list")){
-                    e.preventDefault();
-                };
-            };
-        });
+        
     };
 
     lockNavlistTouchmove = ()=>{
         const navList = document.getElementById("nav-list");
 
-        window.addEventListener("touchmove", (e)=>{
-            e.preventDefault();
-        });
+        if(this.state.screenWidth < 1100){
+            window.addEventListener("touchmove", (e)=>{
+                e.preventDefault();
+            });
+        }
     };
 
     render(){

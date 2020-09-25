@@ -39,12 +39,14 @@ export default class AdInfo extends React.Component{
     }
 
     render(){
-        
+
         return (
             <section className="ad-info-container">
                 <section className="ad-info-window">
 
-                    <button type="button" className="ad-info-close-window" onClick={this.closeAdInfo}>X</button>
+                    <div className="ad-info-close-container">
+                        <button type="button" className="ad-info-close-window" onClick={this.closeAdInfo}>{"<"}</button>
+                    </div>
 
                     <div className="ad-info-div1">
 

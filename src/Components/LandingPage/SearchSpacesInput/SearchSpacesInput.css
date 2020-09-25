@@ -2,7 +2,6 @@
     border: 1px solid green;
     height: 55vh;
     margin: 4em 0 0 0;
-
 }
 
 #lp-search-spaces-form{
@@ -79,6 +78,10 @@
 }
 
 @media screen and (max-width: 1030px){
+    #lp-search-spaces-section{
+        margin: 3em 0 0 0;
+    }
+
     #lp-search-spaces-form{
         padding: 0;
         width: 90%;
