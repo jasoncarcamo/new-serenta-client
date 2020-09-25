@@ -43,6 +43,7 @@
     left: 0;
     z-index: 5;
     background-color: white;
+    border-bottom: .05em solid grey;
 }
 
 .ad-info-close-window{
@@ -146,7 +147,7 @@
 @media screen and (max-width: 1030px){
     .ad-info-div1{
         width: 100%;
-        margin: 0;
+        margin: 1.1em 0 0 0;
         padding: 0;
     }
     
@@ -177,6 +178,7 @@
         left: 0;
         z-index: 5;
         background-color: white;
+        border: none;
     }
 
     .ad-info-close-window{
