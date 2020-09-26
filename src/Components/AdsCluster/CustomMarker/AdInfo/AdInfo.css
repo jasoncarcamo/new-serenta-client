@@ -166,7 +166,7 @@
         margin: 0;
         padding-top: 2em;
         transform: unset;
-        overflow: scroll !important;
+        overflow: auto;
     }
 
     .ad-info-close-container{

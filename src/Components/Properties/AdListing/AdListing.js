@@ -17,6 +17,14 @@ export default class AdListing extends React.Component{
 
     static contextType = PostAdContext;
 
+    componentDidMount(){
+        const adSection = document.getElementById("ad-listing-form-section");
+
+        adSection.addEventListener("touchmove", (e)=>{
+            e.preventDefault();
+        }, {passive: false});
+    }
+
     renderLoading = ()=>{
         return <p className="loading-icon">Loading...</p>
     }

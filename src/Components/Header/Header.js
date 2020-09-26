@@ -27,7 +27,7 @@ export default class Header extends React.Component{
             this.setState({
                 screenWidth: window.innerWidth
             });
-        })
+        }, {passive: false})
     }
 
     renderLoggedLinks = () => {
@@ -106,7 +106,7 @@ export default class Header extends React.Component{
         if(this.state.screenWidth < 1100){
             window.addEventListener("touchmove", (e)=>{
                 e.preventDefault();
-            });
+            }, {passive: false});
         }
     };
 
