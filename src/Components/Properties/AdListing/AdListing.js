@@ -13,7 +13,7 @@ export default class AdListing extends React.Component{
             apt_num: "",
             type: "Room"
         };
-    }
+    };
 
     static contextType = PostAdContext;
 
