@@ -53,7 +53,8 @@ export class AdsProvider extends React.Component{
                 });
 
                 this.setState({
-                    ads: resData.ads
+                    ads: resData.ads,
+                    loading: false
                 });
             })
             .catch( err => {

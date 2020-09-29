@@ -8,6 +8,7 @@ import LogIn from "../Components/Login/Login";
 import SignUp from "../Components/SignUp/SignUp";
 import SearchSpacesInput from "../Components/SearchSpacesInput/SearchSpacesInput";
 import GoogleMap from "../Components/Map/Map";
+import MapLoading from "../Components/MapLoading/MapLoading";
 import Footer from "../Components/Footer/Footer";
 import About from "../Components/About/About"; 
 
@@ -34,6 +35,7 @@ class App extends React.Component{
                 <main>
                     <Route exact path="/" component={LandingPage}></Route>
                     <Route exact path="/find-rent" component={SearchSpacesInput}></Route>
+                    <Route exact path="/find-rent" component={MapLoading}></Route>
                     <Route exact path="/find-rent" render={(props)=> <GoogleMap {...props}></GoogleMap>}></Route>
                     <Route exact path="/post-ad" component={PostAd}></Route>
                     <Route exact path="/properties" component={Properties}></Route>

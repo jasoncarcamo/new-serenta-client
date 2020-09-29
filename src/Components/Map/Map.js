@@ -33,6 +33,7 @@ export default class Map extends React.Component{
                     fullscreenControl: false, 
                     mapTypeControl: false              
             }}>
+                <p>Hello</p>
                 <AdsCluster></AdsCluster>
             </GoogleMap>
         );

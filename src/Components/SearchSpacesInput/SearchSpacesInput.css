@@ -1,6 +1,6 @@
 #search-spaces-form{
     position: absolute;
-    top: 8em;
+    top: 7em;
     left: 50%;
     transform: translateX(-50%);
     margin: 0 auto;
@@ -9,10 +9,11 @@
     border-right: .04em solid lightgrey;
     border-bottom: .04em solid lightgrey;
     border-left: .04em solid lightgrey;
-    box-shadow: 0 0 1em gray;
+    box-shadow: 0 .15em .75em gray;
     border-radius: .4em;
     overflow: hidden;
     z-index: 3;
+    background-color: white;
 }
 
 .hide-search-space-form{
@@ -57,6 +58,7 @@
 }
 
 .autocomplete-dropdown-container{
+    width: 100%;
     margin: 0;
     padding: 0;
     overflow: hidden;

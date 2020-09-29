@@ -6,6 +6,21 @@
     backdrop-filter: blur(.3em);
 }
 
+.ad-info-window{
+    display: flex;
+    flex-direction: row-reverse;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 75vw;
+    transform: translate(-50%, -50%);
+    height: 80%;
+    overflow: hidden;
+    padding: 0;
+    margin: -1em 0 0 0;
+    background-color: white;
+}
+
 .ad-info-div1{
     width: 50%;
     margin: 0;
@@ -15,35 +30,19 @@
 .ad-info-div2{
     width: 50%;
     margin: 0;
-    padding: 0 1em;
+    padding: 0 1em 4.75em 1em;
     overflow: auto;
-}
-
-.ad-info-window{
-    display: flex;
-    flex-direction: row-reverse;
-    position: relative;
-    top: 1em;
-    left: 50%;
-    width: 75vw;
-    transform: translate(-50%, 0);
-    height: 80%;
-    overflow: hidden;
-    padding: 0;
-    margin: 5em 0 0 0;
-    background-color: white;
 }
 
 .ad-info-close-container{
     display: block;
     position: absolute;
-    width: 100%;
+    width: 50%;
     height: 2em;
     top: 0;
     left: 0;
     z-index: 5;
     background-color: white;
-    border-bottom: .05em solid grey;
 }
 
 .ad-info-close-window{
@@ -71,8 +70,7 @@
     justify-content: space-evenly;
     width: 100%;
     font-size: .8em;
-    padding-bottom: 1em;
-    border-bottom: .05em solid black;
+    border-bottom: .05em solid lightgrey;
 }
 
 .ad-info-window p{
@@ -104,20 +102,27 @@
 .ad-info-contact-container{
     display: flex;
     justify-content: center;
-    margin: 1.5em 0 3em 0;
-    padding: 0;
+    position: fixed;
+    transform: translate(0, 0);
+    left: 0;
+    bottom: 0;
+    margin: 0;
+    width: 50%;
+    padding: .5em 0;
+    background-color: white;
+    height: 4.5em;
 }
 
 .ad-info-contact-link{
     display: block;
-    width: 9em;
+    width: 6.5em;
     height: auto;
-    padding: .65em 0;
+    padding: .55em 0;
     text-align: center;
     border: none;
     color: white;
     background-color: black;
-    margin: .5em 1.5em;
+    margin: .5em 2em;
     text-decoration: none;
     border-radius: .5em;
 }
@@ -127,12 +132,16 @@
     color: black;
 }
 
+.ad-info-amenities-container{
+    margin: 3.5em 0;
+}
+
 .ad-info-close-btn{
     display: block;
     width: 100%;
     font-size: .9em;
     padding: .85em;
-    margin: .5em 0 2em 0;
+    margin: 3.5em 0;
     text-align: center;
     border: 1px solid black;
     color: white;
@@ -142,6 +151,36 @@
 .ad-info-close-btn:hover{
     background-color: white;
     color: black;
+}
+
+.hide-header{
+    transform: translateY(-100%);
+    animation: hideHeader 1s ease-out;
+}
+
+.show-header{
+    transform: translateY(0);
+    animation: showHeader .3s ease-in;
+}
+
+@keyframes hideHeader {
+    from{
+        transform: translateY(0);
+    }
+
+    to{
+        transform: translateY(-100%);
+    }
+}
+
+@keyframes showHeader {
+    from{
+        transform: translateY(-100%);
+    }
+
+    to{
+        transform: translateY(0);
+    }
 }
 
 @media screen and (max-width: 1030px){
@@ -154,7 +193,7 @@
     .ad-info-div2{
         width: 100%;
         overflow: unset;
-        padding: 0 1em;
+        padding: 0 1em 6.5em 1em;
     }
 
     .ad-info-window{
@@ -204,5 +243,10 @@
 
     .ad-info-details-container p{
         margin: 0;
+    }
+
+    .ad-info-contact-container{
+        width: 100%;
+        transform: translate(0, -50%);
     }
 }

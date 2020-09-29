@@ -9,6 +9,10 @@ export default class AdInfo extends React.Component{
 
     static contextType = AppContext;
 
+    componentDidMount(){
+        this.mobileInfoCloseHandler();
+    }
+
     closeAdInfo = ()=>{
         this.props.closeAdInfo();
     }
@@ -38,6 +42,40 @@ export default class AdInfo extends React.Component{
         return `${this.props.ad.street_address}, ${this.props.ad.apt_num ? `${this.props.ad.apt_num}, ${this.props.ad.city}` : this.props.ad.city}, ${this.props.ad.state}, ${this.props.ad.zip_code}`;
     }
 
+    mobileInfoCloseHandler = (e)=>{
+        const closeContainer = document.getElementsByClassName("ad-info-close-container")[0];
+        const infoWindow = document.getElementsByClassName("ad-info-window")[0];
+        const d = document.getElementsByClassName("ad-info-contact-container")[0];
+
+        let prevYOffset = infoWindow.scrollTop;
+
+        infoWindow.addEventListener("scroll", (e)=>{
+            let currentYOffset = infoWindow.scrollTop;
+
+            if(currentYOffset < prevYOffset){
+                closeContainer.classList.add("show-header");
+                closeContainer.classList.remove("hide-header");
+            } else{
+                closeContainer.classList.remove("show-header");
+                closeContainer.classList.add("hide-header");
+            }
+
+            prevYOffset = currentYOffset;
+        });
+    }
+
+    isInViewport = (element)=>{
+        var rect = element.getBoundingClientRect();
+        var html = document.documentElement;
+
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || html.clientHeight) &&
+            rect.right <= (window.innerWidth || html.clientWidth)
+        );
+    };
+
     render(){
 
         return (
@@ -66,12 +104,12 @@ export default class AdInfo extends React.Component{
                             <p><strong><FontAwesomeIcon icon={faCube}></FontAwesomeIcon> Sqft: {this.props.ad.squareft}</strong></p>
                         </section>
 
-                        <div className="ad-info-contact-container">
+                        <section className="ad-info-contact-container">
                             <a href={`tel:${this.props.ad.mobile_number}`} className="ad-info-contact-link">Call or Text</a>
                             <a href={`mailto:${this.props.ad.email}`} className="ad-info-contact-link">Email</a>
-                        </div>
+                        </section>
 
-                        <section>
+                        <section className="ad-info-amenities-container">
                             <h3 className="ad-info-h3">Amenities</h3>
 
                             <p><strong><FontAwesomeIcon icon={faTv}></FontAwesomeIcon> Cable:</strong> {this.props.ad.cable}</p>
@@ -90,8 +128,8 @@ export default class AdInfo extends React.Component{
                         </section>
 
                         <section>
-                            <h3 className="ad-info-h3">Comments</h3>
-                            <p className="ad-info-comment">{this.props.ad.comments ||  "Lister did not provide comments."}</p>
+                            <h3 className="ad-info-h3">Additional information provided by lister</h3>
+                            <p className="ad-info-comment">{this.props.ad.comments ||  "Lister did not provide addional information."}</p>
                         </section>
 
                         <button type="button" onClick={this.closeAdInfo} className="ad-info-close-btn">Close</button>
