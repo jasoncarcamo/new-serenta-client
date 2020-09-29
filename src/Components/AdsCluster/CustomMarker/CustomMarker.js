@@ -39,7 +39,7 @@ export default class CustomMarker extends React.Component{
                     searchForm.classList.add("hide-search-space-form");
                 }
             }
-        }, {passive: false})
+        }, {passive: false});
     }
 
     setMapPosition = ()=>{
