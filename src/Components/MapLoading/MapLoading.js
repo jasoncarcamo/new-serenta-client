@@ -15,7 +15,7 @@ export default class MapLoading extends React.Component{
         )
     }
     render(){
-        
+        console.log(this.context.adsContext.loading)
         return !this.context.adsContext.loading ? "" : this.renderLoading();
     };
 };
