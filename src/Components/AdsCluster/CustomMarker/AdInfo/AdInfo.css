@@ -184,6 +184,11 @@
 }
 
 @media screen and (max-width: 1030px){
+
+    .ad-info-container{
+        top: 0;
+    }
+
     .ad-info-div1{
         width: 100%;
         margin: 1.25em 0 0 0;
@@ -247,6 +252,6 @@
 
     .ad-info-contact-container{
         width: 100%;
-        transform: translate(0, -50%);
+        transform: translate(0, 0);
     }
 }
