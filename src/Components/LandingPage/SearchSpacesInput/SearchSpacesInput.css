@@ -1,7 +1,11 @@
 #lp-search-spaces-section{
     border: 1px solid green;
-    height: 55vh;
+    height: 100vh;
     margin: 4em 0 0 0;
+    background-image: url("../../../assets/pavlo-rekun-OkQxNHpmygs-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    backdrop-filter: blur(.5em);
 }
 
 #lp-search-spaces-form{
@@ -16,6 +20,7 @@
     border-radius: .4em;
     overflow: hidden;
     z-index: 2;
+    background-color: white;
 }
 
 .hide-search-space-form{
@@ -112,7 +117,7 @@
     #lp-search-spaces-input{
         display: inline-block;
         width: 100%;
-        height: 2.8em;
+        height: 2.6em;
         font-size: 1em;
         padding: 0 0 0 2em;
         border: none;
@@ -120,7 +125,7 @@
     
     #input-container button{
         width: 4em;
-        height: 2.8em;
+        height: 2.6em;
         font-size: 1em;
         position: absolute;
         right: 0;

@@ -2,6 +2,7 @@ import React from "react";
 import "./SignUp.css";
 import UserToken from "../../Services/UserToken/UserToken";
 import { Link } from "react-router-dom";
+import ReactLoadingIcon from "../ReactLoadingIcon/ReactLoadingIcon";
 
 export default class SignUp extends React.Component{
     constructor(props){
@@ -13,6 +14,7 @@ export default class SignUp extends React.Component{
             email: "",
             password: "",
             confirm_password: "",
+            loading: false,
             error: ""
         }
     }
@@ -92,7 +94,8 @@ export default class SignUp extends React.Component{
         e.preventDefault();
 
         this.setState({
-            error: ""
+            error: "",
+            loading: true
         })
 
         if(!this.interateRequiremnts()){
@@ -121,11 +124,17 @@ export default class SignUp extends React.Component{
             })
             .then( resData => {
                 UserToken.setToken(resData.token);
+
+                this.setState({
+                    loading: false
+                });
+
                 this.props.history.push("/user");
             })
             .catch( err => {
                 this.setState({
-                    error: err.error
+                    error: err.error,
+                    loading: false
                 });
             });
     }
@@ -180,7 +189,7 @@ export default class SignUp extends React.Component{
                 <form id="signup-form" onSubmit={this.handleSubmit}>
                     <fieldset id='signup-fieldset'>
                         <legend id="signup-legend">
-                            <h3>Sign up</h3>
+                            <h3>Register and get started today!</h3>
                         </legend>
 
                         <label className="signup-label" htmlFor="first_name">First name:</label>
@@ -254,9 +263,9 @@ export default class SignUp extends React.Component{
                             <div id="password-matches"></div>
                             {this.state.password && this.state.confirm_password ? this.passwordMatch() : ""}
 
-                            <p id="login-error">{this.state.error ? this.state.error : ""}</p>
+                            {this.state.error ? <p id="signup-error">{this.state.error}</p> : <p id="signup-error-sub">{""}</p>}
 
-                            <button id="signup-submit" type="submit">Sign up</button>
+                            {!this.state.loading ? <button id="signup-submit" type="submit">Sign up</button> : <ReactLoadingIcon/>}
                             <Link to="/login" className="signup-user-helpers">Already have an account?</Link>
                     </fieldset>
                 </form>

@@ -3,6 +3,7 @@ import "./Login.css";
 import UserToken from "../../Services/UserToken/UserToken";
 import AppContext from "../../Contexts/AppContext/AppContext";
 import { Link } from "react-router-dom";
+import ReactLoadingIcon from "../ReactLoadingIcon/ReactLoadingIcon";
 
 export default class Login extends React.Component{
     constructor(props){
@@ -10,6 +11,7 @@ export default class Login extends React.Component{
         this.state = {
             email: "",
             password: "",
+            loading: false,
             error: ""
         }
     }
@@ -67,7 +69,8 @@ export default class Login extends React.Component{
         e.preventDefault();
 
         this.setState({
-            error: ""
+            error: "",
+            loading: true
         });
 
         this.interateRequirements();
@@ -100,12 +103,17 @@ export default class Login extends React.Component{
             .then( resData => {
                 UserToken.setToken(resData.token);
 
+                this.setState({
+                    loading: false
+                });
+
                 this.context.userContext.handleLogIn();
                 
                 this.props.history.push("/properties");
             })
             .catch( err => this.setState({
-                error: err.error
+                error: err.error,
+                loading: false
             }))
     }
 
@@ -139,9 +147,9 @@ export default class Login extends React.Component{
                             name="password"
                             ></input>
                         <p className="login-user-helpers">Forgot you password?</p>
-                        {this.state.error ? <p id="login-error">{this.state.error}</p> : ""}
+                        {this.state.error ? <p id="login-error">{this.state.error}</p> : <p id="login-error-sub">{""}</p>}
 
-                        <button id="login-submit" type="submit">Log In</button>
+                        {!this.state.loading ? <button id="login-submit" type="submit">Log In</button> : <ReactLoadingIcon/>}
                         <p id="login-to-signup" id="to-signup" className="login-user-helpers">Need an account? <Link to="/signup">Sign Up</Link></p>
                     </fieldset>
                 </form>
