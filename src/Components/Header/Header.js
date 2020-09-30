@@ -102,12 +102,6 @@ export default class Header extends React.Component{
 
     lockNavlistTouchmove = ()=>{
         const navList = document.getElementById("nav-list");
-
-        if(this.state.screenWidth < 1100){
-            window.addEventListener("touchmove", (e)=>{
-                e.preventDefault();
-            }, {passive: false});
-        }
     };
 
     render(){

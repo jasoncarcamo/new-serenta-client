@@ -22,7 +22,7 @@ export default class AdListing extends React.Component{
 
         adSection.addEventListener("touchmove", (e)=>{
             e.preventDefault();
-        }, {passive: false});
+        });
     }
 
     renderLoading = ()=>{
