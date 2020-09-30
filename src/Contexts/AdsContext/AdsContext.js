@@ -33,9 +33,7 @@ export class AdsProvider extends React.Component{
             loading: true
         });
 
-        console.log(this.state.loading)
-
-        /*fetch(`${process.env.REACT_APP_FETCH_API_URL}/api/living-spaces`, {
+        fetch(`${process.env.REACT_APP_FETCH_API_URL}/api/living-spaces`, {
             headers: {
                 'content-type': 'application/json'
             }
@@ -59,7 +57,7 @@ export class AdsProvider extends React.Component{
                     loading: false
                 });
 
-                console.log(this.state.loading)
+                
             })
             .catch( err => {
                 this.setState({
@@ -67,7 +65,6 @@ export class AdsProvider extends React.Component{
                     loading: false
                 });
             });
-            */
     }
 
     addAd = (ad)=>{
@@ -119,7 +116,7 @@ export class AdsProvider extends React.Component{
             updateAd: this.updateAd,
             deleteAd: this.deleteAd
         };
-        console.log(value.loading)
+        
         return (
             <AdsContext.Provider value={value}>
                 {this.props.children}
