@@ -61,7 +61,7 @@
 
     .ad-info-grid{
         display: grid;
-        grid-template: 100% / auto auto auto;
+        grid-template: 100% / 100vw 100vw 100vw;
         min-width: 40em;
         align-self: center;
     }
