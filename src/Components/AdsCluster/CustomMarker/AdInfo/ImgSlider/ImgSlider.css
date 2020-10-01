@@ -9,7 +9,7 @@
 .ad-info-img{
     width: auto;
     max-width: 100%;
-    height: auto;
+    min-height: 16em;
 }
 
 .ad-info-img-btn-left{

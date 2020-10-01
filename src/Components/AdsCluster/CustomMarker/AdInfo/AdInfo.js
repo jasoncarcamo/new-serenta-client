@@ -76,10 +76,23 @@ export default class AdInfo extends React.Component{
         );
     };
 
+    backgroundHandler = (e)=>{
+        const infoContainer = document.getElementsByClassName("ad-info-container")[0];
+        console.log(e.target)
+
+        if(e.target === infoContainer){
+            if(window.innerWidth > 1030){
+                this.closeAdInfo();
+            };
+        };
+
+        return;
+    }
+
     render(){
 
         return (
-            <section className="ad-info-container">
+            <section className="ad-info-container" onClick={this.backgroundHandler}>
                 <section className="ad-info-window">
 
                     <div className="ad-info-close-container">
@@ -89,20 +102,25 @@ export default class AdInfo extends React.Component{
                     <div className="ad-info-div1">
 
                         <ImgSlider ad={this.props.ad} images={this.props.ad.images}/>
+
                     </div>
 
                     <div className="ad-info-div2">
-                        <h2 className="ad-info-header">${this.props.ad.price} a month</h2>
+                        <div className="ad-info-header-container">
+                            <h2 className="ad-info-header">${this.props.ad.price}/mo</h2>
+                            
+                            <section className="ad-info-details-container">
+                                <p><strong><FontAwesomeIcon icon={faBed}></FontAwesomeIcon> Bd:</strong> {this.props.ad.bedrooms}</p>
+
+                                <p><strong><FontAwesomeIcon icon={faBath}></FontAwesomeIcon> Ba:</strong> {this.props.ad.bathrooms}</p>
+
+                                <p><strong><FontAwesomeIcon icon={faCube}></FontAwesomeIcon> Sqft: {this.props.ad.squareft}</strong></p>
+                            </section>
+                        </div>
 
                         <p className="ad-info-address">{this.displayAddress()}</p>
 
-                        <section className="ad-info-details-container">
-                            <p><strong><FontAwesomeIcon icon={faBed}></FontAwesomeIcon> Bed rooms:</strong> {this.props.ad.bedrooms}</p>
-
-                            <p><strong><FontAwesomeIcon icon={faBath}></FontAwesomeIcon> Bathrooms:</strong> {this.props.ad.bathrooms}</p>
-
-                            <p><strong><FontAwesomeIcon icon={faCube}></FontAwesomeIcon> Sqft: {this.props.ad.squareft}</strong></p>
-                        </section>
+                        <p>{this.props.ad.type} for rent</p>
 
                         <section className="ad-info-contact-container">
                             <a href={`tel:${this.props.ad.mobile_number}`} className="ad-info-contact-link">Call or Text</a>
