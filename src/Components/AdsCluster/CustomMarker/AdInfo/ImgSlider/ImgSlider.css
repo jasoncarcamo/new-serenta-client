@@ -17,6 +17,7 @@
     width: auto;
     max-width: 100%;
     min-height: 16em;
+    cursor: pointer;
 }
 
 .ad-info-img-btn-left{
@@ -51,6 +52,38 @@
 
 }
 
+.full-screen-img-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(1.5em);
+    z-index: 6;
+}
+
+.full-screen-close-btn{
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    z-index: 6;
+    font-size: 1em;
+    color: black;
+    background-color: white;
+    border: none;
+}
+
+.ad-info-img-full-screen{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    max-height: 100%;
+}
+
 @media screen and (max-width: 1030px){
 
     .ad-info-img-container{
@@ -64,5 +97,9 @@
         grid-template: 100% / 100vw 100vw 100vw;
         min-width: 40em;
         align-self: center;
+    }
+
+    .full-screen-close-btn{
+        top: 6em;
     }
 }

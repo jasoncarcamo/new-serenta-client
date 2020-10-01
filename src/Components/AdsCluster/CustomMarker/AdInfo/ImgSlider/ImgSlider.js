@@ -8,7 +8,9 @@ export default class ImgSlider extends React.Component{
         super(props);
         this.state = {
             images: this.props.images,
-            imgIndex: 0
+            imgIndex: 0,
+            displayImage: false,
+            imageSrc: ""
         };
     }
 
@@ -26,8 +28,6 @@ export default class ImgSlider extends React.Component{
         this.setState({
             images: userImages
         });
-
-        this.imgSwipeHandler();
     }
 
     leftButton = ()=>{
@@ -88,31 +88,45 @@ export default class ImgSlider extends React.Component{
     };
 
     renderFirstImg = (imgs)=>{
-        return <img src={imgs[0].url} alt="" className="ad-info-img"/>
+        return <img src={imgs[0].url} alt="" className="ad-info-img" onClick={this.fullScreenImg}/>
     }
 
     renderImgs = (imgs)=>{
-        if(!imgs || imgs.length === 0){
-            return <img src={LivingRoom} alt="" className="ad-info-img"/>
-        };
 
         let images = imgs;
 
         images = images.map((image, index)=>{
             console.log(image)
 
-            return <img src={image.url} alt="" className="ad-info-img"/>
+            return <img src={image.url} alt="" className="ad-info-img" onClick={this.fullScreenImg}/>
         })
 
         return images;
     };
 
-    imgSwipeHandler = ()=>{
-        const imgContainer = document.getElementsByClassName("ad-info-img-container")[0];
+    fullScreenImg = (e)=>{
+        console.log(e.target)
+        this.setState({
+            displayImage: true,
+            imageSrc: e.target.src
+        });
+    }
 
-        imgContainer.addEventListener("touchmove", (e)=>{
-            console.log(e);
-        })
+    displayFullScreenImg = ()=>{
+        return (
+            <div className="full-screen-img-container">
+                <button className="full-screen-close-btn" onClick={this.closeFullScreen}>X</button>
+
+                <img src={this.state.imageSrc} alt="" className="ad-info-img-full-screen" onClick={this.fullScreenImg}/>
+            </div>
+        )
+    }
+
+    closeFullScreen = ()=>{
+        this.setState({
+            displayImage: false,
+            imageSrc: ""
+        });
     }
 
     render(){
@@ -121,6 +135,8 @@ export default class ImgSlider extends React.Component{
             <section className="ad-info-img-container">
 
                 {this.renderFirstImg(this.props.images)}
+
+                {this.state.displayImage === true ? this.displayFullScreenImg() : ""}
 
                 <div className="ad-info-grid">
                     {this.renderImgs(this.props.images.slice(1))}
