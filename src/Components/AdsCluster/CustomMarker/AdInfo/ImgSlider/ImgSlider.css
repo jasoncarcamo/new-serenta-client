@@ -1,9 +1,16 @@
 .ad-info-img-container{
     position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
     width: 100%;
+}
+
+.ad-info-grid{
+    display: grid;
+    grid-template: auto auto / 1fr 1fr;
+    padding: 0;
+    margin: 0;
+    height: 100%;
 }
 
 .ad-info-img{
@@ -42,4 +49,20 @@
     cursor: unset !important;
     opacity: .3;
 
+}
+
+@media screen and (max-width: 1030px){
+
+    .ad-info-img-container{
+        display: flex;
+        height: auto;
+        overflow: auto;
+    }
+
+    .ad-info-grid{
+        display: grid;
+        grid-template: 100% / auto auto auto;
+        min-width: 40em;
+        align-self: center;
+    }
 }

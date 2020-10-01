@@ -26,6 +26,8 @@ export default class ImgSlider extends React.Component{
         this.setState({
             images: userImages
         });
+
+        this.imgSwipeHandler();
     }
 
     leftButton = ()=>{
@@ -85,23 +87,45 @@ export default class ImgSlider extends React.Component{
         });
     };
 
-    renderImg = (imgs)=>{
+    renderFirstImg = (imgs)=>{
+        return <img src={imgs[0].url} alt="" className="ad-info-img"/>
+    }
+
+    renderImgs = (imgs)=>{
         if(!imgs || imgs.length === 0){
             return <img src={LivingRoom} alt="" className="ad-info-img"/>
         };
 
-        return <img src={!imgs[this.state.imgIndex].url ? LivingRoom : imgs[this.state.imgIndex].url} alt="" className="ad-info-img"/>;
+        let images = imgs;
+
+        images = images.map((image, index)=>{
+            console.log(image)
+
+            return <img src={image.url} alt="" className="ad-info-img"/>
+        })
+
+        return images;
     };
+
+    imgSwipeHandler = ()=>{
+        const imgContainer = document.getElementsByClassName("ad-info-img-container")[0];
+
+        imgContainer.addEventListener("touchmove", (e)=>{
+            console.log(e);
+        })
+    }
 
     render(){
         
         return (
             <section className="ad-info-img-container">
-                <button onClick={this.leftButton} className="ad-info-img-btn-left fade-btn">{"<"}</button>
-                
-                {this.renderImg(this.props.images)}
 
-                <button onClick={this.rightButton} className={(this.props.images.length <= 1 ? "ad-info-img-btn-right fade-btn" : "ad-info-img-btn-right") }>{">"}</button>
+                {this.renderFirstImg(this.props.images)}
+
+                <div className="ad-info-grid">
+                    {this.renderImgs(this.props.images.slice(1))}
+                </div>
+                
             </section>
         )
     }

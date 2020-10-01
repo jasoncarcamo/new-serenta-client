@@ -23,8 +23,10 @@
 
 .ad-info-div1{
     width: 50%;
+    min-height: 100%;
     margin: 0;
     padding: 0;
+    overflow: auto;
 }
 
 .ad-info-div2{
@@ -160,6 +162,7 @@
     margin: auto 2em;
     text-decoration: none;
     border-radius: .25em;
+    border: .05em solid black;
 }
 
 .ad-info-contact-link:hover{
@@ -226,8 +229,11 @@
 
     .ad-info-div1{
         width: 100%;
+        min-height: unset;
+        height: auto;
         margin: 1em 0 0 0;
         padding: 0;
+        overflow: unset;
     }
     
     .ad-info-div2{
