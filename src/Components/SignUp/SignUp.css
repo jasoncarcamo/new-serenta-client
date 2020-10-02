@@ -61,17 +61,12 @@
 #password-confirm-box{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     width: 100%;
     margin: 0 auto;
-    border: 1px solid gray;
-    border-radius: .3em;
-    background-color: rgb(255, 255, 245);
-}
-
-#password-confirm-box span{
-    margin-bottom: .5em;
-    padding-left: .5em;
+    padding-left: 1.25em;
+    padding-top: .25em;
+    padding-bottom: 1em;
 }
 
 #password-matches{
@@ -79,7 +74,6 @@
     margin: 0 auto;
     height: .4em;
     background-color: gray;
-    border-radius: .2em;
 }
 
 #signup-error{
@@ -97,6 +91,11 @@
     padding: .25em 0 0 .5em;
     border: none;
     min-height: 3em;
+}
+
+.req_error{
+    margin: 0;
+    padding: 0;
 }
 
 @media screen and (max-width: 900px){

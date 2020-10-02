@@ -1,7 +1,9 @@
 import React from "react";
-import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete';
+import PlacesAutocomplete from 'react-places-autocomplete';
 import "./SearchSpacesInput.css";
 import MapContext from "../../Contexts/MapContext/MapContext";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faSearch} from "@fortawesome/free-solid-svg-icons";
 
 export default class SearchSpacesInput extends React.Component{
     constructor(props){
@@ -109,7 +111,7 @@ export default class SearchSpacesInput extends React.Component{
                                         })}
                                         />
 
-                                        <button type="submit">Search</button>
+                                        <button type="submit"><FontAwesomeIcon icon={faSearch}></FontAwesomeIcon></button>
                                     </div>
                                     
                                     <ul className="autocomplete-dropdown-container">
