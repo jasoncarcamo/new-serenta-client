@@ -18,6 +18,7 @@
     max-width: 100%;
     min-height: 16em;
     cursor: pointer;
+    align-self: center;
 }
 
 .ad-info-img-btn-left{

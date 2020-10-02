@@ -19,6 +19,29 @@ export default class SignUp extends React.Component{
         }
     }
 
+    allInputs = ()=>{
+        const inputs = [
+            (
+                <>
+                    <label className="signup-label" htmlFor="confirm-password">Confirm password:</label>
+                        <input 
+                            id="confirm-password"
+                            className="signup-input"
+                            type="password"
+                            onChange={this.handleTextInput}
+                            onBlur={this.checkRequirement}
+                            value={this.state.confirm_password}
+                            name="confirm_password"
+                            required></input>
+                        <div id="password-matches"></div>
+                        {this.state.password && this.state.confirm_password ? this.passwordMatch() : ""}
+
+                        {this.state.error ? <p id="signup-error">{this.state.error}</p> : <p id="signup-error-sub">{""}</p>}
+                </>
+            )
+        ]
+    }
+
     passwordMatch = ()=>{
         const div = document.getElementById("password-matches");
 
@@ -192,7 +215,7 @@ export default class SignUp extends React.Component{
                             <h3>Register and get started today!</h3>
                         </legend>
 
-                        <label className="signup-label" htmlFor="first_name">First name:</label>
+                            <label className="signup-label" htmlFor="first_name">First name:</label>
                             <input 
                                 id="first_name"
                                 className="signup-input"
