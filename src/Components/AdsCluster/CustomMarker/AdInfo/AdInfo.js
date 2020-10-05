@@ -159,4 +159,4 @@ export default class AdInfo extends React.Component{
             </section>
         );
     };
-};
+}
