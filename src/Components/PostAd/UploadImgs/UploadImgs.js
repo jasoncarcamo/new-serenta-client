@@ -4,6 +4,9 @@ import UserToken from "../../../Services/UserToken/UserToken";
 import AppContext from "../../../Contexts/AppContext/AppContext";
 import UploadedImages from "./UploadedImages/UploadedImages";
 import ImageCompression from 'browser-image-compression';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faUpload} from "@fortawesome/free-solid-svg-icons";
+import ReactLoadingIcon from "../../ReactLoadingIcon/ReactLoadingIcon";
 
 export default class UploadImgs extends React.Component{
     constructor(props){
@@ -16,6 +19,10 @@ export default class UploadImgs extends React.Component{
     }
 
     static contextType = AppContext;
+
+    componentDidMount(){
+        this.handleLabelAnimation();
+    }
 
     toggleLoading = ()=>{
         this.props.toggleLoading();
@@ -155,6 +162,36 @@ export default class UploadImgs extends React.Component{
             });
     }
 
+    renderUploadlabel = ()=>{
+        return (
+            <>
+                
+            </>
+        )
+    }
+
+    isInViewport = (element)=>{
+        var rect = element.getBoundingClientRect();
+        var html = document.documentElement;
+
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || html.clientHeight) &&
+            rect.right <= (window.innerWidth || html.clientWidth)
+        );
+    };
+
+    handleLabelAnimation =()=>{
+        const label = document.querySelector(".post-ad-images-container label");
+
+        window.addEventListener("scroll", (e)=>{
+            if(this.isInViewport(label)){
+                label.classList.add("animate-label");
+            }
+        })
+    }
+
     render(){
         
         return (
@@ -163,8 +200,11 @@ export default class UploadImgs extends React.Component{
 
                 <div className="post-ad-images-container">
                     
-                    <label htmlFor="post-ad-images">{this.state.uploading ? "Loading.." : "Upload Image(s)"}</label>
-                    <input id="post-ad-images" name="images" type="file" onChange={this.handleChange} multiple={true}></input>        
+                    <label htmlFor="post-ad-images">
+                        {this.state.uploading ? <ReactLoadingIcon/> : <FontAwesomeIcon className="post-ad-image-icon" icon={faUpload}></FontAwesomeIcon>}
+                    </label>
+                    <input id="post-ad-images" name="images" type="file" onChange={this.handleChange} multiple={true}></input> 
+                    <p className="post-ad-images-hint">* For the best user experience please upload images in landscape mode</p>       
                 </div>
 
                 <UploadedImages images={this.context.postAdContext.ad.images}/>

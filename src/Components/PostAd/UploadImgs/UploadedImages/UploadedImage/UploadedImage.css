@@ -1,14 +1,15 @@
 .uploaded-image-container{
     display: flex;
     justify-content: baseline;
-    border: .05em solid black;
+    margin: .25em 0;
     padding: 0;
+    background-color: rgb(234, 247, 255);
 }
 
 .uploaded-image{
     margin: 0;
-    width: 2.5em;
-    height: 2.5em;
+    width: 2.8em;
+    max-height: 2.5em;
 }
 
 .uploaded-image-btn{
