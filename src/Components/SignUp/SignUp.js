@@ -3,6 +3,8 @@ import "./SignUp.css";
 import UserToken from "../../Services/UserToken/UserToken";
 import { Link } from "react-router-dom";
 import ReactLoadingIcon from "../ReactLoadingIcon/ReactLoadingIcon";
+import InputContainer from "./InputContainer/InputContainer";
+import { faLeaf } from "@fortawesome/free-solid-svg-icons";
 
 export default class SignUp extends React.Component{
     constructor(props){
@@ -14,44 +16,38 @@ export default class SignUp extends React.Component{
             email: "",
             password: "",
             confirm_password: "",
+            passwordMatches: false,
             loading: false,
+            currentInput: "",
+            currentInputIndex: 0,
+            inputMax: 6,
+            userInputs: [],
             error: ""
         }
     }
 
-    allInputs = ()=>{
-        const inputs = [
-            (
-                <>
-                    <label className="signup-label" htmlFor="confirm-password">Confirm password:</label>
-                        <input 
-                            id="confirm-password"
-                            className="signup-input"
-                            type="password"
-                            onChange={this.handleTextInput}
-                            onBlur={this.checkRequirement}
-                            value={this.state.confirm_password}
-                            name="confirm_password"
-                            required></input>
-                        <div id="password-matches"></div>
-                        {this.state.password && this.state.confirm_password ? this.passwordMatch() : ""}
-
-                        {this.state.error ? <p id="signup-error">{this.state.error}</p> : <p id="signup-error-sub">{""}</p>}
-                </>
-            )
-        ]
+    componentDidMount(){
     }
 
-    passwordMatch = ()=>{
-        const div = document.getElementById("password-matches");
-
-        
+    passwordMatches = ()=>{
         if(this.state.password === this.state.confirm_password){
-            div.style.backgroundColor = "green";
-
+            return true;
         } else{
-            div.style.backgroundColor = "red";
+            return false;
         }
+    }
+
+    passwordMatchColor = ()=>{
+
+        if(this.state.password === this.state.confirm_password){
+
+            return "green";
+
+        } else if(this.state.confirm_password.length > 0){
+            return "red";
+        };
+
+        return "grey"
         
     };
 
@@ -122,8 +118,12 @@ export default class SignUp extends React.Component{
         })
 
         if(!this.interateRequiremnts()){
+            this.setState({
+                error: ""
+            });
+
             return;
-        }
+        };
 
         fetch(`${process.env.REACT_APP_FETCH_API_URL}/api/register`, {
             method: "POST",
@@ -163,134 +163,261 @@ export default class SignUp extends React.Component{
     }
 
     interateRequiremnts = ()=>{
-        const first_name = document.getElementById("first_name");
-        const last_name = document.getElementById("last_name");
-        const password = this.state.password;
-        const confirmPassword = this.state.confirm_password;
-        const confirmPasswordInput = document.getElementById("confirm-password");
-        const missingInput = document.querySelector(".signup-missing-input");
+        let inputs = this.allInputs();
 
-        if(!this.state.first_name){
-            first_name.classList.add("signup-missing-input");
-            
-            missingInput.scrollIntoView();
+        for(let i = 0; i < inputs.length; i++){
+            const inputName = inputs[i].inputName;
 
-            return false;
-        } else{
-            first_name.classList.remove("signup-missing-input");
+            if(this.state.currentInputIndex === i && !this.state[inputName]){
+                this.setState({
+                    error: `Missing ${inputName.split("_").join(" ")}`
+                });
+
+                return false;
+            }
         };
-
-        if(!this.state.last_name){
-            last_name.classList.add("signup-missing-input");
-            
-            missingInput.scrollIntoView();
-
-            return false;
-        } else{
-            last_name.classList.remove("signup-missing-input");
-        };
-        
-        if(password !== confirmPassword){
-            confirmPasswordInput.classList.add("signup-missing-input");
-
-            this.setState({
-                error: "Password confirmation does not match"
-            });
-
-            return false;
-        } else{
-            confirmPasswordInput.classList.remove("signup-missing-input");
-        }
 
         return true;
+    };
+
+    handleBackButton = ()=>{
+        let currentInputIndex = this.state.currentInputIndex;
+
+        currentInputIndex--;
+
+        if(currentInputIndex < 0){{
+            currentInputIndex = 0;
+        }};
+
+        this.setState({
+            currentInputIndex
+        });
+
+        this.unAnimate(currentInputIndex);
     }
-    
-    render(){
 
+    handleNextButton = ()=>{
+        let currentInputIndex = this.state.currentInputIndex;
+        let originalIndex = currentInputIndex;
+
+        currentInputIndex++;
+
+        console.log(currentInputIndex);
+
+        if(currentInputIndex > 5){{
+            currentInputIndex = 5;
+        }};
+
+        if(!this.interateRequiremnts()){
+            return;
+        }
+
+        console.log(currentInputIndex);
+
+        this.setState({
+            currentInputIndex
+        });
+
+        this.animateInput(currentInputIndex);
+    }
+
+    renderButtons = (currentInputIndex)=>{
         return (
-            <section id="signup-section">
-                <form id="signup-form" onSubmit={this.handleSubmit}>
-                    <fieldset id='signup-fieldset'>
-                        <legend id="signup-legend">
-                            <h3>Register and get started today!</h3>
-                        </legend>
-
-                            <label className="signup-label" htmlFor="first_name">First name:</label>
+            <div id="signup-btns-container">
+                {currentInputIndex > 0 && !this.state.loading ? <button onClick={this.handleBackButton}>Back</button> : ""}
+                {currentInputIndex >= 0 && currentInputIndex < 5 ? <button onClick={this.handleNextButton}>Next</button> : ""}
+                {currentInputIndex === 5 ? !this.state.loading ? <button id="signup-submit" type="button" style={{ opacity: this.passwordMatches() ? 1 : .2, cursor: this.passwordMatches() ? "pointer" : "default"}} onClick={ this.passwordMatches() ? this.handleSubmit : ()=>{}}>Sign up</button> : <ReactLoadingIcon/> : ""}
+            </div>
+        )
+    }  
+    
+    allInputs = (currentInputIndex)=>{
+        let userInputs = [
+            {
+                inputName: "first_name",
+                input: <InputContainer>
+                    <div className="signup-input-container animate-input-container">
+                        <label className="signup-label" htmlFor="first_name">First name:</label>
                             <input 
                                 id="first_name"
                                 className="signup-input"
                                 type="text"
                                 onChange={this.handleTextInput}
                                 onBlur={this.checkRequirement}
-                                value={this.state.first_name}
-                                name="first_name"
-                                required></input>
-
-                            <label className="signup-label" htmlFor="last_name">Last name:</label>
+                                value={"" || this.state.first_name}
+                                name="first_name"></input>
+                    </div>
+                </InputContainer>
+            }
+        ,
+            {
+                inputName: "last_name",
+                input: <InputContainer>
+                    <div className="signup-input-container">
+                        <label className="signup-label" htmlFor="last_name">Last name:</label>
                             <input
                                 id="last_name"
                                 className="signup-input"
                                 type="text"
                                 onChange={this.handleTextInput}
                                 onBlur={this.checkRequirement}
-                                value={this.state.last_name}
-                                name="last_name"
-                                required></input>
-
-                            <label className="signup-label" htmlFor="mobile_number">Mobile number:</label>
-                            <input
-                                id="mobile_number"
-                                className="signup-input"
-                                type="text"
-                                onChange={this.handleTextInput}
-                                onBlur={this.checkRequirement}
-                                value={this.state.mobile_number}
-                                name="mobile_number"
-                                required></input>
-
-                            <label className="signup-label" htmlFor="sign-up-email">Email:</label>
+                                value={"" || this.state.last_name}
+                                name="last_name"></input>
+                    </div>
+                </InputContainer>
+            }
+        ,
+            {
+                inputName: "email",
+                input: <InputContainer>
+                    <div className="signup-input-container">
+                        <label className="signup-label" htmlFor="sign-up-email">Email:</label>
                             <input
                                 id="sign-up-email"
                                 className="signup-input"
                                 type="text"
                                 onChange={this.handleTextInput}
                                 onBlur={this.checkRequirement}
-                                value={this.state.email}
-                                name="email"
-                                required></input>
-
-                            <label className="signup-label" htmlFor="sign-sup-password">Password:</label>
+                                value={"" || this.state.email}
+                                name="email"></input>
+                    </div>
+                </InputContainer>
+            }
+        ,
+            {
+                inputName: "mobile_number",
+                input: <InputContainer>
+                    <div className="signup-input-container">
+                        <label className="signup-label" htmlFor="mobile_number">Mobile number:</label>
+                            <input
+                                id="mobile_number"
+                                className="signup-input"
+                                type="text"
+                                onChange={this.handleTextInput}
+                                onBlur={this.checkRequirement}
+                                value={"" || this.state.mobile_number}
+                                name="mobile_number"></input>
+                    </div>
+                </InputContainer>
+            }
+        ,
+            {
+                inputName: "password",
+                input: <InputContainer>
+                    <div className="signup-input-container">
+                        <label className="signup-label" htmlFor="sign-up-password">Password:</label>
                             <input
                                 id="sign-up-password"
                                 className="signup-input"
                                 type="password"
                                 onChange={this.handleTextInput}
                                 onBlur={this.checkRequirement}
-                                value={this.state.password}
-                                name="password"
-                                required></input>
+                                value={"" || this.state.password}
+                                name="password"></input>
                             <ul id="password-confirm-box">
                                 {this.validatePassword(this.state.password)}
                             </ul>
-
-                            <label className="signup-label" htmlFor="confirm-password">Confirm password:</label>
+                    </div>
+                </InputContainer>
+            }
+        ,
+            {
+                inputName: "confirm_password",
+                input: <InputContainer>
+                    <div className="signup-input-container">
+                        <label className="signup-label" htmlFor="confirm-password">Confirm password:</label>
                             <input 
                                 id="confirm-password"
                                 className="signup-input"
                                 type="password"
+                                placeholder="Retype password"
                                 onChange={this.handleTextInput}
                                 onBlur={this.checkRequirement}
-                                value={this.state.confirm_password}
-                                name="confirm_password"
-                                required></input>
-                            <div id="password-matches"></div>
-                            
-                            {this.state.password && this.state.confirm_password ? this.passwordMatch() : ""}
+                                value={"" || this.state.confirm_password}
+                                name="confirm_password"></input>
+                            <div 
+                                id="password-matches"
+                                style={{
+                                    backgroundColor: this.passwordMatchColor()
+                                }}></div>
+                    </div>
+                </InputContainer>
+            }
+        ];
+
+        return userInputs;
+    }
+
+    renderInput = (currentInputIndex)=>{
+        let inputs = this.allInputs(currentInputIndex);
+
+        inputs = inputs.map((input, i)=>{
+            return input.input;
+        });
+
+        return inputs;
+    }
+
+    cancelForm = (e)=>{
+        e.preventDefault();
+    }
+
+    animateInput = (currentInputIndex)=>{
+        const allInputs = document.getElementsByClassName("signup-input-container");
+
+        if(allInputs.length === 0){
+            return;
+        };
+
+        for(let i = 0; i < allInputs.length; i++){
+            allInputs[i].classList.remove("animate-input-container");
+            allInputs[i].classList.remove("unanimate-input-container");
+
+
+            if(currentInputIndex === i){
+                allInputs[i].classList.add("animate-input-container");
+            };
+        };
+    }
+
+    unAnimate = (currentInputIndex)=>{
+        const allInputs = document.getElementsByClassName("signup-input-container");
+
+        if(allInputs.length === 0){
+            return;
+        };
+
+        for(let i = 5; i >= 0; i--){
+
+            allInputs[i].classList.remove("animate-input-container");
+            allInputs[i].classList.remove("unanimate-input-container");
+
+            if( i === currentInputIndex){
+                allInputs[i].classList.add("unanimate-input-container");
+            };
+        };
+    }
+    
+    render(){
+
+        return (
+            <section id="signup-section">
+                <form id="signup-form" onSubmit={this.cancelForm}>
+                    <fieldset id='signup-fieldset'>
+                        <legend id="signup-legend">
+                            <h3>Register and get started today!</h3>
+                        </legend>
+
+
+                        <div id="signup-inputs-container">
+                            {this.renderInput(this.state.currentInputIndex)}
 
                             {this.state.error ? <p id="signup-error">{this.state.error}</p> : <p id="signup-error-sub">{""}</p>}
 
-                            {!this.state.loading ? <button id="signup-submit" type="submit">Sign up</button> : <ReactLoadingIcon/>}
-                            <Link to="/login" className="signup-user-helpers">Already have an account?</Link>
+                            {this.renderButtons(this.state.currentInputIndex)}
+                        </div>
+
+                        <Link to="/login" className="signup-user-helpers">Already have an account?</Link>
                     </fieldset>
                 </form>
             </section>

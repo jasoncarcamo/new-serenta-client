@@ -1,14 +1,20 @@
 #signup-section{
     width: 100%;
+    min-height: 95vh;
     margin: 0;
     padding: 0;
 }
 
 #signup-form{
-    width: 27.75em;
-    border: .06em solid lightgrey;
-    margin: 5em auto 0 auto;
+    width: 35em;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: .06em solid  black;
+    margin: 0 auto;
     padding: 0 2em;
+    overflow: hidden;
 }
 
 #signup-fieldset{
@@ -25,6 +31,14 @@
     text-align: center;
 }
 
+.signup-input-container{
+    display: none;
+    transform: translateX(150%);
+    transition-property: all;
+    transition-duration: 1s;
+    transition-timing-function: linear;
+}
+
 .signup-label{
     display: block;
     margin-top: 1em;
@@ -37,16 +51,39 @@
     padding-left: 1em;
 }
 
-.signup-missing-input{
-    border: .075em solid red;
+.animate-input-container{
+    display: block;
+    animation-name: animateinputcontainer;
+    animation-duration: .8s;
+    animation-timing-function: ease-in;
 }
 
-#signup-submit{
+.unanimate-input-container{
     display: block;
-    width: 100%;
-    height: 2.75em;
-    font-size: 1em;
-    margin: 2.75em auto 0 auto;
+    transform: translateX(0);
+    animation-name: unanimateinputcontainer;
+    animation-duration: .5s;
+    animation-timing-function: ease-in;
+}
+
+@keyframes animateinputcontainer{
+    from{
+        transform: translateX(150%);
+    }
+
+    to{
+        transform: translateX(0);
+    }
+}
+
+@keyframes unanimateinputcontainer{
+    from{
+        transform: translateX(-150%);
+    }
+
+    to{
+        transform: translateX(0);
+    }
 }
 
 .signup-user-helpers{
@@ -73,14 +110,12 @@
     width: 100%;
     margin: 0 auto;
     height: .4em;
-    background-color: gray;
 }
 
 #signup-error{
     color: rgb(231, 2, 2);
     margin: 0;
     padding: .25em 0 0 .5em;
-    border: .05em solid red;
     min-height: 3em;
     font-size: .9em;
 }
@@ -96,6 +131,23 @@
 .req_error{
     margin: 0;
     padding: 0;
+}
+
+#signup-btns-container{
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#signup-btns-container button{
+    align-self: center;
+    display: block;
+    width: 5em;
+    font-size: 1em;
 }
 
 @media screen and (max-width: 900px){
