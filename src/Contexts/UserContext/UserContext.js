@@ -47,6 +47,7 @@ export class UserProvider extends React.Component{
             return JSON.parse(image);
         });
 
+        updateAd.date_last_modified = new Date();
         updateAd.images = newImages;
 
         ads[adIndex] = updateAd;
@@ -68,6 +69,8 @@ export class UserProvider extends React.Component{
                 updateAd.images.push(images[i]);
             }
         };
+
+        updateAd.date_last_modified = new Date();
 
         ads[adIndex] = updateAd;
 
@@ -111,7 +114,7 @@ export class UserProvider extends React.Component{
 
         this.setState({
             ads
-        })
+        });
     }
 
     addToAds = (ad)=>{
@@ -206,7 +209,7 @@ export class UserProvider extends React.Component{
             loading: this.state.loading,
             handleLogIn: this.handleLogIn
         };
-        
+
         return (
             <UserContext.Provider value={value}>
                 {this.props.children}

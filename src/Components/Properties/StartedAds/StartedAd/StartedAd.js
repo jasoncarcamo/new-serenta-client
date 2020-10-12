@@ -1,6 +1,5 @@
 import React from "react";
 import "./StartedAd.css";
-import PostAdContext from "../../../../Contexts/PostAdContext/PostAdContext";
 import AppContext from "../../../../Contexts/AppContext/AppContext";
 import Map from "./Map/Map";
 
@@ -42,7 +41,7 @@ export default class StartedAd extends React.Component{
     handleCancel = ()=>{
         this.setState({
             cancel: false
-        }); 
+        });
     }
 
     handleRemove = ()=>{

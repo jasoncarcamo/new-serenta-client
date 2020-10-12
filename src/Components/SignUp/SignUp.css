@@ -11,7 +11,6 @@
     top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: .06em solid  black;
     margin: 0 auto;
     padding: 0 2em;
     overflow: hidden;
@@ -26,22 +25,18 @@
 #signup-legend{
     width: 100%;
     margin: 0;
-    padding: 3.5em 0 2em 0;
+    padding: 0 0 2em 0;
     border: none;
     text-align: center;
-}
-
-.signup-input-container{
-    display: none;
-    transform: translateX(150%);
-    transition-property: all;
-    transition-duration: 1s;
-    transition-timing-function: linear;
 }
 
 .signup-label{
     display: block;
     margin-top: 1em;
+}
+
+.signup-astrick{
+    color: red;
 }
 
 .signup-input{
@@ -51,24 +46,31 @@
     padding-left: 1em;
 }
 
+
+/* Animation for signup-input-container starts here */
+.signup-input-container{
+    display: none;
+    transform: translateX(200%);
+    transition-property: all;
+    transition-duration: 1s;
+    transition-timing-function: linear;
+}
+
 .animate-input-container{
     display: block;
     animation-name: animateinputcontainer;
-    animation-duration: .8s;
+    animation-duration: .6s;
     animation-timing-function: ease-in;
 }
 
 .unanimate-input-container{
     display: block;
     transform: translateX(0);
-    animation-name: unanimateinputcontainer;
-    animation-duration: .5s;
-    animation-timing-function: ease-in;
 }
 
 @keyframes animateinputcontainer{
     from{
-        transform: translateX(150%);
+        transform: translateX(200%);
     }
 
     to{
@@ -78,7 +80,7 @@
 
 @keyframes unanimateinputcontainer{
     from{
-        transform: translateX(-150%);
+        transform: translateX(-200%);
     }
 
     to{
@@ -89,7 +91,6 @@
 .signup-user-helpers{
     display: block;
     width: 100%;
-    height: 2.5em;
     font-size: .9em;
     margin: .5em auto 4em auto;
     text-decoration: none;
@@ -121,11 +122,11 @@
 }
 
 #signup-error-sub{
-    color: red;
+    color: rgb(231, 2, 2);
     margin: 0;
     padding: .25em 0 0 .5em;
-    border: none;
     min-height: 3em;
+    font-size: .9em;
 }
 
 .req_error{
@@ -160,7 +161,7 @@
     #signup-form{
         width: 100%;
         border: none;
-        margin: 3em auto 0 auto;
+        margin: 0 auto;
         padding: 0 .5em;
     }
     

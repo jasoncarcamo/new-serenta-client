@@ -30,7 +30,6 @@ export default class UploadImgs extends React.Component{
 
     handleChange = (e)=>{
         const fileInputFiles = document.getElementById("post-ad-images").files;
-        let files = this.state.files;
         let newFiles = [];
 
         this.toggleLoading();
@@ -160,14 +159,6 @@ export default class UploadImgs extends React.Component{
 
                 this.toggleLoading();
             });
-    }
-
-    renderUploadlabel = ()=>{
-        return (
-            <>
-                
-            </>
-        )
     }
 
     isInViewport = (element)=>{

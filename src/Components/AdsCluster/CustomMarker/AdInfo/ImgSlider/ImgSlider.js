@@ -88,7 +88,7 @@ export default class ImgSlider extends React.Component{
     };
 
     renderFirstImg = (imgs)=>{
-        return <img src={imgs[0].url} alt="" className="ad-info-img" onClick={this.fullScreenImg}/>
+        return <img src={imgs[0].url} alt="" className="ad-info-img" onClick={this.fullScreenImg}/>;
     }
 
     renderImgs = (imgs)=>{
@@ -96,16 +96,14 @@ export default class ImgSlider extends React.Component{
         let images = imgs;
 
         images = images.map((image, index)=>{
-            console.log(image)
 
-            return <img src={image.url} alt="" className="ad-info-img" onClick={this.fullScreenImg}/>
-        })
+            return <img src={image.url} key={index} alt="" className="ad-info-img" onClick={this.fullScreenImg}/>
+        });
 
         return images;
     };
 
     fullScreenImg = (e)=>{
-        console.log(e.target)
         this.setState({
             displayImage: true,
             imageSrc: e.target.src

@@ -78,7 +78,6 @@ export default class AdInfo extends React.Component{
 
     backgroundHandler = (e)=>{
         const infoContainer = document.getElementsByClassName("ad-info-container")[0];
-        console.log(e.target)
 
         if(e.target === infoContainer){
             if(window.innerWidth > 1030){
@@ -90,7 +89,7 @@ export default class AdInfo extends React.Component{
     }
 
     render(){
-
+        
         return (
             <section className="ad-info-container" onClick={this.backgroundHandler}>
                 <section className="ad-info-window">
@@ -114,7 +113,7 @@ export default class AdInfo extends React.Component{
 
                                 <p><strong><FontAwesomeIcon icon={faBath}></FontAwesomeIcon> Ba:</strong> {this.props.ad.bathrooms}</p>
 
-                                <p><strong><FontAwesomeIcon icon={faCube}></FontAwesomeIcon> Sqft: {this.props.ad.squareft}</strong></p>
+                                <p><strong><FontAwesomeIcon icon={faCube}></FontAwesomeIcon> Sqft: {this.props.ad.squareft || "Did not provide"}</strong></p>
                             </section>
                         </div>
 

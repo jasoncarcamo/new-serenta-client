@@ -91,6 +91,8 @@ export class AdsProvider extends React.Component{
         });
 
         if(adIndex > -1){
+
+            ad.date_last_modified = new Date();
             ads[adIndex] = ad;
         };
 

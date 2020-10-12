@@ -34,6 +34,9 @@ export default class SubmitAd extends React.Component{
         this.context.handlePatchAd()
             .then( resData => {
 
+                //sets current ad's new modified date
+                this.context.ad.date_last_modified = new Date();
+
                 if(this.state.message === "Your ad has been posted!"){
                     
                     this.context.addAd(this.context.ad);

@@ -152,7 +152,7 @@ export default class SignUp extends React.Component{
                     loading: false
                 });
 
-                this.props.history.push("/user");
+                this.props.history.push("/properties");
             })
             .catch( err => {
                 this.setState({
@@ -202,17 +202,13 @@ export default class SignUp extends React.Component{
 
         currentInputIndex++;
 
-        console.log(currentInputIndex);
-
         if(currentInputIndex > 5){{
             currentInputIndex = 5;
         }};
 
         if(!this.interateRequiremnts()){
             return;
-        }
-
-        console.log(currentInputIndex);
+        };
 
         this.setState({
             currentInputIndex
@@ -235,113 +231,101 @@ export default class SignUp extends React.Component{
         let userInputs = [
             {
                 inputName: "first_name",
-                input: <InputContainer>
-                    <div className="signup-input-container animate-input-container">
-                        <label className="signup-label" htmlFor="first_name">First name:</label>
-                            <input 
-                                id="first_name"
-                                className="signup-input"
-                                type="text"
-                                onChange={this.handleTextInput}
-                                onBlur={this.checkRequirement}
-                                value={"" || this.state.first_name}
-                                name="first_name"></input>
-                    </div>
-                </InputContainer>
+                input: <div className="signup-input-container animate-input-container">
+                <label className="signup-label" htmlFor="first_name">First name <span className="signup-astrick">*</span></label>
+                    <input 
+                        id="first_name"
+                        className="signup-input"
+                        type="text"
+                        onChange={this.handleTextInput}
+                        onBlur={this.checkRequirement}
+                        value={"" || this.state.first_name}
+                        name="first_name"></input>
+                </div>
             }
         ,
             {
                 inputName: "last_name",
-                input: <InputContainer>
-                    <div className="signup-input-container">
-                        <label className="signup-label" htmlFor="last_name">Last name:</label>
-                            <input
-                                id="last_name"
-                                className="signup-input"
-                                type="text"
-                                onChange={this.handleTextInput}
-                                onBlur={this.checkRequirement}
-                                value={"" || this.state.last_name}
-                                name="last_name"></input>
-                    </div>
-                </InputContainer>
+                input: <div className="signup-input-container">
+                <label className="signup-label" htmlFor="last_name">Last name <span className="signup-astrick">*</span></label>
+                    <input
+                        id="last_name"
+                        className="signup-input"
+                        type="text"
+                        onChange={this.handleTextInput}
+                        onBlur={this.checkRequirement}
+                        value={"" || this.state.last_name}
+                        name="last_name"></input>
+                </div>
             }
         ,
             {
                 inputName: "email",
-                input: <InputContainer>
-                    <div className="signup-input-container">
-                        <label className="signup-label" htmlFor="sign-up-email">Email:</label>
-                            <input
-                                id="sign-up-email"
-                                className="signup-input"
-                                type="text"
-                                onChange={this.handleTextInput}
-                                onBlur={this.checkRequirement}
-                                value={"" || this.state.email}
-                                name="email"></input>
-                    </div>
-                </InputContainer>
+                input: <div className="signup-input-container">
+                <label className="signup-label" htmlFor="sign-up-email">Email <span className="signup-astrick">*</span></label>
+                    <input
+                        id="sign-up-email"
+                        className="signup-input"
+                        type="text"
+                        onChange={this.handleTextInput}
+                        onBlur={this.checkRequirement}
+                        value={"" || this.state.email}
+                        name="email"></input>
+                </div>
             }
         ,
             {
                 inputName: "mobile_number",
-                input: <InputContainer>
-                    <div className="signup-input-container">
-                        <label className="signup-label" htmlFor="mobile_number">Mobile number:</label>
-                            <input
-                                id="mobile_number"
-                                className="signup-input"
-                                type="text"
-                                onChange={this.handleTextInput}
-                                onBlur={this.checkRequirement}
-                                value={"" || this.state.mobile_number}
-                                name="mobile_number"></input>
-                    </div>
-                </InputContainer>
+                input: <div className="signup-input-container">
+                <label className="signup-label" htmlFor="mobile_number">Mobile number <span className="signup-astrick">*</span></label>
+                    <input
+                        id="mobile_number"
+                        className="signup-input"
+                        type="text"
+                        onChange={this.handleTextInput}
+                        onBlur={this.checkRequirement}
+                        value={"" || this.state.mobile_number}
+                        name="mobile_number"></input>
+                </div>
             }
         ,
             {
                 inputName: "password",
-                input: <InputContainer>
-                    <div className="signup-input-container">
-                        <label className="signup-label" htmlFor="sign-up-password">Password:</label>
-                            <input
-                                id="sign-up-password"
-                                className="signup-input"
-                                type="password"
-                                onChange={this.handleTextInput}
-                                onBlur={this.checkRequirement}
-                                value={"" || this.state.password}
-                                name="password"></input>
-                            <ul id="password-confirm-box">
-                                {this.validatePassword(this.state.password)}
-                            </ul>
-                    </div>
-                </InputContainer>
+                input: <div className="signup-input-container">
+                <label className="signup-label" htmlFor="sign-up-password">Password <span className="signup-astrick">*</span></label>
+                    <input
+                        id="sign-up-password"
+                        className="signup-input"
+                        type="password"
+                        onChange={this.handleTextInput}
+                        onBlur={this.checkRequirement}
+                        value={"" || this.state.password}
+                        name="password"></input>
+                    <ul id="password-confirm-box">
+                        {this.validatePassword(this.state.password)}
+                    </ul>
+                </div>
             }
         ,
             {
                 inputName: "confirm_password",
-                input: <InputContainer>
-                    <div className="signup-input-container">
-                        <label className="signup-label" htmlFor="confirm-password">Confirm password:</label>
-                            <input 
-                                id="confirm-password"
-                                className="signup-input"
-                                type="password"
-                                placeholder="Retype password"
-                                onChange={this.handleTextInput}
-                                onBlur={this.checkRequirement}
-                                value={"" || this.state.confirm_password}
-                                name="confirm_password"></input>
-                            <div 
-                                id="password-matches"
-                                style={{
-                                    backgroundColor: this.passwordMatchColor()
-                                }}></div>
-                    </div>
-                </InputContainer>
+                input: <div className="signup-input-container">
+                <label className="signup-label" htmlFor="confirm-password">Confirm password <span className="signup-astrick">*</span></label>
+                    <input 
+                        id="confirm-password"
+                        className="signup-input"
+                        type="password"
+                        placeholder="Retype password"
+                        onChange={this.handleTextInput}
+                        onBlur={this.checkRequirement}
+                        value={"" || this.state.confirm_password}
+                        name="confirm_password"></input>
+                    <div 
+                        id="password-matches"
+                        style={{
+                            backgroundColor: this.passwordMatchColor()
+                        }}></div>
+                </div>
             }
         ];
 

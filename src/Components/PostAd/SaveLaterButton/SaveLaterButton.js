@@ -46,7 +46,7 @@ export default class SaveLaterButton extends React.Component{
     }
 
     renderLoading = ()=>{
-        return <p classname="save-later-message">Loading...</p>;
+        return <p className="save-later-message">Loading...</p>;
     };
 
     // this will revert saved message back to button after 2.5 seconds on successful save
