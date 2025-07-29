@@ -1,5 +1,5 @@
 import React from "react";
-import LivingRoom from "../../../../../assets/livingroom.jpg";
+import LivingRoom from "../../../../../Assets/livingroom.jpg";
 import "./ImgSlider.css";
 import AppContext from "../../../../../Contexts/AppContext/AppContext";
 

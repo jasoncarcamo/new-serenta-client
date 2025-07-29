@@ -3,7 +3,7 @@ import "./Header.css";
 import "./hamburger.css";
 import UserToken from "../../Services/UserToken/UserToken";
 import {NavLink, } from "react-router-dom";
-import Logo from "../../assets/SvgImages/logo.svg"
+import Logo from "../../Assets/SvgImages/logo.svg"
 import AppContext from "../../Contexts/AppContext/AppContext";
 
 export default class Header extends React.Component{

@@ -1,8 +1,7 @@
 #lp-search-spaces-section{
-    border: 1px solid green;
     height: 100vh;
     margin: 4em 0 0 0;
-    background-image: url("../../../assets/pavlo-rekun-OkQxNHpmygs-unsplash.jpg");
+    background-image: url("../../../Assets/pavlo-rekun-OkQxNHpmygs-unsplash.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     backdrop-filter: blur(.5em);

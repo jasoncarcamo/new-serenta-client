@@ -8,9 +8,13 @@ import UserContext, {UserProvider} from "./Contexts/UserContext/UserContext";
 import AdsContext, {AdsProvider} from "./Contexts/AdsContext/AdsContext";
 import MapContext, {MapProvider} from "./Contexts/MapContext/MapContext";
 import PostAdContext, {PostAdProvider} from "./Contexts/PostAdContext/PostAdContext";
+import { createRoot } from 'react-dom/client';
 import AppContext, {AppProvider} from "./Contexts/AppContext/AppContext";
 
-ReactDOM.render(
+
+const container = document.getElementById('root');
+const root = createRoot(container);
+const AppContainer = (
     <BrowserRouter>
         <AdsProvider>
             <AdsContext.Consumer>
@@ -39,6 +43,6 @@ ReactDOM.render(
                 )}
             </AdsContext.Consumer>
         </AdsProvider>
-    </BrowserRouter>,
-    document.getElementById('root')
-);
+    </BrowserRouter>);
+
+root.render(AppContainer);
