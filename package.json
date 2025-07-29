@@ -15,9 +15,9 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-loading": "^2.0.3",
+    "react-places-autocomplete": "^7.3.0",
     "react-router-dom": "^5.3.4",
-    "react-scripts": "5.0.1",
-    "react-places-autocomplete": "^7.3.0"
+    "react-scripts": "5.0.1"
   },
   "scripts": {
     "start": "react-scripts --openssl-legacy-provider start",
