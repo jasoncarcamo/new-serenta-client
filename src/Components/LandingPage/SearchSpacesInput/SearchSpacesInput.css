@@ -1,6 +1,6 @@
 #lp-search-spaces-section{
     height: 100vh;
-    margin: 4em 0 0 0;
+    margin: 0;
     background-image: url("../../../Assets/pavlo-rekun-OkQxNHpmygs-unsplash.jpg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -83,7 +83,7 @@
 
 @media screen and (max-width: 1030px){
     #lp-search-spaces-section{
-        margin: 3em 0 0 0;
+        margin: 0;
     }
 
     #lp-search-spaces-form{
