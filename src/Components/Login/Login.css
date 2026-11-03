@@ -1,111 +1,552 @@
-#login-section{
+
+/* =========================================
+   SERENTA LOGIN PAGE
+========================================= */
+
+.serenta-login-page {
+    --login-primary: #245a67;
+    --login-primary-dark: #194651;
+    --login-ink: #1d2a32;
+    --login-muted: #667781;
+    --login-border: #dce5e8;
+    --login-error: #b42332;
+
+    min-height: calc(100vh - 82px);
+    background: #ffffff;
+    color: var(--login-ink);
+    font-family: "Inter", "Roboto", Arial, sans-serif;
+}
+
+.serenta-login-page *,
+.serenta-login-page *::before,
+.serenta-login-page *::after {
+    box-sizing: border-box;
+}
+
+.serenta-login-container {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    min-height: calc(100vh - 82px);
+}
+
+/* =========================================
+   LEFT BRAND PANEL
+========================================= */
+
+.serenta-login-intro {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: clamp(50px, 7vw, 105px);
+    overflow: hidden;
+    color: #ffffff;
+    background:
+        radial-gradient(
+            ellipse at 90% 10%,
+            rgba(180, 220, 225, 0.16),
+            transparent 45%
+        ),
+        linear-gradient(
+            145deg,
+            #245a67 0%,
+            #194651 65%,
+            #143b45 100%
+        );
+}
+
+.serenta-login-intro::before {
+    content: "";
+    position: absolute;
+    right: -120px;
+    bottom: -180px;
+    width: 520px;
+    height: 520px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.serenta-login-intro::after {
+    content: "";
+    position: absolute;
+    right: -50px;
+    bottom: -110px;
+    width: 380px;
+    height: 380px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.serenta-login-intro-content,
+.serenta-login-intro-bottom {
+    position: relative;
+    z-index: 1;
+}
+
+.serenta-login-eyebrow {
+    display: inline-block;
+    margin-bottom: 28px;
+    color: #b7d9df;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+}
+
+.serenta-login-intro h1 {
+    max-width: 610px;
+    margin: 0 0 25px;
+    font-size: clamp(2.8rem, 4.3vw, 4.8rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.055em;
+}
+
+.serenta-login-intro h1 span {
+    color: #b5dce2;
+}
+
+.serenta-login-intro-content > p {
+    max-width: 500px;
+    margin: 0;
+    color: #d5e5e8;
+    font-size: 1rem;
+    line-height: 1.85;
+}
+
+/* =========================================
+   BRAND FEATURES
+========================================= */
+
+.serenta-login-intro-features {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    max-width: 480px;
+    margin-top: 65px;
+}
+
+.serenta-login-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+}
+
+.serenta-login-feature-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    color: #d8eff2;
+    background: rgba(255, 255, 255, 0.09);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 13px;
+}
+
+.serenta-login-feature-icon svg {
+    width: 23px;
+    height: 23px;
+}
+
+.serenta-login-feature strong {
+    display: block;
+    margin-bottom: 7px;
+    color: #ffffff;
+    font-size: 0.97rem;
+    font-weight: 700;
+}
+
+.serenta-login-feature p {
+    margin: 0;
+    color: #c5dce0;
+    font-size: 0.87rem;
+    line-height: 1.7;
+}
+
+.serenta-login-intro-bottom {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 75px;
+    color: #c1dce0;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+}
+
+.serenta-login-intro-line {
+    display: block;
+    width: 35px;
+    height: 1px;
+    background: #9fc7cd;
+}
+
+/* =========================================
+   RIGHT FORM PANEL
+========================================= */
+
+.serenta-login-form-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 65px 45px;
+    background: #ffffff;
+}
+
+.serenta-login-form-wrapper {
     width: 100%;
-    margin: 0;
-    padding: 0;
+    max-width: 430px;
 }
 
-#login-form{
-    width: 27.75em;
-    border: .06em solid lightgrey;
-    margin: 7em auto 0 auto;
-    padding: 0 2em;
+.serenta-login-form-eyebrow {
+    display: inline-block;
+    margin-bottom: 15px;
+    color: var(--login-primary);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
 }
 
-#login-fieldset{
-    margin: 0;
-    padding: 0;
-    border: none;
+.serenta-login-form-header h2 {
+    margin: 0 0 12px;
+    color: var(--login-ink);
+    font-size: clamp(2rem, 3vw, 2.65rem);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.045em;
 }
 
-#login-legend{
+.serenta-login-form-header p {
+    margin: 0 0 40px;
+    color: var(--login-muted);
+    font-size: 0.94rem;
+    line-height: 1.75;
+}
+
+/* =========================================
+   FORM FIELDS
+========================================= */
+
+.serenta-login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+}
+
+.serenta-login-field {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.serenta-login-field label {
+    color: var(--login-ink);
+    font-size: 0.87rem;
+    font-weight: 700;
+}
+
+.serenta-login-field input {
+    display: block;
     width: 100%;
+    height: 52px;
     margin: 0;
-    padding: 3.5em 0 2em 0;
+    padding: 0 16px;
+    color: var(--login-ink);
+    background: #ffffff;
+    border: 1px solid var(--login-border);
+    border-radius: 9px;
+    outline: none;
+    font-family: inherit;
+    font-size: 0.93rem;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.serenta-login-field input::placeholder {
+    color: #97a5ab;
+}
+
+.serenta-login-field input:hover {
+    border-color: #b7cbd0;
+}
+
+.serenta-login-field input:focus {
+    border-color: var(--login-primary);
+    box-shadow: 0 0 0 3px rgba(36, 90, 103, 0.11);
+}
+
+.serenta-login-field input[aria-invalid="true"] {
+    border-color: var(--login-error);
+}
+
+.serenta-login-field input:disabled {
+    background: #f6f8f8;
+    cursor: not-allowed;
+}
+
+.serenta-login-field-error {
+    color: var(--login-error);
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+/* =========================================
+   PASSWORD VISIBILITY
+========================================= */
+
+.serenta-login-password-wrap {
+    position: relative;
+}
+
+.serenta-login-password-wrap input {
+    padding-right: 75px;
+}
+
+.serenta-login-password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 55px;
+    min-height: 36px;
+    padding: 6px 10px;
+    transform: translateY(-50%);
+    color: var(--login-primary);
+    background: transparent;
     border: none;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.serenta-login-password-toggle:hover {
+    background: #edf5f6;
+}
+
+.serenta-login-password-toggle:focus-visible {
+    outline: 2px solid var(--login-primary);
+    outline-offset: 2px;
+}
+
+/* =========================================
+   ERROR MESSAGE
+========================================= */
+
+.serenta-login-error {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 15px;
+    color: #922d3b;
+    background: #fff2f3;
+    border: 1px solid #f3cbd0;
+    border-radius: 9px;
+}
+
+.serenta-login-error > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    color: #ffffff;
+    background: #b42332;
+    border-radius: 50%;
+    font-size: 0.76rem;
+    font-weight: 800;
+}
+
+.serenta-login-error p {
+    margin: 0;
+    font-size: 0.83rem;
+    line-height: 1.6;
+}
+
+/* =========================================
+   SUBMIT BUTTON
+========================================= */
+
+.serenta-login-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 53px;
+    margin-top: 5px;
+    padding: 14px 20px;
+    color: #ffffff;
+    background: var(--login-primary);
+    border: 1px solid var(--login-primary);
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: 0.94rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.serenta-login-submit:hover:not(:disabled) {
+    background: var(--login-primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(36, 90, 103, 0.17);
+}
+
+.serenta-login-submit:disabled {
+    opacity: 0.8;
+    cursor: wait;
+}
+
+.serenta-login-submit:focus-visible {
+    outline: 3px solid rgba(36, 90, 103, 0.35);
+    outline-offset: 3px;
+}
+
+/* =========================================
+   SIGNUP / FOOTER
+========================================= */
+
+.serenta-login-signup {
+    margin: 6px 0 0;
+    color: var(--login-muted);
+    font-size: 0.87rem;
+    line-height: 1.7;
     text-align: center;
 }
 
-.login-label{
-    display: block;
-    margin-top: 1em;
+.serenta-login-signup a {
+    color: var(--login-primary);
+    font-weight: 800;
+    text-decoration: none;
 }
 
-.login-label span{
-    color: red;
+.serenta-login-signup a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
 }
 
-#login-email{
-    display: block;
-    width: 100%;
-    height: 2.8em;
-    padding-left: 1em;
+.serenta-login-form-footer {
+    margin-top: 55px;
+    padding-top: 23px;
+    border-top: 1px solid var(--login-border);
+    color: #91a0a6;
+    font-size: 0.78rem;
+    text-align: center;
 }
 
-#login-password{
-    display: block;
-    width: 100%;
-    height: 2.8em;
-    padding-left: 1em;
-}
+/* =========================================
+   TABLET
+========================================= */
 
-.login-missing-input{
-    border: .075em solid red;
-}
-
-.loading-icon{
-    font-size: 1em;
-    margin: 1em auto;
-}
-
-#login-submit{
-    display: block;
-    width: 100%;
-    height: 2.5em;
-    font-size: 1em;
-    margin: 1em auto;
-}
-
-#to-signup{
-    margin-bottom: 5em;;
-}
-
-.login-user-helpers{
-    display: block;
-    width: 100%;
-    height: 2.5em;
-    font-size: .9em;
-    margin: .5em auto 0 auto;
-}
-
-#login-error{
-    color: rgb(231, 2, 2);
-    margin: 0;
-    padding: .25em 0 0 .5em;
-    border: .05em solid red;
-    min-height: 4em;
-    font-size: .9em;
-}
-
-#login-error-sub{
-    color: red;
-    margin: 0;
-    padding: .25em 0 0 .5em;
-    border: none;
-    min-height: 4em;
-}
-
-@media screen and (max-width: 900px){
-    #login-section{
-        width: 100%;
-        margin: 0;
-        padding: 0;
+@media screen and (max-width: 1050px) {
+    .serenta-login-intro {
+        padding: 60px 45px;
     }
-    
-    #login-form{
-        width: 100%;
-        border: none;
-        margin: 3em auto 0 auto;
-        padding: 0 .5em;
+
+    .serenta-login-intro h1 {
+        font-size: clamp(2.5rem, 4.5vw, 3.5rem);
     }
-    
+
+    .serenta-login-form-section {
+        padding: 55px 35px;
+    }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media screen and (max-width: 800px) {
+    .serenta-login-container {
+        grid-template-columns: 1fr;
+    }
+
+    .serenta-login-intro {
+        padding: 55px 30px;
+    }
+
+    .serenta-login-intro h1 {
+        max-width: 560px;
+        font-size: clamp(2.5rem, 7vw, 3.5rem);
+    }
+
+    .serenta-login-intro-features,
+    .serenta-login-intro-bottom {
+        display: none;
+    }
+
+    .serenta-login-form-section {
+        padding: 65px 25px 80px;
+    }
+
+    .serenta-login-form-wrapper {
+        max-width: 480px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .serenta-login-intro {
+        padding: 42px 22px;
+    }
+
+    .serenta-login-eyebrow {
+        margin-bottom: 18px;
+    }
+
+    .serenta-login-intro h1 {
+        margin-bottom: 17px;
+        font-size: 2.35rem;
+    }
+
+    .serenta-login-intro-content > p {
+        font-size: 0.88rem;
+        line-height: 1.7;
+    }
+
+    .serenta-login-form-section {
+        padding: 48px 20px 65px;
+    }
+
+    .serenta-login-form-header h2 {
+        font-size: 2.1rem;
+    }
+
+    .serenta-login-form-header p {
+        margin-bottom: 30px;
+    }
+
+    .serenta-login-form-footer {
+        margin-top: 40px;
+    }
+}
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+.serenta-login-page a:focus-visible {
+    outline: 3px solid rgba(36, 90, 103, 0.4);
+    outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .serenta-login-page *,
+    .serenta-login-page *::before,
+    .serenta-login-page *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
 }

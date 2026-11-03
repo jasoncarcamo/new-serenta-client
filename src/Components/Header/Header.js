@@ -1,163 +1,300 @@
-import React from "react";
-import "./Header.css";
-import "./hamburger.css";
+
+import React, { Component } from "react";
+import { NavLink, withRouter } from "react-router-dom";
+
 import UserToken from "../../Services/UserToken/UserToken";
-import {NavLink, } from "react-router-dom";
-import Logo from "../../Assets/SvgImages/logo.svg"
 import AppContext from "../../Contexts/AppContext/AppContext";
 
-export default class Header extends React.Component{
-    constructor(props){
+import Logo from "../../Assets/SvgImages/logo.svg";
+
+import "./Header.css";
+
+class Header extends Component {
+    static contextType = AppContext;
+
+    constructor(props) {
         super(props);
+
         this.state = {
-            screenWidth: window.innerWidth
+            menuOpen: false,
+            scrolled: false
+        };
+
+        this.menuRef = React.createRef();
+        this.menuButtonRef = React.createRef();
+    }
+
+    componentDidMount() {
+        window.addEventListener("scroll", this.handleScroll, {
+            passive: true
+        });
+
+        window.addEventListener("keydown", this.handleKeyDown);
+        document.addEventListener("mousedown", this.handleOutsideClick);
+
+        this.handleScroll();
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (
+            prevProps.location.pathname !== this.props.location.pathname &&
+            this.state.menuOpen
+        ) {
+            this.setState({
+                menuOpen: false
+            });
+        }
+
+        if (prevState.menuOpen !== this.state.menuOpen) {
+            document.body.classList.toggle(
+                "serenta-menu-open",
+                this.state.menuOpen
+            );
         }
     }
 
-    static contextType = AppContext;
+    componentWillUnmount() {
+        window.removeEventListener("scroll", this.handleScroll);
+        window.removeEventListener("keydown", this.handleKeyDown);
+        document.removeEventListener("mousedown", this.handleOutsideClick);
 
-    componentDidMount(){
-        this.lockNavlistTouchmove();
-        this.lockNavListScroll();
-        this.screenWidthHandler();
+        document.body.classList.remove("serenta-menu-open");
     }
 
-    screenWidthHandler = ()=>{
-        window.addEventListener("resize", (e)=>{
+    handleScroll = () => {
+        const scrolled = window.scrollY > 12;
+
+        if (scrolled !== this.state.scrolled) {
             this.setState({
-                screenWidth: window.innerWidth
+                scrolled
             });
-        }, {passive: false})
-    }
+        }
+    };
 
-    renderLoggedLinks = () => {
-        if(UserToken.hasToken()){
+    handleKeyDown = (event) => {
+        if (event.key === "Escape" && this.state.menuOpen) {
+            this.closeMenu();
+            this.menuButtonRef.current?.focus();
+        }
+    };
+
+    handleOutsideClick = (event) => {
+        if (!this.state.menuOpen) {
+            return;
+        }
+
+        const menu = this.menuRef.current;
+        const button = this.menuButtonRef.current;
+
+        if (
+            menu &&
+            !menu.contains(event.target) &&
+            button &&
+            !button.contains(event.target)
+        ) {
+            this.closeMenu();
+        }
+    };
+
+    toggleMenu = () => {
+        this.setState((previousState) => ({
+            menuOpen: !previousState.menuOpen
+        }));
+    };
+
+    closeMenu = () => {
+        this.setState({
+            menuOpen: false
+        });
+    };
+
+    handleSignOut = () => {
+        if (this.context.userContext) {
+            this.context.userContext.resetState();
+        }
+
+        if (this.context.postAdContext) {
+            this.context.postAdContext.resetState();
+        }
+
+        UserToken.removeToken();
+        this.closeMenu();
+    };
+
+    renderAuthLinks = () => {
+        if (UserToken.hasToken()) {
             return (
                 <>
-                    <li className="nav-link" onClick={this.mobileNavMenuHandler}>
-                        <NavLink 
-                            to="/properties"
-                            activeStyle={{
-                                backgroundColor: "black",
-                                color: "white",
-                                fontWeight: "bold"
-                        }}>Properties</NavLink>
-                    </li>
-                    <li className="nav-link" onClick={this.mobileNavMenuHandler}><NavLink to="/" onClick={this.handleSignOut}>Sign Out</NavLink></li>
+                    <NavLink
+                        to="/properties"
+                        className="serenta-nav-link"
+                        activeClassName="serenta-nav-link--active"
+                        onClick={this.closeMenu}
+                    >
+                        My Properties
+                    </NavLink>
+
+                    <NavLink
+                        exact
+                        to="/"
+                        className="serenta-nav-link serenta-nav-signout"
+                        onClick={this.handleSignOut}
+                    >
+                        Sign Out
+                    </NavLink>
                 </>
-            )
+            );
         }
 
         return (
             <>
-                <li className="nav-link" onClick={this.mobileNavMenuHandler}>
-                    <NavLink 
-                        to="/login" 
-                        activeStyle={{
-                            backgroundColor: "black",
-                            color: "white",
-                            fontWeight: "bold"
-                    }}>Log In</NavLink>
-                </li>
-                <li className="nav-link" onClick={this.mobileNavMenuHandler}>
-                    <NavLink 
-                        to="/signup"
-                        activeStyle={{
-                            backgroundColor: "black",
-                            color: "white",
-                            fontWeight: "bold"
-                    }}>Sign up</NavLink>
-                </li>
+                <NavLink
+                    to="/login"
+                    className="serenta-nav-link serenta-nav-login"
+                    activeClassName="serenta-nav-link--active"
+                    onClick={this.closeMenu}
+                >
+                    Log In
+                </NavLink>
+
+                <NavLink
+                    to="/signup"
+                    className="serenta-nav-signup"
+                    activeClassName="serenta-nav-signup--active"
+                    onClick={this.closeMenu}
+                >
+                    Sign Up
+                </NavLink>
             </>
-        )
-    }
-
-    handleSignOut = ()=>{
-        
-        // sets states to default upon sign out
-        this.context.userContext.resetState();
-        this.context.postAdContext.resetState();
-        
-        UserToken.removeToken();
-    }
-
-    mobileNavMenuHandler = ()=>{
-        const navBurger = document.getElementById("nav-burger");
-        const navList = document.getElementById("nav-list");
-
-        if(this.state.screenWidth > 1030){
-            return;
-        };
-
-        navList.classList.toggle("display-nav-list");
-            
-        navBurger.classList.toggle("is-active");
-    }
-
-    lockNavListScroll = ()=>{
-        const navList = document.getElementById("nav-list");
-
-        
+        );
     };
 
-    lockNavlistTouchmove = ()=>{
-        const navList = document.getElementById("nav-list");
-    };
+    render() {
+        const { menuOpen, scrolled } = this.state;
 
-    render(){
         return (
-            <header id="header-container">
-                
-                <nav id="nav-container">
+            <header
+                id="header-container"
+                className={[
+                    "serenta-header",
+                    scrolled ? "serenta-header--scrolled" : ""
+                ].filter(Boolean).join(" ")}
+            >
+                <nav
+                    id="nav-container"
+                    className="serenta-nav"
+                    aria-label="Main navigation"
+                >
+                    <NavLink
+                        exact
+                        to="/"
+                        className="serenta-brand"
+                        onClick={this.closeMenu}
+                        aria-label="Serenta home"
+                    >
+                        <img
+                            src={Logo}
+                            alt="Serenta"
+                            className="serenta-brand-logo"
+                        />
+                    </NavLink>
 
-                    <button id="nav-burger" className="hamburger hamburger--collapse" type="button" onClick={this.mobileNavMenuHandler}>
-                        <span className="hamburger-box" >
-                            <span className="hamburger-inner"></span>
+                    <button
+                        ref={this.menuButtonRef}
+                        className={[
+                            "serenta-menu-toggle",
+                            menuOpen ? "serenta-menu-toggle--open" : ""
+                        ].filter(Boolean).join(" ")}
+                        type="button"
+                        onClick={this.toggleMenu}
+                        aria-label={menuOpen ? "Close menu" : "Open menu"}
+                        aria-expanded={menuOpen}
+                        aria-controls="serenta-navigation-links"
+                    >
+                        <span className="serenta-menu-toggle-lines">
+                            <span />
+                            <span />
+                            <span />
                         </span>
                     </button>
 
-                    <ul id="nav-list">
-                        <li className="nav-link" onClick={this.mobileNavMenuHandler}>
-                            <NavLink 
-                                exact to="/"
-                                activeStyle={{
-                                    backgroundColor: "black",
-                                    color: "white",
-                                    fontWeight: "bold"
-                                }}>
-                                <img src={Logo} alt="Serenta logo"></img>
-                            </NavLink></li>
+                    <div
+                        id="serenta-navigation-links"
+                        ref={this.menuRef}
+                        className={[
+                            "serenta-nav-content",
+                            menuOpen ? "serenta-nav-content--open" : ""
+                        ].filter(Boolean).join(" ")}
+                    >
+                        <div className="serenta-nav-main">
+                            <NavLink
+                                exact
+                                to="/"
+                                className="serenta-nav-link"
+                                activeClassName="serenta-nav-link--active"
+                                onClick={this.closeMenu}
+                            >
+                                Home
+                            </NavLink>
 
-                        <li className="nav-link" onClick={this.mobileNavMenuHandler}>
-                            <NavLink 
-                                to="/find-rent" 
-                                activeStyle={{
-                                backgroundColor: "black",
-                                color: "white",
-                                fontWeight: "bold"
-                        }}>Find Rent</NavLink></li>
+                            <NavLink
+                                to="/find-rent"
+                                className="serenta-nav-link"
+                                activeClassName="serenta-nav-link--active"
+                                onClick={this.closeMenu}
+                            >
+                                Find a Rental
+                            </NavLink>
 
-                        <li className="nav-link" onClick={this.mobileNavMenuHandler}>
-                            <NavLink 
-                                to="/post-ad" 
-                                activeStyle={{
-                                backgroundColor: "black",
-                                color: "white",
-                                fontWeight: "bold"
-                        }}>Post Ad</NavLink></li>
-
-                        <li className="nav-link" onClick={this.mobileNavMenuHandler}>
-                            <NavLink 
+                            <NavLink
                                 to="/about"
-                                activeStyle={{
-                                    backgroundColor: "black",
-                                    color: "white",
-                                    fontWeight: "bold"
-                        }}>About</NavLink></li>
-                        {this.renderLoggedLinks()}
-                    </ul>
+                                className="serenta-nav-link"
+                                activeClassName="serenta-nav-link--active"
+                                onClick={this.closeMenu}
+                            >
+                                About Us
+                            </NavLink>
+                        </div>
+
+                        <div className="serenta-nav-actions">
+                            {this.renderAuthLinks()}
+
+                            <NavLink
+                                to="/post-ad"
+                                className="serenta-post-button"
+                                activeClassName="serenta-post-button--active"
+                                onClick={this.closeMenu}
+                            >
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    aria-hidden="true"
+                                >
+                                    <path d="M12 5v14M5 12h14" />
+                                </svg>
+
+                                <span>Post an Ad</span>
+                            </NavLink>
+                        </div>
+                    </div>
                 </nav>
+
+                {menuOpen && (
+                    <button
+                        type="button"
+                        className="serenta-menu-backdrop"
+                        onClick={this.closeMenu}
+                        aria-label="Close navigation menu"
+                        tabIndex={-1}
+                    />
+                )}
             </header>
         );
-    };
-};
+    }
+}
+
+export default withRouter(Header);

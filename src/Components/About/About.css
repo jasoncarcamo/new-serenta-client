@@ -1,0 +1,618 @@
+
+/* =========================================
+   SERENTA ABOUT PAGE
+========================================= */
+
+.serenta-about {
+    --about-primary: #245a67;
+    --about-primary-dark: #194651;
+    --about-ink: #1d2a32;
+    --about-muted: #667781;
+    --about-border: #e5ebed;
+    --about-surface: #f6f8f8;
+
+    width: 100%;
+    overflow: hidden;
+    color: var(--about-ink);
+    background: #ffffff;
+    font-family: "Inter", "Roboto", Arial, sans-serif;
+}
+
+.serenta-about *,
+.serenta-about *::before,
+.serenta-about *::after {
+    box-sizing: border-box;
+}
+
+.serenta-about-container {
+    width: min(100% - 48px, 1240px);
+    margin: 0 auto;
+}
+
+.serenta-about-eyebrow {
+    display: inline-block;
+    margin-bottom: 18px;
+    color: var(--about-primary);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.serenta-about h1,
+.serenta-about h2,
+.serenta-about h3,
+.serenta-about p {
+    margin-top: 0;
+}
+
+/* =========================================
+   HERO
+========================================= */
+
+.serenta-about-hero {
+    position: relative;
+    padding: 105px 0 115px;
+    background:
+        radial-gradient(
+            ellipse at 85% 25%,
+            rgba(36, 90, 103, 0.09),
+            transparent 48%
+        ),
+        linear-gradient(145deg, #ffffff, #f7faf9);
+}
+
+.serenta-about-hero .serenta-about-container {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    align-items: center;
+    gap: 80px;
+}
+
+.serenta-about-hero-content {
+    max-width: 650px;
+}
+
+.serenta-about-hero h1 {
+    margin-bottom: 25px;
+    font-size: clamp(2.8rem, 5vw, 5rem);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -0.055em;
+}
+
+.serenta-about-hero h1 span {
+    color: var(--about-primary);
+}
+
+.serenta-about-hero-description {
+    max-width: 560px;
+    margin-bottom: 35px;
+    color: var(--about-muted);
+    font-size: 1.04rem;
+    line-height: 1.85;
+}
+
+.serenta-about-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 13px;
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.serenta-about-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 51px;
+    padding: 14px 22px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    line-height: 1.4;
+    text-decoration: none;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.serenta-about-button:hover {
+    transform: translateY(-2px);
+}
+
+.serenta-about-button--primary {
+    color: #ffffff;
+    background: var(--about-primary);
+    box-shadow: 0 5px 15px rgba(36, 90, 103, 0.13);
+}
+
+.serenta-about-button--primary:hover {
+    color: #ffffff;
+    background: var(--about-primary-dark);
+}
+
+.serenta-about-button--secondary {
+    color: var(--about-primary);
+    background: #ffffff;
+    border-color: #cbdcde;
+}
+
+.serenta-about-button--secondary:hover {
+    color: var(--about-primary-dark);
+    background: #f1f6f7;
+    border-color: var(--about-primary);
+}
+
+/* =========================================
+   HERO VISUAL
+========================================= */
+
+.serenta-about-hero-visual {
+    position: relative;
+    padding: 24px;
+}
+
+.serenta-about-visual-frame {
+    position: relative;
+    z-index: 1;
+    min-height: 430px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 45px;
+    background: linear-gradient(145deg, #e7f0f0, #d4e5e6);
+    border: 1px solid #d5e5e7;
+    border-radius: 24px;
+}
+
+.serenta-about-visual-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 300px;
+    text-align: center;
+}
+
+.serenta-about-visual-label {
+    margin-bottom: 35px;
+    color: var(--about-primary);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+}
+
+.serenta-about-visual-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 32px;
+    color: var(--about-primary);
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid #c8dcde;
+    border-radius: 30px;
+}
+
+.serenta-about-visual-icon svg {
+    width: 65px;
+    height: 65px;
+}
+
+.serenta-about-visual-content strong {
+    margin-bottom: 13px;
+    color: var(--about-ink);
+    font-size: 1.45rem;
+    font-weight: 800;
+    letter-spacing: -0.035em;
+}
+
+.serenta-about-visual-content p {
+    color: var(--about-muted);
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+
+.serenta-about-visual-accent {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 45%;
+    height: 45%;
+    background: #bdd4d8;
+    border-radius: 24px;
+}
+
+/* =========================================
+   INTRO / MISSION
+========================================= */
+
+.serenta-about-intro {
+    padding: 110px 0;
+}
+
+.serenta-about-intro-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 100px;
+}
+
+.serenta-about-intro h2,
+.serenta-about-values h2 {
+    max-width: 520px;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.17;
+    letter-spacing: -0.045em;
+}
+
+.serenta-about-intro-copy p {
+    margin-bottom: 20px;
+    color: var(--about-muted);
+    font-size: 1rem;
+    line-height: 1.9;
+}
+
+/* =========================================
+   BENEFITS
+========================================= */
+
+.serenta-about-benefits {
+    padding: 105px 0 115px;
+    background: var(--about-surface);
+}
+
+.serenta-about-section-heading {
+    max-width: 680px;
+    margin: 0 auto 55px;
+    text-align: center;
+}
+
+.serenta-about-section-heading h2 {
+    margin-bottom: 18px;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 1.2;
+}
+
+.serenta-about-section-heading p {
+    color: var(--about-muted);
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+.serenta-about-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.serenta-about-benefit-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 325px;
+    padding: 35px 30px;
+    background: #ffffff;
+    border: 1px solid var(--about-border);
+    border-radius: 15px;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.serenta-about-benefit-card:hover {
+    transform: translateY(-4px);
+    border-color: #cbdcde;
+    box-shadow: 0 15px 35px rgba(29, 42, 50, 0.06);
+}
+
+.serenta-about-benefit-number {
+    margin-bottom: 32px;
+    color: var(--about-primary);
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+}
+
+.serenta-about-benefit-card h3 {
+    margin-bottom: 14px;
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+}
+
+.serenta-about-benefit-card p {
+    margin-bottom: 28px;
+    color: var(--about-muted);
+    font-size: 0.9rem;
+    line-height: 1.85;
+}
+
+.serenta-about-benefit-card a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+    color: var(--about-primary);
+    font-size: 0.86rem;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.serenta-about-benefit-card a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+/* =========================================
+   VALUES
+========================================= */
+
+.serenta-about-values {
+    padding: 115px 0;
+}
+
+.serenta-about-values-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: 100px;
+}
+
+.serenta-about-values-content p {
+    max-width: 500px;
+    color: var(--about-muted);
+    font-size: 1rem;
+    line-height: 1.9;
+}
+
+.serenta-about-values-list {
+    border-top: 1px solid var(--about-border);
+}
+
+.serenta-about-values-list article {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    gap: 20px;
+    padding: 27px 0;
+    border-bottom: 1px solid var(--about-border);
+}
+
+.serenta-about-values-list article > span {
+    padding-top: 4px;
+    color: var(--about-primary);
+    font-size: 0.76rem;
+    font-weight: 800;
+}
+
+.serenta-about-values-list h3 {
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+.serenta-about-values-list p {
+    margin-bottom: 0;
+    color: var(--about-muted);
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+/* =========================================
+   CTA
+========================================= */
+
+.serenta-about-cta {
+    padding: 100px 0;
+    background: var(--about-primary-dark);
+}
+
+.serenta-about-cta-content {
+    max-width: 750px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.serenta-about-cta .serenta-about-eyebrow {
+    color: #a8d4da;
+}
+
+.serenta-about-cta h2 {
+    margin-bottom: 20px;
+    color: #ffffff;
+    font-size: clamp(2.1rem, 4vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.045em;
+}
+
+.serenta-about-cta p {
+    max-width: 560px;
+    margin: 0 auto 32px;
+    color: #d1e2e5;
+    font-size: 1rem;
+    line-height: 1.85;
+}
+
+.serenta-about-cta .serenta-about-hero-actions {
+    justify-content: center;
+}
+
+.serenta-about-button--light {
+    color: var(--about-primary-dark);
+    background: #ffffff;
+}
+
+.serenta-about-button--light:hover {
+    color: var(--about-primary-dark);
+    background: #e9f2f3;
+}
+
+.serenta-about-button--outline-light {
+    color: #ffffff;
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.45);
+}
+
+.serenta-about-button--outline-light:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #ffffff;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media screen and (max-width: 1000px) {
+    .serenta-about-hero .serenta-about-container {
+        gap: 45px;
+    }
+
+    .serenta-about-intro-grid,
+    .serenta-about-values-grid {
+        gap: 55px;
+    }
+
+    .serenta-about-benefit-card {
+        padding: 28px 24px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .serenta-about-hero {
+        padding: 75px 0 85px;
+    }
+
+    .serenta-about-hero .serenta-about-container,
+    .serenta-about-intro-grid,
+    .serenta-about-values-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .serenta-about-hero-content {
+        max-width: 650px;
+    }
+
+    .serenta-about-hero-visual {
+        max-width: 600px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .serenta-about-intro,
+    .serenta-about-values {
+        padding: 80px 0;
+    }
+
+    .serenta-about-benefits {
+        padding: 80px 0;
+    }
+
+    .serenta-about-benefits-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .serenta-about-benefit-card {
+        min-height: 0;
+    }
+
+    .serenta-about-benefit-number {
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .serenta-about-container {
+        width: min(100% - 32px, 1240px);
+    }
+
+    .serenta-about-hero {
+        padding: 65px 0 70px;
+    }
+
+    .serenta-about-hero h1 {
+        font-size: clamp(2.45rem, 10vw, 3.5rem);
+    }
+
+    .serenta-about-hero-description {
+        font-size: 0.95rem;
+    }
+
+    .serenta-about-hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .serenta-about-button {
+        width: 100%;
+    }
+
+    .serenta-about-hero-visual {
+        padding: 12px;
+    }
+
+    .serenta-about-visual-frame {
+        min-height: 340px;
+        padding: 25px;
+        border-radius: 18px;
+    }
+
+    .serenta-about-visual-icon {
+        width: 95px;
+        height: 95px;
+    }
+
+    .serenta-about-visual-icon svg {
+        width: 52px;
+        height: 52px;
+    }
+
+    .serenta-about-intro,
+    .serenta-about-values,
+    .serenta-about-benefits {
+        padding: 70px 0;
+    }
+
+    .serenta-about-cta {
+        padding: 75px 0;
+    }
+
+    .serenta-about-values-list article {
+        grid-template-columns: 30px 1fr;
+        gap: 14px;
+    }
+}
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+.serenta-about a:focus-visible {
+    outline: 3px solid rgba(36, 90, 103, 0.45);
+    outline-offset: 4px;
+}
+
+.serenta-about-cta a:focus-visible {
+    outline-color: #ffffff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .serenta-about *,
+    .serenta-about *::before,
+    .serenta-about *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}

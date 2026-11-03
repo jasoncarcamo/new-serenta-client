@@ -1,168 +1,555 @@
-#signup-section{
-    width: 100%;
-    min-height: 95vh;
-    margin: 0;
-    padding: 0;
+
+/* =========================================
+   SERENTA SIGNUP PAGE
+========================================= */
+
+.serenta-signup-page {
+    --signup-primary: #245a67;
+    --signup-primary-dark: #194651;
+    --signup-ink: #1d2a32;
+    --signup-muted: #667781;
+    --signup-border: #dce5e8;
+    --signup-error: #b42332;
+
+    min-height: calc(100vh - 82px);
+    background: #ffffff;
+    color: var(--signup-ink);
+    font-family: "Inter", "Roboto", Arial, sans-serif;
 }
 
-#signup-form{
-    width: 35em;
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 0 auto;
-    padding: 0 2em;
+.serenta-signup-page *,
+.serenta-signup-page *::before,
+.serenta-signup-page *::after {
+    box-sizing: border-box;
+}
+
+.serenta-signup-container {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    min-height: calc(100vh - 82px);
+}
+
+/* =========================================
+   LEFT PANEL
+========================================= */
+
+.serenta-signup-intro {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: clamp(50px, 6vw, 95px);
     overflow: hidden;
+    color: #ffffff;
+    background:
+        radial-gradient(
+            ellipse at 85% 15%,
+            rgba(180, 220, 225, 0.15),
+            transparent 48%
+        ),
+        linear-gradient(
+            145deg,
+            #245a67 0%,
+            #194651 65%,
+            #143b45 100%
+        );
 }
 
-#signup-fieldset{
+.serenta-signup-intro::before {
+    content: "";
+    position: absolute;
+    right: -160px;
+    bottom: -180px;
+    width: 500px;
+    height: 500px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.serenta-signup-intro-content,
+.serenta-signup-intro-bottom {
+    position: relative;
+    z-index: 1;
+}
+
+.serenta-signup-eyebrow {
+    display: inline-block;
+    margin-bottom: 26px;
+    color: #b7d9df;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+}
+
+.serenta-signup-intro h1 {
+    max-width: 570px;
+    margin: 0 0 24px;
+    font-size: clamp(2.7rem, 4.1vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.055em;
+}
+
+.serenta-signup-intro h1 span {
+    color: #b5dce2;
+}
+
+.serenta-signup-intro-content > p {
+    max-width: 500px;
+    margin: 0;
+    color: #d5e5e8;
+    font-size: 0.98rem;
+    line-height: 1.85;
+}
+
+.serenta-signup-intro-divider {
+    width: 100%;
+    max-width: 440px;
+    height: 1px;
+    margin: 48px 0;
+    background: rgba(255, 255, 255, 0.18);
+}
+
+.serenta-signup-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    max-width: 470px;
+    margin-bottom: 30px;
+}
+
+.serenta-signup-feature > span {
+    flex-shrink: 0;
+    padding-top: 2px;
+    color: #b7d9df;
+    font-size: 0.78rem;
+    font-weight: 800;
+}
+
+.serenta-signup-feature strong {
+    display: block;
+    margin-bottom: 7px;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.serenta-signup-feature p {
+    margin: 0;
+    color: #c5dce0;
+    font-size: 0.86rem;
+    line-height: 1.7;
+}
+
+.serenta-signup-intro-bottom {
+    margin-top: 65px;
+    color: #c1dce0;
+    font-size: 0.79rem;
+    font-weight: 600;
+}
+
+/* =========================================
+   FORM PANEL
+========================================= */
+
+.serenta-signup-form-section {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 80px 45px 100px;
+    background: #ffffff;
+}
+
+.serenta-signup-form-wrapper {
+    width: 100%;
+    max-width: 520px;
+}
+
+.serenta-signup-form-eyebrow {
+    display: inline-block;
+    margin-bottom: 15px;
+    color: var(--signup-primary);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+}
+
+.serenta-signup-form-header h2 {
+    margin: 0 0 12px;
+    color: var(--signup-ink);
+    font-size: clamp(2rem, 3vw, 2.65rem);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.045em;
+}
+
+.serenta-signup-form-header p {
+    margin: 0 0 35px;
+    color: var(--signup-muted);
+    font-size: 0.94rem;
+    line-height: 1.75;
+}
+
+/* =========================================
+   FORM
+========================================= */
+
+.serenta-signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
+}
+
+.serenta-signup-name-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.serenta-signup-field {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    min-width: 0;
+}
+
+.serenta-signup-field label {
+    color: var(--signup-ink);
+    font-size: 0.86rem;
+    font-weight: 700;
+}
+
+.serenta-signup-field label span {
+    color: var(--signup-error);
+}
+
+.serenta-signup-field input {
+    display: block;
+    width: 100%;
+    height: 51px;
+    margin: 0;
+    padding: 0 15px;
+    color: var(--signup-ink);
+    background: #ffffff;
+    border: 1px solid var(--signup-border);
+    border-radius: 9px;
+    outline: none;
+    font-family: inherit;
+    font-size: 0.92rem;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.serenta-signup-field input::placeholder {
+    color: #97a5ab;
+}
+
+.serenta-signup-field input:hover {
+    border-color: #b7cbd0;
+}
+
+.serenta-signup-field input:focus {
+    border-color: var(--signup-primary);
+    box-shadow: 0 0 0 3px rgba(36, 90, 103, 0.11);
+}
+
+.serenta-signup-field input[aria-invalid="true"] {
+    border-color: var(--signup-error);
+}
+
+.serenta-signup-field input:disabled {
+    background: #f6f8f8;
+    cursor: not-allowed;
+}
+
+.serenta-signup-field-error {
+    color: var(--signup-error);
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+/* =========================================
+   PASSWORD
+========================================= */
+
+.serenta-signup-password-wrap {
+    position: relative;
+}
+
+.serenta-signup-password-wrap input {
+    padding-right: 75px;
+}
+
+.serenta-signup-password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 55px;
+    min-height: 36px;
+    padding: 6px 10px;
+    transform: translateY(-50%);
+    color: var(--signup-primary);
+    background: transparent;
+    border: 0;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.serenta-signup-password-toggle:hover {
+    background: #edf5f6;
+}
+
+/* =========================================
+   PASSWORD REQUIREMENTS
+========================================= */
+
+.serenta-signup-requirements {
+    padding: 18px 20px;
+    background: #f6f9f9;
+    border: 1px solid var(--signup-border);
+    border-radius: 10px;
+}
+
+.serenta-signup-requirements > p {
+    margin: 0 0 13px;
+    color: var(--signup-ink);
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.serenta-signup-requirements ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 11px 14px;
     margin: 0;
     padding: 0;
-    border: none;
+    list-style: none;
 }
 
-#signup-legend{
-    width: 100%;
+.serenta-signup-requirements li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    color: var(--signup-muted);
+    font-size: 0.76rem;
+    line-height: 1.5;
+}
+
+.serenta-signup-requirements li > span {
+    flex-shrink: 0;
+    color: #9aa9af;
+    font-weight: 800;
+}
+
+.serenta-signup-requirements li.serenta-signup-requirement--valid {
+    color: #267349;
+}
+
+.serenta-signup-requirements li.serenta-signup-requirement--valid > span {
+    color: #267349;
+}
+
+.serenta-signup-match {
+    margin: -8px 0 0;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.serenta-signup-match--valid {
+    color: #267349;
+}
+
+.serenta-signup-match--invalid {
+    color: var(--signup-error);
+}
+
+/* =========================================
+   ERROR
+========================================= */
+
+.serenta-signup-error {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 15px;
+    color: #922d3b;
+    background: #fff2f3;
+    border: 1px solid #f3cbd0;
+    border-radius: 9px;
+}
+
+.serenta-signup-error > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    color: #ffffff;
+    background: #b42332;
+    border-radius: 50%;
+    font-size: 0.76rem;
+    font-weight: 800;
+}
+
+.serenta-signup-error p {
     margin: 0;
-    padding: 0 0 2em 0;
-    border: none;
+    font-size: 0.83rem;
+    line-height: 1.6;
+}
+
+/* =========================================
+   SUBMIT
+========================================= */
+
+.serenta-signup-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 53px;
+    margin-top: 7px;
+    padding: 14px 20px;
+    color: #ffffff;
+    background: var(--signup-primary);
+    border: 1px solid var(--signup-primary);
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: 0.94rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.serenta-signup-submit:hover:not(:disabled) {
+    background: var(--signup-primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(36, 90, 103, 0.17);
+}
+
+.serenta-signup-submit:disabled {
+    opacity: 0.8;
+    cursor: wait;
+}
+
+/* =========================================
+   LOGIN LINK
+========================================= */
+
+.serenta-signup-login {
+    margin: 4px 0 0;
+    color: var(--signup-muted);
+    font-size: 0.87rem;
+    line-height: 1.7;
     text-align: center;
 }
 
-.signup-label{
-    display: block;
-    margin-top: 1em;
-}
-
-.signup-astrick{
-    color: red;
-}
-
-.signup-input{
-    display: block;
-    width: 100%;
-    height: 2.8em;
-    padding-left: 1em;
-}
-
-
-/* Animation for signup-input-container starts here */
-.signup-input-container{
-    display: none;
-    transform: translateX(200%);
-    transition-property: all;
-    transition-duration: 1s;
-    transition-timing-function: linear;
-}
-
-.animate-input-container{
-    display: block;
-    animation-name: animateinputcontainer;
-    animation-duration: .6s;
-    animation-timing-function: ease-in;
-}
-
-.unanimate-input-container{
-    display: block;
-    transform: translateX(0);
-}
-
-@keyframes animateinputcontainer{
-    from{
-        transform: translateX(200%);
-    }
-
-    to{
-        transform: translateX(0);
-    }
-}
-
-@keyframes unanimateinputcontainer{
-    from{
-        transform: translateX(-200%);
-    }
-
-    to{
-        transform: translateX(0);
-    }
-}
-
-.signup-user-helpers{
-    display: block;
-    width: 100%;
-    font-size: .9em;
-    margin: .5em auto 4em auto;
+.serenta-signup-login a {
+    color: var(--signup-primary);
+    font-weight: 800;
     text-decoration: none;
 }
 
-#password-confirm-box{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 100%;
-    margin: 0 auto;
-    padding-left: 1.25em;
-    padding-top: .25em;
-    padding-bottom: 1em;
+.serenta-signup-login a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
 }
 
-#password-matches{
-    width: 100%;
-    margin: 0 auto;
-    height: .4em;
-}
+/* =========================================
+   RESPONSIVE
+========================================= */
 
-#signup-error{
-    color: rgb(231, 2, 2);
-    margin: 0;
-    padding: .25em 0 0 .5em;
-    min-height: 3em;
-    font-size: .9em;
-}
-
-#signup-error-sub{
-    color: rgb(231, 2, 2);
-    margin: 0;
-    padding: .25em 0 0 .5em;
-    min-height: 3em;
-    font-size: .9em;
-}
-
-.req_error{
-    margin: 0;
-    padding: 0;
-}
-
-#signup-btns-container{
-    display: flex;
-    justify-content: space-evenly;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-#signup-btns-container button{
-    align-self: center;
-    display: block;
-    width: 5em;
-    font-size: 1em;
-}
-
-@media screen and (max-width: 900px){
-    #signup-section{
-        width: 100%;
-        margin: 0;
-        padding: 0;
+@media screen and (max-width: 1050px) {
+    .serenta-signup-intro {
+        padding: 60px 42px;
     }
-    
-    #signup-form{
-        width: 100%;
-        border: none;
-        margin: 0 auto;
-        padding: 0 .5em;
+
+    .serenta-signup-form-section {
+        padding: 65px 35px 85px;
     }
-    
+}
+
+@media screen and (max-width: 800px) {
+    .serenta-signup-container {
+        grid-template-columns: 1fr;
+    }
+
+    .serenta-signup-intro {
+        padding: 55px 30px;
+    }
+
+    .serenta-signup-intro h1 {
+        max-width: 580px;
+    }
+
+    .serenta-signup-intro-divider,
+    .serenta-signup-feature,
+    .serenta-signup-intro-bottom {
+        display: none;
+    }
+
+    .serenta-signup-form-section {
+        padding: 60px 25px 80px;
+    }
+
+    .serenta-signup-form-wrapper {
+        max-width: 540px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .serenta-signup-intro {
+        padding: 42px 22px;
+    }
+
+    .serenta-signup-intro h1 {
+        font-size: 2.35rem;
+    }
+
+    .serenta-signup-intro-content > p {
+        font-size: 0.88rem;
+    }
+
+    .serenta-signup-form-section {
+        padding: 48px 20px 65px;
+    }
+
+    .serenta-signup-name-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .serenta-signup-requirements ul {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+.serenta-signup-page a:focus-visible,
+.serenta-signup-page button:focus-visible {
+    outline: 3px solid rgba(36, 90, 103, 0.45);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .serenta-signup-page *,
+    .serenta-signup-page *::before,
+    .serenta-signup-page *::after {
+        animation: none !important;
+        transition: none !important;
+    }
 }

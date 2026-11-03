@@ -1,9 +1,314 @@
-footer{
-    position: absolute;
-    z-index: 1;
-    bottom: 0;
-    left: 0;
+
+/* =========================================
+   SERENTA FOOTER
+========================================= */
+
+.serenta-footer {
+    --footer-primary: #245a67;
+    --footer-primary-dark: #194651;
+    --footer-text: #26363e;
+    --footer-muted: #6c7b83;
+    --footer-border: #e4eaec;
+
     width: 100%;
-    height: 3em;
-    background-color: transparent;
+    background: #f8faf9;
+    color: var(--footer-text);
+    font-family: "Inter", "Roboto", Arial, sans-serif;
+}
+
+.serenta-footer *,
+.serenta-footer *::before,
+.serenta-footer *::after {
+    box-sizing: border-box;
+}
+
+.serenta-footer-container {
+    width: min(100% - 48px, 1240px);
+    margin: 0 auto;
+}
+
+/* =========================================
+   MAIN FOOTER
+========================================= */
+
+.serenta-footer-main {
+    padding: 85px 0 75px;
+    border-top: 1px solid var(--footer-border);
+}
+
+.serenta-footer-grid {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1.45fr)
+        minmax(0, 0.7fr)
+        minmax(0, 0.8fr)
+        minmax(0, 1.15fr);
+    gap: 45px;
+    align-items: start;
+}
+
+/* =========================================
+   BRAND
+========================================= */
+
+.serenta-footer-brand {
+    max-width: 310px;
+}
+
+.serenta-footer-logo-link {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 24px;
+    text-decoration: none;
+}
+
+.serenta-footer-logo {
+    display: block;
+    width: auto;
+    max-width: 185px;
+    height: 43px;
+    object-fit: contain;
+}
+
+.serenta-footer-description {
+    margin: 0 0 20px;
+    color: var(--footer-muted);
+    font-size: 0.91rem;
+    line-height: 1.85;
+}
+
+.serenta-footer-tagline {
+    display: inline-block;
+    color: var(--footer-primary);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
+/* =========================================
+   NAVIGATION COLUMNS
+========================================= */
+
+.serenta-footer-column h2,
+.serenta-footer-cta h2 {
+    margin: 8px 0 24px;
+    color: var(--footer-text);
+    font-size: 0.91rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+}
+
+.serenta-footer-column ul {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.serenta-footer-column li {
+    margin: 0;
+    padding: 0;
+}
+
+.serenta-footer-column a {
+    display: inline-block;
+    color: var(--footer-muted);
+    font-size: 0.87rem;
+    font-weight: 500;
+    line-height: 1.6;
+    text-decoration: none;
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.serenta-footer-column a:hover {
+    color: var(--footer-primary);
+    transform: translateX(3px);
+}
+
+/* =========================================
+   PROPERTY CTA
+========================================= */
+
+.serenta-footer-cta {
+    padding: 26px;
+    background: #edf4f4;
+    border: 1px solid #dce8e9;
+    border-radius: 13px;
+}
+
+.serenta-footer-cta h2 {
+    margin: 0 0 12px;
+    font-size: 1.03rem;
+    line-height: 1.4;
+}
+
+.serenta-footer-cta p {
+    margin: 0 0 22px;
+    color: var(--footer-muted);
+    font-size: 0.86rem;
+    line-height: 1.8;
+}
+
+.serenta-footer-cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 43px;
+    padding: 11px 16px;
+    color: #ffffff;
+    background: var(--footer-primary);
+    border: 1px solid var(--footer-primary);
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    line-height: 1.4;
+    text-decoration: none;
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.serenta-footer-cta-button:hover {
+    color: #ffffff;
+    background: var(--footer-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 14px rgba(36, 90, 103, 0.15);
+}
+
+.serenta-footer-cta-button svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+/* =========================================
+   COPYRIGHT
+========================================= */
+
+.serenta-footer-bottom {
+    background: #ffffff;
+    border-top: 1px solid var(--footer-border);
+}
+
+.serenta-footer-bottom-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    min-height: 75px;
+    padding: 18px 0;
+}
+
+.serenta-footer-bottom p {
+    margin: 0;
+    color: var(--footer-muted);
+    font-size: 0.78rem;
+    line-height: 1.6;
+}
+
+.serenta-footer-bottom-message {
+    text-align: right;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media screen and (max-width: 1100px) {
+    .serenta-footer-grid {
+        grid-template-columns: 1.2fr 1fr 1fr;
+        gap: 40px;
+    }
+
+    .serenta-footer-cta {
+        grid-column: 1 / -1;
+        max-width: 600px;
+    }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media screen and (max-width: 700px) {
+    .serenta-footer-container {
+        width: min(100% - 36px, 1240px);
+    }
+
+    .serenta-footer-main {
+        padding: 65px 0 55px;
+    }
+
+    .serenta-footer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 45px 25px;
+    }
+
+    .serenta-footer-brand {
+        grid-column: 1 / -1;
+        max-width: 440px;
+    }
+
+    .serenta-footer-cta {
+        grid-column: 1 / -1;
+        max-width: none;
+    }
+
+    .serenta-footer-bottom-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 7px;
+        padding: 22px 0;
+    }
+
+    .serenta-footer-bottom-message {
+        text-align: left;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .serenta-footer-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .serenta-footer-brand,
+    .serenta-footer-cta {
+        grid-column: auto;
+    }
+
+    .serenta-footer-column h2 {
+        margin-bottom: 15px;
+    }
+
+    .serenta-footer-column ul {
+        gap: 11px;
+    }
+}
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+.serenta-footer a:focus-visible {
+    outline: 3px solid rgba(36, 90, 103, 0.45);
+    outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .serenta-footer *,
+    .serenta-footer *::before,
+    .serenta-footer *::after {
+        animation: none !important;
+        transition: none !important;
+    }
 }

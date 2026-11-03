@@ -1,14 +1,16 @@
-import React from "react";
-import "./SignUp.css";
-import UserToken from "../../Services/UserToken/UserToken";
-import { Link } from "react-router-dom";
-import ReactLoadingIcon from "../ReactLoadingIcon/ReactLoadingIcon";
-import InputContainer from "./InputContainer/InputContainer";
-import { faLeaf } from "@fortawesome/free-solid-svg-icons";
 
-export default class SignUp extends React.Component{
-    constructor(props){
+import React from "react";
+import { Link } from "react-router-dom";
+
+import UserToken from "../../Services/UserToken/UserToken";
+import ReactLoadingIcon from "../ReactLoadingIcon/ReactLoadingIcon";
+
+import "./SignUp.css";
+
+export default class SignUp extends React.Component {
+    constructor(props) {
         super(props);
+
         this.state = {
             first_name: "",
             last_name: "",
@@ -16,395 +18,567 @@ export default class SignUp extends React.Component{
             email: "",
             password: "",
             confirm_password: "",
-            passwordMatches: false,
+            showPassword: false,
+            showConfirmPassword: false,
             loading: false,
-            currentInput: "",
-            currentInputIndex: 0,
-            inputMax: 6,
-            userInputs: [],
-            error: ""
-        }
-    }
-
-    componentDidMount(){
-    }
-
-    passwordMatches = ()=>{
-        if(this.state.password === this.state.confirm_password){
-            return true;
-        } else{
-            return false;
-        }
-    }
-
-    passwordMatchColor = ()=>{
-
-        if(this.state.password === this.state.confirm_password){
-
-            return "green";
-
-        } else if(this.state.confirm_password.length > 0){
-            return "red";
-        };
-
-        return "grey"
-        
-    };
-
-    validatePassword = (password) => {
-        
-        const REGEX_UPPER_LOWER_NUMBER_SPECIAL = (/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&])[\S]+/);
-
-        const requirements = [ 
-            <li key={0} className="reg_error">Password must be longer than 8 characters</li>,
-            <li key={1} className="reg_error">Password must be less than 72 characters</li>,
-            <li key={2} className="reg_error">Password must not start or end with empty spaces</li>,
-            <li key={3} className="reg_error">Password must contain one upper case, lower case, number and special character</li>
-        ]
-
-        if(password.length > 1){
-            if (password.length > 8) {
-                requirements[0] = <li key={0} className="reg_error" style={{color: 'green'}}>Password must be longer than 8 characters</li>
-              } else{
-      
-              }
-      
-              if (password.length < 72) {
-                requirements[1] = <li key={1} className="reg_error" style={{color: 'green', }}>Password must be less than 72 characters</li>
-              } else{
-      
-              };
-      
-              if (!password.startsWith(' ') || !password.endsWith(' ')) {
-                requirements[2] = <li key={2} className="reg_error" style={{color: 'green'}}>Password must not start or end with empty spaces</li>
-              } else{
-                
-              };
-      
-              if (!REGEX_UPPER_LOWER_NUMBER_SPECIAL.test(password)) {
-                  requirements[3] = <li key={3} className="reg_error" style={{color: 'gray'}}>Password must contain one upper case, lower case, number and special character</li>
-              } else{
-                  requirements[3] = <li key={3} className="reg_error" style={{color: 'green'}}>Password must contain one upper case, lower case, number and special character</li>
-              };
-        }
-        
-        return requirements
-    }
-
-    handleTextInput = (e)=>{
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-    }
-
-    checkRequirement = (e)=>{
-        if(e.target.value === "" || !(e.target.value)){
-            e.target.classList.add("login-missing-input");
-        } else{
-            e.target.classList.remove("login-missing-input");
-
-            this.setState({
-                error: ""
-            });
-        }
-    }
-
-    handleSubmit = (e)=>{
-        e.preventDefault();
-
-        this.setState({
             error: "",
-            loading: true
-        })
-
-        if(!this.interateRequiremnts()){
-            this.setState({
-                error: ""
-            });
-
-            return;
+            errors: {},
+            touched: {}
         };
 
-        fetch(`${process.env.REACT_APP_FETCH_API_URL}/api/register`, {
-            method: "POST",
-            headers: {
-                'content-type': "application/json",
-            },
-            body: JSON.stringify({
-                first_name: this.state.first_name,
-                last_name: this.state.last_name,
-                mobile_number: this.state.mobile_number,
-                email: this.state.email,
-                password: this.state.password
-            })
-        })
-            .then( res => {
-                if(!res.ok){
-                    return res.json().then( e => Promise.reject(e));
-                };
-
-                return res.json();
-            })
-            .then( resData => {
-                UserToken.setToken(resData.token);
-
-                this.setState({
-                    loading: false
-                });
-
-                this.props.history.push("/properties");
-            })
-            .catch( err => {
-                this.setState({
-                    error: err.error,
-                    loading: false
-                });
-            });
+        this.abortController = null;
     }
 
-    interateRequiremnts = ()=>{
-        let inputs = this.allInputs();
+    componentWillUnmount() {
+        if (this.abortController) {
+            this.abortController.abort();
+        }
+    }
 
-        for(let i = 0; i < inputs.length; i++){
-            const inputName = inputs[i].inputName;
+    handleTextInput = (event) => {
+        const { name, value } = event.target;
 
-            if(this.state.currentInputIndex === i && !this.state[inputName]){
-                this.setState({
-                    error: `Missing ${inputName.split("_").join(" ")}`
-                });
-
-                return false;
+        this.setState((previousState) => ({
+            [name]: value,
+            error: "",
+            errors: {
+                ...previousState.errors,
+                [name]: ""
             }
-        };
-
-        return true;
+        }));
     };
 
-    handleBackButton = ()=>{
-        let currentInputIndex = this.state.currentInputIndex;
+    handleBlur = (event) => {
+        const { name } = event.target;
 
-        currentInputIndex--;
-
-        if(currentInputIndex < 0){{
-            currentInputIndex = 0;
-        }};
-
-        this.setState({
-            currentInputIndex
-        });
-
-        this.unAnimate(currentInputIndex);
-    }
-
-    handleNextButton = ()=>{
-        let currentInputIndex = this.state.currentInputIndex;
-        let originalIndex = currentInputIndex;
-
-        currentInputIndex++;
-
-        if(currentInputIndex > 5){{
-            currentInputIndex = 5;
-        }};
-
-        if(!this.interateRequiremnts()){
-            return;
-        };
-
-        this.setState({
-            currentInputIndex
-        });
-
-        this.animateInput(currentInputIndex);
-    }
-
-    renderButtons = (currentInputIndex)=>{
-        return (
-            <div id="signup-btns-container">
-                {currentInputIndex > 0 && !this.state.loading ? <button onClick={this.handleBackButton}>Back</button> : ""}
-                {currentInputIndex >= 0 && currentInputIndex < 5 ? <button onClick={this.handleNextButton}>Next</button> : ""}
-                {currentInputIndex === 5 ? !this.state.loading ? <button id="signup-submit" type="button" style={{ opacity: this.passwordMatches() ? 1 : .2, cursor: this.passwordMatches() ? "pointer" : "default"}} onClick={ this.passwordMatches() ? this.handleSubmit : ()=>{}}>Sign up</button> : <ReactLoadingIcon/> : ""}
-            </div>
-        )
-    }  
-    
-    allInputs = (currentInputIndex)=>{
-        let userInputs = [
-            {
-                inputName: "first_name",
-                input: <div className="signup-input-container animate-input-container">
-                <label className="signup-label" htmlFor="first_name">First name <span className="signup-astrick">*</span></label>
-                    <input 
-                        id="first_name"
-                        className="signup-input"
-                        type="text"
-                        onChange={this.handleTextInput}
-                        onBlur={this.checkRequirement}
-                        value={"" || this.state.first_name}
-                        name="first_name"></input>
-                </div>
+        this.setState((previousState) => ({
+            touched: {
+                ...previousState.touched,
+                [name]: true
             }
-        ,
+        }));
+    };
+
+    togglePassword = (field) => {
+        this.setState((previousState) => ({
+            [field]: !previousState[field]
+        }));
+    };
+
+    getPasswordRequirements = () => {
+        const { password } = this.state;
+
+        return [
             {
-                inputName: "last_name",
-                input: <div className="signup-input-container">
-                <label className="signup-label" htmlFor="last_name">Last name <span className="signup-astrick">*</span></label>
-                    <input
-                        id="last_name"
-                        className="signup-input"
-                        type="text"
-                        onChange={this.handleTextInput}
-                        onBlur={this.checkRequirement}
-                        value={"" || this.state.last_name}
-                        name="last_name"></input>
-                </div>
-            }
-        ,
+                label: "At least 9 characters",
+                valid: password.length >= 9
+            },
             {
-                inputName: "email",
-                input: <div className="signup-input-container">
-                <label className="signup-label" htmlFor="sign-up-email">Email <span className="signup-astrick">*</span></label>
-                    <input
-                        id="sign-up-email"
-                        className="signup-input"
-                        type="text"
-                        onChange={this.handleTextInput}
-                        onBlur={this.checkRequirement}
-                        value={"" || this.state.email}
-                        name="email"></input>
-                </div>
-            }
-        ,
+                label: "Fewer than 72 characters",
+                valid: password.length < 72
+            },
             {
-                inputName: "mobile_number",
-                input: <div className="signup-input-container">
-                <label className="signup-label" htmlFor="mobile_number">Mobile number <span className="signup-astrick">*</span></label>
-                    <input
-                        id="mobile_number"
-                        className="signup-input"
-                        type="text"
-                        onChange={this.handleTextInput}
-                        onBlur={this.checkRequirement}
-                        value={"" || this.state.mobile_number}
-                        name="mobile_number"></input>
-                </div>
-            }
-        ,
+                label: "Uppercase and lowercase letters",
+                valid: /[A-Z]/.test(password) &&
+                    /[a-z]/.test(password)
+            },
             {
-                inputName: "password",
-                input: <div className="signup-input-container">
-                <label className="signup-label" htmlFor="sign-up-password">Password <span className="signup-astrick">*</span></label>
-                    <input
-                        id="sign-up-password"
-                        className="signup-input"
-                        type="password"
-                        onChange={this.handleTextInput}
-                        onBlur={this.checkRequirement}
-                        value={"" || this.state.password}
-                        name="password"></input>
-                    <ul id="password-confirm-box">
-                        {this.validatePassword(this.state.password)}
-                    </ul>
-                </div>
-            }
-        ,
+                label: "At least one number",
+                valid: /[0-9]/.test(password)
+            },
             {
-                inputName: "confirm_password",
-                input: <div className="signup-input-container">
-                <label className="signup-label" htmlFor="confirm-password">Confirm password <span className="signup-astrick">*</span></label>
-                    <input 
-                        id="confirm-password"
-                        className="signup-input"
-                        type="password"
-                        placeholder="Retype password"
-                        onChange={this.handleTextInput}
-                        onBlur={this.checkRequirement}
-                        value={"" || this.state.confirm_password}
-                        name="confirm_password"></input>
-                    <div 
-                        id="password-matches"
-                        style={{
-                            backgroundColor: this.passwordMatchColor()
-                        }}></div>
-                </div>
+                label: "At least one special character (!@#$%^&)",
+                valid: /[!@#$%^&]/.test(password)
+            },
+            {
+                label: "No leading or trailing spaces",
+                valid: password.length > 0 &&
+                    password === password.trim()
             }
         ];
+    };
 
-        return userInputs;
-    }
+    validateForm = () => {
+        const {
+            first_name,
+            last_name,
+            mobile_number,
+            email,
+            password,
+            confirm_password
+        } = this.state;
 
-    renderInput = (currentInputIndex)=>{
-        let inputs = this.allInputs(currentInputIndex);
+        const errors = {};
 
-        inputs = inputs.map((input, i)=>{
-            return input.input;
+        if (!first_name.trim()) {
+            errors.first_name = "Please enter your first name.";
+        }
+
+        if (!last_name.trim()) {
+            errors.last_name = "Please enter your last name.";
+        }
+
+        if (!mobile_number.trim()) {
+            errors.mobile_number = "Please enter your mobile number.";
+        }
+
+        if (!email.trim()) {
+            errors.email = "Please enter your email address.";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+            errors.email = "Please enter a valid email address.";
+        }
+
+        if (!password) {
+            errors.password = "Please create a password.";
+        } else if (
+            !this.getPasswordRequirements().every(
+                (requirement) => requirement.valid
+            )
+        ) {
+            errors.password = "Your password does not meet all requirements.";
+        }
+
+        if (!confirm_password) {
+            errors.confirm_password = "Please confirm your password.";
+        } else if (password !== confirm_password) {
+            errors.confirm_password = "Your passwords do not match.";
+        }
+
+        return errors;
+    };
+
+    handleSubmit = async (event) => {
+        event.preventDefault();
+
+        if (this.state.loading) {
+            return;
+        }
+
+        const errors = this.validateForm();
+
+        if (Object.keys(errors).length > 0) {
+            this.setState({
+                errors,
+                error: "Please correct the highlighted fields."
+            });
+
+            return;
+        }
+
+        this.setState({
+            loading: true,
+            error: "",
+            errors: {}
         });
 
-        return inputs;
-    }
+        this.abortController = new AbortController();
 
-    cancelForm = (e)=>{
-        e.preventDefault();
-    }
+        try {
+            const response = await fetch(
+                `${process.env.REACT_APP_FETCH_API_URL}/api/register`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        first_name: this.state.first_name.trim(),
+                        last_name: this.state.last_name.trim(),
+                        mobile_number: this.state.mobile_number.trim(),
+                        email: this.state.email.trim(),
+                        password: this.state.password
+                    }),
+                    signal: this.abortController.signal
+                }
+            );
 
-    animateInput = (currentInputIndex)=>{
-        const allInputs = document.getElementsByClassName("signup-input-container");
+            let responseData = {};
 
-        if(allInputs.length === 0){
-            return;
-        };
+            try {
+                responseData = await response.json();
+            } catch (parseError) {
+                throw new Error("The server returned an invalid response.");
+            }
 
-        for(let i = 0; i < allInputs.length; i++){
-            allInputs[i].classList.remove("animate-input-container");
-            allInputs[i].classList.remove("unanimate-input-container");
+            if (!response.ok) {
+                throw new Error(
+                    responseData.error ||
+                    "Unable to create your account. Please try again."
+                );
+            }
 
+            if (!responseData.token) {
+                throw new Error(
+                    "Your account was created, but no authentication token was returned."
+                );
+            }
 
-            if(currentInputIndex === i){
-                allInputs[i].classList.add("animate-input-container");
-            };
-        };
-    }
+            UserToken.setToken(responseData.token);
 
-    unAnimate = (currentInputIndex)=>{
-        const allInputs = document.getElementsByClassName("signup-input-container");
+            this.props.history.push("/properties");
+        } catch (error) {
+            if (error.name === "AbortError") {
+                return;
+            }
 
-        if(allInputs.length === 0){
-            return;
-        };
+            this.setState({
+                error: error.message ||
+                    "Something went wrong. Please try again."
+            });
+        } finally {
+            if (
+                this.abortController &&
+                !this.abortController.signal.aborted
+            ) {
+                this.setState({
+                    loading: false
+                });
+            }
+        }
+    };
 
-        for(let i = 5; i >= 0; i--){
+    renderField = ({
+        name,
+        label,
+        type = "text",
+        placeholder,
+        autoComplete,
+        inputMode
+    }) => {
+        const { errors, loading } = this.state;
 
-            allInputs[i].classList.remove("animate-input-container");
-            allInputs[i].classList.remove("unanimate-input-container");
-
-            if( i === currentInputIndex){
-                allInputs[i].classList.add("unanimate-input-container");
-            };
-        };
-    }
-    
-    render(){
+        const error = errors[name];
 
         return (
-            <section id="signup-section">
-                <form id="signup-form" onSubmit={this.cancelForm}>
-                    <fieldset id='signup-fieldset'>
-                        <legend id="signup-legend">
-                            <h3>Register and get started today!</h3>
-                        </legend>
+            <div className="serenta-signup-field" key={name}>
+                <label htmlFor={`signup-${name}`}>
+                    {label}
+                    <span aria-hidden="true"> *</span>
+                </label>
 
+                <input
+                    id={`signup-${name}`}
+                    name={name}
+                    type={type}
+                    value={this.state[name]}
+                    onChange={this.handleTextInput}
+                    onBlur={this.handleBlur}
+                    placeholder={placeholder}
+                    autoComplete={autoComplete}
+                    inputMode={inputMode}
+                    disabled={loading}
+                    required
+                    aria-invalid={Boolean(error)}
+                    aria-describedby={
+                        error ? `signup-${name}-error` : undefined
+                    }
+                />
 
-                        <div id="signup-inputs-container">
-                            {this.renderInput(this.state.currentInputIndex)}
-
-                            {this.state.error ? <p id="signup-error">{this.state.error}</p> : <p id="signup-error-sub">{""}</p>}
-
-                            {this.renderButtons(this.state.currentInputIndex)}
-                        </div>
-
-                        <Link to="/login" className="signup-user-helpers">Already have an account?</Link>
-                    </fieldset>
-                </form>
-            </section>
+                {error && (
+                    <span
+                        id={`signup-${name}-error`}
+                        className="serenta-signup-field-error"
+                    >
+                        {error}
+                    </span>
+                )}
+            </div>
         );
     };
-};
+
+    renderPasswordField = (confirm = false) => {
+        const name = confirm ? "confirm_password" : "password";
+        const showField = confirm
+            ? "showConfirmPassword"
+            : "showPassword";
+
+        const { errors, loading } = this.state;
+
+        return (
+            <div className="serenta-signup-field">
+                <label htmlFor={`signup-${name}`}>
+                    {confirm ? "Confirm password" : "Password"}
+                    <span aria-hidden="true"> *</span>
+                </label>
+
+                <div className="serenta-signup-password-wrap">
+                    <input
+                        id={`signup-${name}`}
+                        name={name}
+                        type={this.state[showField] ? "text" : "password"}
+                        value={this.state[name]}
+                        onChange={this.handleTextInput}
+                        onBlur={this.handleBlur}
+                        placeholder={
+                            confirm
+                                ? "Re-enter your password"
+                                : "Create a secure password"
+                        }
+                        autoComplete={
+                            confirm ? "new-password" : "new-password"
+                        }
+                        disabled={loading}
+                        required
+                        aria-invalid={Boolean(errors[name])}
+                        aria-describedby={
+                            errors[name]
+                                ? `signup-${name}-error`
+                                : undefined
+                        }
+                    />
+
+                    <button
+                        type="button"
+                        className="serenta-signup-password-toggle"
+                        onClick={() => this.togglePassword(showField)}
+                        aria-label={
+                            this.state[showField]
+                                ? "Hide password"
+                                : "Show password"
+                        }
+                        aria-pressed={this.state[showField]}
+                        disabled={loading}
+                    >
+                        {this.state[showField] ? "Hide" : "Show"}
+                    </button>
+                </div>
+
+                {errors[name] && (
+                    <span
+                        id={`signup-${name}-error`}
+                        className="serenta-signup-field-error"
+                    >
+                        {errors[name]}
+                    </span>
+                )}
+            </div>
+        );
+    };
+
+    render() {
+        const {
+            password,
+            confirm_password,
+            loading,
+            error
+        } = this.state;
+
+        const requirements = this.getPasswordRequirements();
+
+        return (
+            <main className="serenta-signup-page">
+                <div className="serenta-signup-container">
+                    <section
+                        className="serenta-signup-intro"
+                        aria-labelledby="serenta-signup-intro-title"
+                    >
+                        <div className="serenta-signup-intro-content">
+                            <span className="serenta-signup-eyebrow">
+                                JOIN SERENTA
+                            </span>
+
+                            <h1 id="serenta-signup-intro-title">
+                                A simpler way to
+                                <span> connect and discover.</span>
+                            </h1>
+
+                            <p>
+                                Create your Serenta account to
+                                explore rental opportunities,
+                                share properties, and connect
+                                with people looking for their
+                                next home.
+                            </p>
+
+                            <div className="serenta-signup-intro-divider" />
+
+                            <div className="serenta-signup-feature">
+                                <span aria-hidden="true">01</span>
+
+                                <div>
+                                    <strong>Discover rental opportunities</strong>
+                                    <p>
+                                        Explore available property
+                                        listings in one convenient place.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="serenta-signup-feature">
+                                <span aria-hidden="true">02</span>
+
+                                <div>
+                                    <strong>Share your property</strong>
+                                    <p>
+                                        Advertise rental opportunities
+                                        and connect with potential renters.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="serenta-signup-feature">
+                                <span aria-hidden="true">03</span>
+
+                                <div>
+                                    <strong>Manage your account</strong>
+                                    <p>
+                                        Keep your property advertisements
+                                        and account information organized.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="serenta-signup-intro-bottom">
+                            Find a place. Make a connection.
+                        </div>
+                    </section>
+
+                    <section
+                        className="serenta-signup-form-section"
+                        aria-labelledby="serenta-signup-heading"
+                    >
+                        <div className="serenta-signup-form-wrapper">
+                            <div className="serenta-signup-form-header">
+                                <span className="serenta-signup-form-eyebrow">
+                                    CREATE YOUR ACCOUNT
+                                </span>
+
+                                <h2 id="serenta-signup-heading">
+                                    Get started
+                                </h2>
+
+                                <p>
+                                    Fill in your details below to
+                                    create your Serenta account.
+                                </p>
+                            </div>
+
+                            <form
+                                id="signup-form"
+                                className="serenta-signup-form"
+                                onSubmit={this.handleSubmit}
+                                noValidate
+                            >
+                                <div className="serenta-signup-name-grid">
+                                    {this.renderField({
+                                        name: "first_name",
+                                        label: "First name",
+                                        placeholder: "First name",
+                                        autoComplete: "given-name"
+                                    })}
+
+                                    {this.renderField({
+                                        name: "last_name",
+                                        label: "Last name",
+                                        placeholder: "Last name",
+                                        autoComplete: "family-name"
+                                    })}
+                                </div>
+
+                                {this.renderField({
+                                    name: "email",
+                                    label: "Email address",
+                                    type: "email",
+                                    placeholder: "you@example.com",
+                                    autoComplete: "email"
+                                })}
+
+                                {this.renderField({
+                                    name: "mobile_number",
+                                    label: "Mobile number",
+                                    type: "tel",
+                                    placeholder: "(555) 123-4567",
+                                    autoComplete: "tel",
+                                    inputMode: "tel"
+                                })}
+
+                                {this.renderPasswordField()}
+
+                                <div
+                                    className="serenta-signup-requirements"
+                                    aria-label="Password requirements"
+                                >
+                                    <p>Password must include:</p>
+
+                                    <ul>
+                                        {requirements.map((requirement, index) => (
+                                            <li
+                                                key={index}
+                                                className={
+                                                    password && requirement.valid
+                                                        ? "serenta-signup-requirement--valid"
+                                                        : ""
+                                                }
+                                            >
+                                                <span aria-hidden="true">
+                                                    {password && requirement.valid
+                                                        ? "✓"
+                                                        : "○"}
+                                                </span>
+
+                                                {requirement.label}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+
+                                {this.renderPasswordField(true)}
+
+                                {confirm_password && (
+                                    <p
+                                        className={
+                                            password === confirm_password
+                                                ? "serenta-signup-match serenta-signup-match--valid"
+                                                : "serenta-signup-match serenta-signup-match--invalid"
+                                        }
+                                    >
+                                        {password === confirm_password
+                                            ? "✓ Passwords match"
+                                            : "Passwords do not match"}
+                                    </p>
+                                )}
+
+                                {error && (
+                                    <div
+                                        className="serenta-signup-error"
+                                        role="alert"
+                                    >
+                                        <span aria-hidden="true">!</span>
+                                        <p>{error}</p>
+                                    </div>
+                                )}
+
+                                <button
+                                    id="signup-submit"
+                                    className="serenta-signup-submit"
+                                    type="submit"
+                                    disabled={loading}
+                                >
+                                    {loading ? (
+                                        <>
+                                            <ReactLoadingIcon />
+                                            <span>Creating account...</span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <span>Create Account</span>
+                                            <span aria-hidden="true">→</span>
+                                        </>
+                                    )}
+                                </button>
+
+                                <p className="serenta-signup-login">
+                                    Already have an account?{" "}
+                                    <Link to="/login">
+                                        Sign In
+                                    </Link>
+                                </p>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        );
+    }
+}

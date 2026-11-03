@@ -1,136 +1,147 @@
-#lp-search-spaces-section{
-    height: 100vh;
-    margin: 0;
-    background-image: url("../../../Assets/pavlo-rekun-OkQxNHpmygs-unsplash.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    backdrop-filter: blur(.5em);
-}
-
-#lp-search-spaces-form{
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 0;
-    padding: 0;
-    width: 35em;
-    border: .04em solid lightgrey;
-    border-radius: .4em;
-    overflow: hidden;
-    z-index: 2;
-    background-color: white;
-}
-
-.hide-search-space-form{
-    display: none !important;
-}
-
-#lp-search-spaces-fieldset{
-    border: none;
-    margin: 0;
-    padding: 0;
-}
-
-#lp-search-spaces-input-container{
-    position: relative;
-    background-color: transparent;
-    overflow: hidden;
-}
-
-#lp-input-container{
-    padding: 0;
-}
-
-#lp-search-spaces-input{
-    display: inline-block;
+#lp-search-spaces-section {
     width: 100%;
-    height: 2.8em;
-    font-size: 1em;
-    padding: 0 0 0 2em;
+}
+
+#lp-search-spaces-form {
+    width: 100%;
+}
+
+.lp-search-spaces-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+#lp-input-container {
+    width: 100%;
+}
+
+.lp-search-spaces-label {
+    display: block;
+    margin-bottom: 12px;
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-align: left;
+}
+
+.lp-search-spaces-control {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    padding: 6px;
+    background: #ffffff;
+    border: 1px solid #d8e4e6;
+    border-radius: 14px;
+    box-shadow: 0 12px 36px rgba(25, 70, 81, 0.1);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lp-search-spaces-control:focus-within {
+    border-color: #245a67;
+    box-shadow: 0 0 0 3px rgba(36, 90, 103, 0.12);
+}
+
+.location-search-input {
+    flex: 1;
+    min-width: 0;
+    padding: 16px 18px;
     border: none;
+    outline: none;
+    background: transparent;
+    color: #194651;
+    font: inherit;
+    font-size: 1rem;
 }
 
-#lp-input-container button{
-    width: 4em;
-    height: 2.8em;
-    font-size: 1em;
+.location-search-input::placeholder {
+    color: #82969b;
+}
+
+.lp-search-spaces-control button {
+    min-width: 130px;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 10px;
+    background: #245a67;
+    color: #ffffff;
+    font: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.lp-search-spaces-control button:hover:not(:disabled) {
+    background: #194651;
+}
+
+.lp-search-spaces-control button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.autocomplete-dropdown-container {
     position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
     right: 0;
-    border-top: none;
-    border-right: none;
-    border-bottom: none;
-    border-left: .1em solid lightgray;
+    z-index: 100;
+    padding: 8px;
+    background: #ffffff;
+    border: 1px solid #d8e4e6;
+    border-radius: 12px;
+    box-shadow: 0 16px 40px rgba(25, 70, 81, 0.14);
+    text-align: left;
 }
 
-.autocomplete-dropdown-container{
+.suggestion-item {
+    padding: 13px 16px;
+    border-radius: 8px;
+    color: #294d56;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+.suggestion-item:hover,
+.suggestion-item--active {
+    background: #edf5f5;
+    color: #194651;
+}
+
+.autocomplete-loading {
     margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: white;
+    padding: 12px 16px;
+    color: #526b72;
 }
 
-.autocomplete-dropdown-container li, .autocomplete-dropdown-container p{
-    margin: 0;
-    padding: 0;
-    list-style: none;
+.lp-search-error {
+    margin: 12px 0 0;
+    color: #b42318;
+    font-size: 0.9rem;
+    text-align: left;
 }
 
-.autocomplete-dropdown-container li{
-    border-bottom: .05em solid lightgrey;
-    padding: .7em 0 .7em 1em;
-}
-
-@media screen and (max-width: 1030px){
-    #lp-search-spaces-section{
-        margin: 0;
+@media (max-width: 600px) {
+    .lp-search-spaces-control {
+        flex-direction: column;
+        gap: 8px;
     }
 
-    #lp-search-spaces-form{
-        padding: 0;
-        width: 90%;
-        border-right: .04em solid lightgrey;
-        border-bottom: .04em solid lightgrey;
-        border-left: .04em solid lightgrey;
-        border-radius: .4em;
-        overflow: hidden;
-        z-index: 2;
-    }
-    
-    #lp-search-spaces-fieldset{
-        border: none;
-        margin: 0;
-        padding: 0;
-    }
-    
-    #lp-search-spaces-input-container{
-        position: relative;
-        background-color: transparent;
-        overflow: hidden;
-    }
-    
-    #input-container{
-        padding: 0;
-    }
-    
-    #lp-search-spaces-input{
-        display: inline-block;
+    .location-search-input {
         width: 100%;
-        height: 2.6em;
-        font-size: 1em;
-        padding: 0 0 0 2em;
-        border: none;
+        padding: 15px 14px;
     }
-    
-    #input-container button{
-        width: 4em;
-        height: 2.6em;
-        font-size: 1em;
-        position: absolute;
-        right: 0;
-        border-top: none;
-        border-right: none;
-        border-bottom: none;
-        border-left: .1em solid lightgray;
+
+    .lp-search-spaces-control button {
+        width: 100%;
+        min-height: 48px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .lp-search-spaces-control,
+    .lp-search-spaces-control button {
+        transition: none;
     }
 }

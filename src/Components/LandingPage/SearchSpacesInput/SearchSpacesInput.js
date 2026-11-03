@@ -1,148 +1,227 @@
 import React from "react";
-import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete';
+import PlacesAutocomplete, {
+    geocodeByAddress,
+    getLatLng
+} from "react-places-autocomplete";
 import "./SearchSpacesInput.css";
 import MapContext from "../../../Contexts/MapContext/MapContext";
 
-export default class SearchSpacesInput extends React.Component{
-    constructor(props){
+export default class SearchSpacesInput extends React.Component {
+    constructor(props) {
         super(props);
+
         this.state = {
-            address: ""
-        }
+            address: "",
+            searching: false,
+            error: ""
+        };
     }
 
     static contextType = MapContext;
 
-    componentDidMount(){
-    }    
-
-    handleChange = (address)=>{
+    handleChange = (address) => {
         this.setState({
-            address
+            address,
+            error: ""
         });
     };
 
-    handleSelect = (address)=>{
-        this.handleChange(address);
-        this.searchArea(address)
-    }
+    handleSelect = (address) => {
+        this.setState({
+            address
+        }, () => {
+            this.searchArea(address);
+        });
+    };
 
-    searchArea = (newAddress)=>{
-        let commasAmount = 0;
-        let zoom = 13;
-        let address = newAddress;
+    getZoomLevel = (address) => {
+        const commaCount = (address.match(/,/g) || []).length;
 
-        address = address.split(" ");
+        if (commaCount === 0) {
+            return 4;
+        }
 
-        for(let i = 0; i < address.length; i++){
-            if(address[i].substring(address[i].length - 1) === ","){
-                commasAmount++;
-            };
-        };
+        if (commaCount === 1) {
+            return 8;
+        }
 
-        if(commasAmount === 0){
-            zoom = 4;
-        };
+        return 14;
+    };
 
-        if(commasAmount === 1){
-            zoom = 8;
-        };
+    searchArea = async (address) => {
+        const searchAddress = address.trim();
 
-        if(commasAmount >= 2){
-            zoom = 14;
-        };
+        if (!searchAddress) {
+            this.setState({
+                error: "Please enter a location."
+            });
 
-        address = address.join(" ").split(", ").join("+").split(" ").join("+");
-        
-        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyAAPqYeOSuJKs63H8A4NwaKp8fjVZo_jao`)
-            .then( res => {
-                if(!res.ok){
-                    res.json().then( e => Promise.reject(e));
-                };
+            return;
+        }
 
-                return res.json();
-            })
-            .then( resData => {
+        this.setState({
+            searching: true,
+            error: ""
+        });
 
-                fetch(`https://nominatim.openstreetmap.org/search.php?q=${address}&polygon_geojson=1&format=json`)
-                    .then( polygonRes => {
-                        if(!polygonRes.ok){
-                            return polygonRes.json().then( e => Promise.reject(e));
-                        }
+        try {
+            const results = await geocodeByAddress(searchAddress);
 
-                        return polygonRes.json();
-                    })
-                    .then( polygonData => {
-                        this.context.searchArea(resData.results[0].geometry.location.lat, resData.results[0].geometry.location.lng, zoom);
-                        this.context.setPath(polygonData[0].geojson.coordinates);
+            if (!results || results.length === 0) {
+                throw new Error("Location not found.");
+            }
 
-                        this.props.history.push("/find-rent");
-                    })
-                    .catch( polygonError => console.log(polygonError));
+            const { lat, lng } = await getLatLng(results[0]);
+            const zoom = this.getZoomLevel(searchAddress);
 
-            })
-            .catch( err => this.setState({ error: err}))
-    }
+            let polygonCoordinates = null;
 
-    handleSubmit = (e)=>{
-        e.preventDefault();
-        
+            try {
+                const polygonResponse = await fetch(
+                    `https://nominatim.openstreetmap.org/search?` +
+                    `q=${encodeURIComponent(searchAddress)}` +
+                    `&polygon_geojson=1&format=json`
+                );
+
+                if (!polygonResponse.ok) {
+                    throw new Error("Unable to retrieve area boundaries.");
+                }
+
+                const polygonData = await polygonResponse.json();
+
+                if (
+                    Array.isArray(polygonData) &&
+                    polygonData.length > 0 &&
+                    polygonData[0].geojson &&
+                    polygonData[0].geojson.coordinates
+                ) {
+                    polygonCoordinates = polygonData[0].geojson.coordinates;
+                }
+            } catch (polygonError) {
+                console.error("Polygon lookup failed:", polygonError);
+            }
+
+            this.context.searchArea(lat, lng, zoom);
+
+            if (polygonCoordinates) {
+                this.context.setPath(polygonCoordinates);
+            } else {
+                this.context.setPath([]);
+            }
+
+            this.props.history.push("/find-rent");
+        } catch (error) {
+            this.setState({
+                error: error.message || "Unable to search this location."
+            });
+        } finally {
+            this.setState({
+                searching: false
+            });
+        }
+    };
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+
+        if (this.state.searching) {
+            return;
+        }
+
         this.searchArea(this.state.address);
-    }
+    };
 
-    render(){
-        
+    render() {
+        const { address, searching, error } = this.state;
+
         return (
-            <section id="lp-search-spaces-section">
-                <form id="lp-search-spaces-form" onSubmit={this.handleSubmit}>
-                    <fieldset id="lp-search-spaces-fieldset">
-                        <PlacesAutocomplete
-                            value={this.state.address}
-                            onChange={this.handleChange}
-                            onSelect={this.handleSelect}>
-                                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                                    <div id="lp-search-spaces-input-container">
+            <section
+                id="lp-search-spaces-section"
+                aria-label="Search rental properties"
+            >
+                <form
+                    id="lp-search-spaces-form"
+                    onSubmit={this.handleSubmit}
+                >
+                    <PlacesAutocomplete
+                        value={address}
+                        onChange={this.handleChange}
+                        onSelect={this.handleSelect}
+                    >
+                        {({
+                            getInputProps,
+                            suggestions,
+                            getSuggestionItemProps,
+                            loading
+                        }) => (
+                            <div className="lp-search-spaces-wrapper">
+                                <div id="lp-input-container">
+                                    <label
+                                        htmlFor="lp-search-spaces-input"
+                                        className="lp-search-spaces-label"
+                                    >
+                                        Search by city, neighborhood, or address
+                                    </label>
 
-                                        <div id="lp-input-container">
-                                            <input
+                                    <div className="lp-search-spaces-control">
+                                        <input
                                             {...getInputProps({
                                                 placeholder: "Where do you want to live?",
-                                                className: 'location-search-input',
-                                                id: "lp-search-spaces-input"
+                                                className: "location-search-input",
+                                                id: "lp-search-spaces-input",
+                                                autoComplete: "off",
+                                                "aria-describedby": error
+                                                    ? "lp-search-error"
+                                                    : undefined
                                             })}
-                                            />
+                                        />
 
-                                            <button type="submit">Search</button>
-                                        </div>
-                                        
-                                        <ul className="autocomplete-dropdown-container">
-                                        {loading && <p>Loading...</p>}
-                                        {suggestions.map( (suggestion, index) => {
-                                            const className = suggestion.active
-                                            ? 'suggestion-item--active'
-                                            : 'suggestion-item';
-                                            // inline style for demonstration purpose
-                                            const style = suggestion.active
-                                            ? { backgroundColor: 'lightgrey', cursor: 'pointer' }
-                                            : { backgroundColor: '#ffffff', cursor: 'pointer' };
-                                            return (
-                                                <li key={index}
-                                                    {...getSuggestionItemProps(suggestion, {
-                                                    className,
-                                                    style
-                                                    })}
-                                                >
-                                                    <p key={index}>{suggestion.description}</p>
-                                                </li>
-                                            );
-                                        })}
-                                        </ul>
+                                        <button
+                                            type="submit"
+                                            disabled={searching}
+                                        >
+                                            {searching ? "Searching..." : "Search"}
+                                        </button>
+                                    </div>
+                                </div>
+
+                                {(loading || suggestions.length > 0) && (
+                                    <div className="autocomplete-dropdown-container">
+                                        {loading && (
+                                            <p className="autocomplete-loading">
+                                                Finding locations...
+                                            </p>
+                                        )}
+
+                                        {suggestions.map((suggestion) => (
+                                            <div
+                                                key={suggestion.placeId}
+                                                {...getSuggestionItemProps(suggestion, {
+                                                    className: suggestion.active
+                                                        ? "suggestion-item suggestion-item--active"
+                                                        : "suggestion-item"
+                                                })}
+                                            >
+                                                {suggestion.description}
+                                            </div>
+                                        ))}
                                     </div>
                                 )}
-                        </PlacesAutocomplete>
-                    </fieldset>
+                            </div>
+                        )}
+                    </PlacesAutocomplete>
+
+                    {error && (
+                        <p
+                            id="lp-search-error"
+                            className="lp-search-error"
+                            role="alert"
+                        >
+                            {error}
+                        </p>
+                    )}
                 </form>
             </section>
-        )
+        );
     }
 }
